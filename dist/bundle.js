@@ -7,15 +7,16 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/app.js":
-/*!********************!*\
-  !*** ./src/app.js ***!
-  \********************/
+/***/ "./src/app/app.ts":
+/*!************************!*\
+  !*** ./src/app/app.ts ***!
+  \************************/
 /***/ (() => {
 
-eval("\n\n//# sourceURL=webpack://projecta/./src/app.js?");
+eval("\nconsole.log('hello typescript');\n\n\n//# sourceURL=webpack://projecta/./src/app/app.ts?");
 
 /***/ })
 
@@ -26,7 +27,7 @@ eval("\n\n//# sourceURL=webpack://projecta/./src/app.js?");
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/app.js"]();
+/******/ 	__webpack_modules__["./src/app/app.ts"]();
 /******/ 	
 /******/ })()
 ;
