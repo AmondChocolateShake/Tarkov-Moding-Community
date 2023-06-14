@@ -1,7 +1,7 @@
 import React from 'react'
 import * as ReactDOM from 'react-dom/client'
 import Main from './main'
-
+import './index.css'
 
 //완성된 리액트 main 파일과 HTML을 연결하는 파일 
 

@@ -12,6 +12,10 @@ module.exports = {
     rules: [
       // 웹팩 로더 설정
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.js$/, // .js 확장자를 가진 파일에 대해
         exclude: /node_modules/, // node_modules 디렉토리는 제외
         use: {
