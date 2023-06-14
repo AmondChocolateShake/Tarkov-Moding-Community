@@ -11,6 +11,7 @@ module.exports = {
   module: {
     rules: [
       // 웹팩 로더 설정
+      
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
@@ -30,6 +31,18 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: 'ts-loader',
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './src/dist/img/[name].[hash].[ext]', // 이미지 파일이 복사될 경로 및 파일명 패턴
+              publicPath:'./src/img'
+            },
+          },
+        ],
       },
       
     ],

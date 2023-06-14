@@ -1,7 +1,6 @@
 import React from 'react'
 import LoginBox from './LoginBox';
-
-
+import logo from '../../src/img/tarkov_logo.png'
 
 
 function Login(){
@@ -13,8 +12,10 @@ function Login(){
     width:'100vw',
     height:'100vh'
   }
+  
   return(
     <div style={container}>
+      <img src={logo}></img>
       <LoginBox></LoginBox>
 
     </div>
