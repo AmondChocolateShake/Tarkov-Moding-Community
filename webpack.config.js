@@ -14,6 +14,9 @@ module.exports = {
         test: /\.js$/, // .js 확장자를 가진 파일에 대해
         exclude: /node_modules/, // node_modules 디렉토리는 제외
         use: 'babel-loader', // babel-loader를 사용하여 변환
+        option:{
+          presets:["@babel/preset-env", "@babel/preset-react"]
+        }
       },
       {
         test: /\.tsx?$/,

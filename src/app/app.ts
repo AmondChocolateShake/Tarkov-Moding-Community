@@ -1,8 +1,13 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import * as ReactDOM from 'react-dom/client'
+import Main from './main'
 
 
-const root=document.getElementById('root');
+const id:HTMLElement|null=document.getElementById('root')
+const root=ReactDOM.createRoot(id as Element|DocumentFragment);
+
+
+
 
 
 

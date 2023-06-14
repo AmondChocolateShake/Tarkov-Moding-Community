@@ -13,11 +13,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "firebase": "^9.22.2",
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
     "@types/istanbul-reports": "^3.0.1",
+    "@types/react-dom": "^18.2.5",
     "babel-loader": "^9.1.2",
+    "firebase": "^9.22.2",
     "html-webpack-plugin": "^5.5.1",
     "ts-loader": "^9.4.3",
     "webpack": "^5.86.0",
