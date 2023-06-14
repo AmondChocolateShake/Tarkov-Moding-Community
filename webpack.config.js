@@ -1,10 +1,11 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
   mode:'development',
   entry: './src/app/app.tsx', // 프로젝트의 진입점 파일
   output: {
-    path: path.resolve(__dirname, 'dist'), // 번들된 파일의 출력 경로
+    path: path.resolve(__dirname+'/src', 'dist'), // 번들된 파일의 출력 경로
     filename: 'bundle.js', // 번들된 파일의 이름
   },
   module: {
@@ -17,7 +18,7 @@ module.exports = {
           
           loader:'babel-loader', // babel-loader를 사용하여 변환
           options:{
-            presets:["@babel/preset-env", "@babel/preset-react"]
+            presets:["@babel/preset-env", "@babel/preset-react"],
           }
         } 
       },
@@ -26,8 +27,16 @@ module.exports = {
         exclude: /node_modules/,
         use: 'ts-loader',
       },
+      
     ],
   },
+  plugins:[
+    new HtmlWebpackPlugin({
+      template:'./src/app/index.html',
+      filename:'index.html',
+      inject:'body'
+    })
+  ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'], // 임포트 시 확장자 생략 가능
   },

@@ -3,13 +3,72 @@ const weaponList:string[]=[
 'ak47',
 ]
 
-let m4a1={
-  chamber:'m4a1',
-  stock:[],
-  pistol_grip:'',
-  magazine:'',
-  recevier:[],
-  chargingHandle:''
+const modNames=[
+  'chamber',
+  'scope',
+  'barrel',
+  'receiver',
+  'handguard',
+  'stock',
+  'magazine',
+  'ammo',
+  'rear sight',
+  'gasblock',
+  'muzzle',
+  'charging handle'
+]
+
+//파츠 데이터 기본 형식
+interface part{
+  modName:string
+  itemName:string,
+  itemId:string
+  modSlot:part[],
+  conflictItemsID:string[],
+}
+
+//총 구조도 코드
+//확장성 고려할것
+interface gun{
+  name:string,
+  id:string,
+  chamber:{
+    use:boolean
+    modSlot:part
+  },
+  stock:{
+    use:boolean
+    modSlot:part
+  },
+  receiver:{
+    use:boolean
+    modSlot:part
+  },
+  barrel:{
+    use:boolean
+    modSlot:part
+  },
+  pistolGrip:{
+    use:boolean
+    modSlot:part
+  },
+  magazine:{
+    use:boolean
+    modSlot:part
+  },
+  gasBlock:{
+    use:boolean
+    modSlot:part
+  },
+  launcher:{
+    use:boolean
+    modSlot:part
+  }
+}
+
+//총기 데이터 예제 작성
+let m4a1:gun={
+
 }
 
 
