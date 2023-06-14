@@ -42,25 +42,129 @@ interface Gun{
     item:Part|null//파츠 기본 데이터
   }[]|null
 }
-////////이거 써야함
-// const m4a1:Gun={
-//   id:'m4a1',
-//   modSlot:[
-//     {
-//       slotName:'Chamber',
-//       capabilityItems:['855a1','856a1','995','FMJ'],
-//       item:{
-//         id:'855a1',
-//         conflictItems:[],
-//         modSlot:null
-//       }
-//     },
-//     {
+//////이거 써야함
+const m4a1:Gun={
+  id:'m4a1',
+  modSlot:[
+    {
+      slotName:'Chamber',
+      capabilityItems:['855a1','856a1','995','FMJ'],
+      item:{
+        id:'855a1',
+        conflictItems:[],
+        modSlot:null
+      }
+    },
+    {
+      slotName:'Magazine',
+      capabilityItems:['STANG-30','Gen.2-30'],
+      item:{
+        id:'STANG-30',
+        conflictItems:[],
+        modSlot:[
+          {
+            slotName:'Ammo',
+            capabilityItems:['855a1','856a1','995','FMJ'],
+            item:{
+              id:'855a1',
+              conflictItems:[],
+              modSlot:null
+            }
+          }
+        ]
+      }
+    },
+    {
+      slotName:'Pistol grip',
+      capabilityItems:['AR-15 Colt A2','ECS','DLG-123'],
+      item:{
+        id:'ECS',
+        conflictItems:[],
+        modSlot:null
+      }
+    },
+    {
+      slotName:'Receiver',
+      capabilityItems:['MUS-1S','Noveske','ADAR 2-15'],
+      item:{
+        id:'ADAR 2-5',
+        conflictItems:[],
+        modSlot:[
+          {
+            slotName:'Scope',
+            capabilityItems:['XPS3-0','XPS3-2','HS401G5','UTG'],
+            item:{
+              id:'XPS3-0',
+              conflictItems:[],
+              modSlot:null
+            }
+          },
+          {
+            slotName:'Barrel',
+            capabilityItems:['AR-15 18','AR-15 20','AR-15 260mm'],
+            item:{
+              id:'AR-15 18',
+              conflictItems:[],
+              modSlot:[
+                {
+                  slotName:'Muzzle',
+                  capabilityItems:['51T','USGI A2','CQB'],
+                  item:{
+                    id:'CQB',
+                    conflictItems:[],
+                    modSlot:null
+                  },
+                },
+                {
+                  slotName:'Gas block',
+                  capabilityItems:['MK12','Windham','M4A1'],
+                  item:{
+                    id:'',
+                    conflictItems:[],
+                    modSlot:null
+                  }
+                }
+              ]
+            }
+          },
+          {
+            slotName:'HandGuard',
+            capabilityItems:['M-LOK','RISII','Carbine'],
+            item:{
+              id:'M-LOK',
+              conflictItems:['MK12'],
+              modSlot:null
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
 
-//     }
-//   ]
+
+/**        총기 프리셋 양식        */
+// {
+//   slotName:'Receiver',
+//       capabilityItems:['MUS-1S','Noveske','ADAR 2-15'],
+//       item:{
+//         id:'ADAR 2-5',
+//         conflictItems:[],
+//         modSlot:[
+//           {
+//             slotName:,
+//             capabilityItems:,
+//             item:{
+//               id:,
+//               conflictItems:[],
+//               modSlot:
+//             }
+//           }
+//         ]
+//       }
 // }
-/////////
+
+///////
 
 // class item implements Part{
 //   id;
