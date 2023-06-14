@@ -32,19 +32,32 @@ module.exports = {
         exclude: /node_modules/,
         use: 'ts-loader',
       },
+      // {
+      //   test: /\.(png|jpe?g|gif)$/i,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: './src/dist/img/[name].[hash].[ext]', // 이미지 파일이 복사될 경로 및 파일명 패턴
+      //         publicPath:'./src/img'
+      //       },
+      //     },
+      //   ],
+      // },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
-              name: './src/dist/img/[name].[hash].[ext]', // 이미지 파일이 복사될 경로 및 파일명 패턴
-              publicPath:'./src/img'
+              limit: 8192, // 작은 이미지 파일은 데이터 URL로 변환
+              name: '[name].[ext]',
+              outputPath: 'images/',
+              publicPath: 'images/',
             },
           },
         ],
       },
-      
     ],
   },
   plugins:[
