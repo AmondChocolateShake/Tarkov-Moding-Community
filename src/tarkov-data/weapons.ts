@@ -25,6 +25,11 @@ const modNames=[
 //파츠 기본 구조
 interface Part{
   id:string,//아이템 id
+  ability:{
+    ergo:number|null,
+    vertical:number|null,
+    horizontal:number|null
+  }|null
   conflictItems:string[],//충돌 아이템 id리스트
   modSlot:{//모드 슬롯
     slotName:string,//모딩 슬롯 이름
@@ -33,24 +38,45 @@ interface Part{
   }[]|null
 }
 
+
+
 //총기 프리셋 기본 구성
 interface Gun{
   id:string,//총기 id
+  ability:{
+    ergo:number|null,
+    vertical:number|null,
+    horizontal:number|null
+  }
   modSlot:{//모드 슬롯 배열
     slotName:string,//모드 슬롯 이름
     capabilityItems:string[]|null,//사용 가능 아이템 id리스트
     item:Part|null//파츠 기본 데이터
   }[]|null
 }
-//////이거 써야함
+
+
+
+//////설계한 인터페이스 기반 코드 구현 시도
+//m4a1
 const m4a1:Gun={
   id:'m4a1',
+  ability:{
+    ergo:80,
+    vertical:100,
+    horizontal:150
+  },
   modSlot:[
     {
       slotName:'Chamber',
       capabilityItems:['855a1','856a1','995','FMJ'],
       item:{
         id:'855a1',
+        ability:{
+          ergo:null,
+          vertical:null,
+          horizontal:null
+        },
         conflictItems:[],
         modSlot:null
       }
