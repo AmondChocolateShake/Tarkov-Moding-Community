@@ -3,8 +3,6 @@ import TopBar from './TopBar'
 
 
 
-
-
 const mainPageForm:React.FC=()=>{
   const fColumn:React.CSSProperties={
     display:'flex',
@@ -25,8 +23,8 @@ const mainPageForm:React.FC=()=>{
       </header>
 
       <div style={fRow}>
-        <LeftMenu></LeftMenu>
-        <MainContent></MainContent>
+        {/* <LeftMenu></LeftMenu>
+        <MainContent></MainContent> */}
       </div>
     </div>
 
