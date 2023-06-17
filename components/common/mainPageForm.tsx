@@ -1,7 +1,7 @@
 import React from 'react'
 import TopBar from './TopBar'
-
-
+import LeftMenu from './LeftMenu'
+import MainContent from './MainContent'
 
 const mainPageForm:React.FC=()=>{
   const fColumn:React.CSSProperties={
@@ -15,6 +15,15 @@ const mainPageForm:React.FC=()=>{
     flexDirection:'row'
   }
 
+  const size:React.CSSProperties={
+    width:'100vw',
+    minHeight:'75vh'
+  }
+  const jtfyctntSpcArnd:React.CSSProperties={
+    justifyContent:'space-around'
+  }
+
+  const mainContainer={...fRow,...size,...jtfyctntSpcArnd}
 
   return(
     <div style={fColumn}>
@@ -22,9 +31,9 @@ const mainPageForm:React.FC=()=>{
         <TopBar></TopBar>
       </header>
 
-      <div style={fRow}>
-        {/* <LeftMenu></LeftMenu>
-        <MainContent></MainContent> */}
+      <div style={mainContainer}>
+        <LeftMenu></LeftMenu>
+        <MainContent></MainContent>
       </div>
     </div>
 
