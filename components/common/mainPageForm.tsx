@@ -1,21 +1,36 @@
 import React from 'react'
+import TopBar from './TopBar'
 
-//메인 컨텐츠가 총기의 경우
-interface weaponContent{
-  Name:string,
-  icon:string,
-}
 
-//메인 컨텐츠가 유저 게시글인 경우
-interface board{
-  
-}
+
 
 
 const mainPageForm:React.FC=()=>{
+  const fColumn:React.CSSProperties={
+    display:'flex',
+    flexDirection:'column',
+    backgroundColor:'black'
+  }
+
+  const fRow:React.CSSProperties={
+    display:'flex',
+    flexDirection:'row'
+  }
+
 
   return(
-    <div></div>
+    <div style={fColumn}>
+      <header>
+        <TopBar></TopBar>
+      </header>
 
-  )
+      <div style={fRow}>
+        <LeftMenu></LeftMenu>
+        <MainContent></MainContent>
+      </div>
+    </div>
+
+  );
 }
+
+export default mainPageForm;

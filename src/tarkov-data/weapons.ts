@@ -19,41 +19,102 @@ const modNames=[
 ]
 
 
+//  UML schema
+/** 2023.06.16 새로 짠 아이템 구조로 코드 구현 */
+interface Item{
+  category:string,
+  id:string,
+  value:{
+    price:number,
+    currency:string,
+  }|null,
+  conflictItems:string[]|null,
+  ability:{
+    ammunitionType:string|null
+    rpm:number|null,
+    ergo:number|null,
+    vertical:number|null,
+    horizontal:number|null,
+    accuracy:number|null,
+    magazineCapacity:number|null,
+    reloadSpeed:number|null,
+    checkDuration:number|null,
+    damage:number|null,
+    penetrationPower:number|null,
+    class:number[]|null,
+    fragmentationChance:number|null
+  },
+  modSlot:{
+    slotName:string,
+    capatibleItems:string[],
+    item:Item
+  }[]|null
+}
+
+
+const M4A1:Item={
+  category:'mainWeapon',
+  id:'m4a1',
+  value:{
+    price:64000,
+    currency:'RUB'
+  },
+  conflictItems:[],
+  ability:{
+    ammunitionType:'5.56x45',
+    rpm:800,
+    ergo:null,
+    vertical:null,
+    horizontal:null,
+    accuracy:null,
+    magazineCapacity:null,
+    reloadSpeed:null,
+    checkDuration:null,
+    damage:null,
+    penetrationPower:null,
+    class:null,
+    fragmentationChance:null
+  },
+  modSlot:null
+}
+
 
 /** 2023.06.14 2차시도 */
 
 //파츠 기본 구조
-interface Part{
-  id:string,//아이템 id
-  ability:{
-    ergo:number|null,
-    vertical:number|null,
-    horizontal:number|null
-  }|null
-  conflictItems:string[],//충돌 아이템 id리스트
-  modSlot:{//모드 슬롯
-    slotName:string,//모딩 슬롯 이름
-    capabilityItems:string[],//사용 가능 아이템 id리스트
-    item:Part//파츠 기본 데이터
-  }[]|null
-}
+// interface Part{
+//   id:string,//아이템 id
+//   ability:{
+//     ergo:number|null,
+//     vertical:number|null,
+//     horizontal:number|null
+//   }|null
+//   conflictItems:string[],//충돌 아이템 id리스트
+//   modSlot:{//모드 슬롯
+//     slotName:string,//모딩 슬롯 이름
+//     capabilityItems:string[],//사용 가능 아이템 id리스트
+//     item:Part//파츠 기본 데이터
+//   }[]|null
+// }
 
 
 
-//총기 프리셋 기본 구성
-interface Gun{
-  id:string,//총기 id
-  ability:{
-    ergo:number|null,
-    vertical:number|null,
-    horizontal:number|null
-  }
-  modSlot:{//모드 슬롯 배열
-    slotName:string,//모드 슬롯 이름
-    capabilityItems:string[]|null,//사용 가능 아이템 id리스트
-    item:Part|null//파츠 기본 데이터
-  }[]|null
-}
+
+
+// //총기 프리셋 기본 구성
+// interface Gun{
+//   id:string,//총기 id
+//   ability:{
+//     ergo:number|null,
+//     vertical:number|null,
+//     horizontal:number|null
+//   }
+//   modSlot:{//모드 슬롯 배열
+//     slotName:string,//모드 슬롯 이름
+//     capabilityItems:string[]|null,//사용 가능 아이템 id리스트
+//     item:Part|null//파츠 기본 데이터
+//   }[]|null
+// }
 
 
 

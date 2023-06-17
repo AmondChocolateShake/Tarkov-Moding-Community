@@ -4,7 +4,7 @@ import React from 'react'
 
 
 //로그인 및 회원가입에 쓰이는 인풋 컴포넌트
-const InputBox:React.FC=(props)=>{
+const InputBox:React.FC=()=>{
 
 
 
