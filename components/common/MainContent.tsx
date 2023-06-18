@@ -28,7 +28,6 @@ const MainContent:React.FC=()=>{
   const Csize:React.CSSProperties={
     width:'70%',
     minHeight:'500px',
-    border:'1px solid white',
     backgroundColor:'#1E1E1E'
   }
 

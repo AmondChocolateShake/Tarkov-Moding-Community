@@ -4,7 +4,7 @@ const mainData={
 }
 
 
-function getWeaponList(){
+export function getWeaponList(){
   return mainData.weaponList
   
 }

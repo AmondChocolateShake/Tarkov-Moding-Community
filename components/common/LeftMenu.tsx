@@ -34,18 +34,26 @@ const LeftMenu:React.FC=()=>{
   const alignCenter:React.CSSProperties={
     alignItems:'center',
   }
+  const alignStart:React.CSSProperties={
+    alignItems:'flex-start',
+  }
   const Csize:React.CSSProperties={
     width:'200px',
     minHeight:'500px',
-    border:'1px solid white',
     backgroundColor:'#1E1E1E'
+  }
+  const listSize:React.CSSProperties={
+    width:'90%',
+    minHeight:'90%',
+    
   }
 
   const container={...fColumn,...jtfyctntCenter,...alignCenter,...Csize}
+  const listSt={...fColumn,...alignStart,...listSize}
 
   return(
     <div style={container}>
-      <div>
+      <div style={listSt}>
         {
           weapons.map((name,index)=>(
             <WeaponName name={name} key={index}></WeaponName>
