@@ -51,6 +51,34 @@ interface Item{
   }[]|null
 }
 
+// const ak47u:Item={
+//   category:'mainWeapon',
+//   id:'58414a16245977599247970a',
+//   value:{
+//     price:24605.0,
+//     currency:'RUB'
+//   },
+//   conflictItems:null,
+//   ability:{
+//     ammunitionType:'5.45x39',
+//     rpm:650,
+//     ergo:44,
+//     vertical:121,
+//     horizontal:415,
+//     accuracy:,
+//     magazineCapacity:,
+//     reloadSpeed:,
+//     checkDuration:,
+//     damage:,
+//     penetrationPower:,
+//     class:,
+//     fragmentationChance:
+//   }
+// }
+
+
+
+
 
 const M4A1:Item={
   category:'mainWeapon',
