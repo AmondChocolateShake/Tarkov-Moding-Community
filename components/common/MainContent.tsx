@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Post from '../post/Post'
 
 const MainContent:React.FC=()=>{
   const fRow:React.CSSProperties={
@@ -35,7 +35,7 @@ const MainContent:React.FC=()=>{
   return(
     <div style={container}>
       
-
+      <Post></Post>
 
     </div>
 

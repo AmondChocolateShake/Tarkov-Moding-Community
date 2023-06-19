@@ -1,15 +1,13 @@
 import React,{useState,useEffect} from 'react'
-import {getWeaponList} from '../global/global'
 import WeaponName from './WeaponName';
 
+interface weaponList{
+  weaponList:string[]
+}
 
 //메인 페이지 왼쪽 총기 리스트 박스
-const LeftMenu:React.FC=()=>{
-  const[weapons,setWeapons]=useState(['']);
-
-  useEffect(()=>{
-    setWeapons(getWeaponList());
-  },[]);
+const LeftMenu:React.FC<weaponList>=(props)=>{
+  
 
   const fRow:React.CSSProperties={
     display:'flex',
@@ -55,7 +53,7 @@ const LeftMenu:React.FC=()=>{
     <div style={container}>
       <div style={listSt}>
         {
-          weapons.map((name,index)=>(
+          props.weaponList.map((name,index)=>(
             <WeaponName name={name} key={index}></WeaponName>
           ))
         }
