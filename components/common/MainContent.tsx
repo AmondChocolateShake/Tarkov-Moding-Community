@@ -1,5 +1,6 @@
 import React from 'react'
 import Post from '../post/Post'
+import ContentOfGuns from './ContentOfGuns'
 
 const MainContent:React.FC=()=>{
   const fRow:React.CSSProperties={
@@ -18,6 +19,7 @@ const MainContent:React.FC=()=>{
   const jtfyctntSpcArnd:React.CSSProperties={
     justifyContent:'space-around'
   }
+
   const jtfyctntStart:React.CSSProperties={
     justifyContent:'flex-start'
   }
@@ -25,6 +27,7 @@ const MainContent:React.FC=()=>{
   const alignCenter:React.CSSProperties={
     alignItems:'center',
   }
+
   const Csize:React.CSSProperties={
     width:'70%',
     minHeight:'500px',
@@ -34,8 +37,7 @@ const MainContent:React.FC=()=>{
   const container={...fColumn,...jtfyctntStart,...Csize}
   return(
     <div style={container}>
-      
-      <Post></Post>
+      <ContentOfGuns></ContentOfGuns>
 
     </div>
 

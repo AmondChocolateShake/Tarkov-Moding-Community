@@ -1,5 +1,5 @@
-const fs= require('fs')
-const items=fs.readFileSync('./items.json');
+import * as fs from 'fs'
+const items=fs.readFileSync('./items.json','utf8');
 console.log(items);
 
 
@@ -221,11 +221,26 @@ const ak47u:Item={
 }
 
 
-// const pistol_6p26:Item2={
+// const ak74u_dustCover:Item2={
 //   category:'rangedWeapon',
 //   id:'57dc334d245977597164366f',
-//   shortName:'6p26',
-
+//   shortName:'6P26 Sb.7',
+//   fullName:'AKS-74U dust cover (6P26 Sb.7)',
+//   color:'blue',
+//   iconLink:'https://assets.tarkov.dev/57dc334d245977597164366f-icon.webp',
+//   value:{
+//     price:1306,
+//     currency:'RUB'
+//   },
+//   conflictItems:[
+//     "57486e672459770abd687134",
+//     "5c82342f2e221644f31c060e",
+//     "576fd4ec2459777f0b518431",
+//     "5c82343a2e221644f31c0611",
+//     "5c61a40d2e2216001403158d",
+//     "5c90c3622e221601da359851"
+//   ],
+  
 // }
 
 

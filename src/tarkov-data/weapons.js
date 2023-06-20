@@ -1,4 +1,6 @@
-var fs = require('fs');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var fs = require("fs");
 var items = fs.readFileSync('./items.json');
 console.log(items);
 var weaponList = [

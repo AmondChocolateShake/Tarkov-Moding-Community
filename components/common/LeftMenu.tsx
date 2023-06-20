@@ -2,7 +2,10 @@ import React,{useState,useEffect} from 'react'
 import WeaponName from './WeaponName';
 
 interface weaponList{
-  weaponList:string[]
+  Guns:{
+    name:string,
+    imgLink:string
+  }[]
 }
 
 //메인 페이지 왼쪽 총기 리스트 박스
@@ -53,8 +56,8 @@ const LeftMenu:React.FC<weaponList>=(props)=>{
     <div style={container}>
       <div style={listSt}>
         {
-          props.weaponList.map((name,index)=>(
-            <WeaponName name={name} key={index}></WeaponName>
+          props.Guns.map(item=>(
+            <WeaponName name={item.name}></WeaponName>
           ))
         }
       </div>

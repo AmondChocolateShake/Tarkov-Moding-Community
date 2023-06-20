@@ -3,6 +3,7 @@ import TopBar from './TopBar'
 import LeftMenu from './LeftMenu'
 import MainContent from './MainContent'
 import {getWeaponList} from '../global/global'
+import { Guns } from '../global/global'
 
 const mainPageForm:React.FC=()=>{
   const fColumn:React.CSSProperties={
@@ -33,7 +34,7 @@ const mainPageForm:React.FC=()=>{
       </header>
 
       <div style={mainContainer}>
-        <LeftMenu weaponList={getWeaponList()}></LeftMenu>
+        <LeftMenu Guns={Guns}></LeftMenu>
         <MainContent></MainContent>
       </div>
     </div>
