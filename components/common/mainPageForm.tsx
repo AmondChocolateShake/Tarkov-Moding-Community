@@ -4,7 +4,6 @@ import LeftMenu from './LeftMenu'
 import MainContent from './MainContent'
 import { Guns } from '../global/global'
 
-
 const mainPageForm:React.FC=()=>{
   const fColumn:React.CSSProperties={
     display:'flex',
@@ -39,8 +38,6 @@ const mainPageForm:React.FC=()=>{
         <LeftMenu Guns={Guns}></LeftMenu>
         
         <MainContent></MainContent>
-
-
       </div>
     </div>
 

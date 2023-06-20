@@ -43,7 +43,8 @@ const Post:React.FC=()=>{
     width:'95%',
     height:'150px',
     backgroundColor:'#1e1e1e',
-    border:'1px solid white'
+    border:'1px solid white',
+    color:'white'
   }
 
   const tagContainer:React.CSSProperties={
@@ -63,7 +64,8 @@ const Post:React.FC=()=>{
         <input style={{
           width:'90%',
           backgroundColor:'#1E1E1E',
-          border:'1px solid white'
+          border:'1px solid white',
+          color:'white'
       }}></input>
       </div>
 

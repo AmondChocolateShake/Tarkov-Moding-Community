@@ -1,6 +1,13 @@
 import React from 'react'
 import SelectBox from './SelectBox';
 
+
+
+const Guns={
+  
+
+}
+
 const MainWeaponSelect:React.FC=()=>{
 
   const container:React.CSSProperties={
@@ -8,8 +15,7 @@ const MainWeaponSelect:React.FC=()=>{
   }
   return(
     <div style={container}>
-      <div>Main Weapon</div>
-      <SelectBox itemCategory='mainWeapon' color='white'></SelectBox>
+      <SelectBox name='M4A1' color='white' iconLink='' itemCategory='mainWeapon'></SelectBox>
     </div>
   );
 }
