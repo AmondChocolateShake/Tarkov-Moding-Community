@@ -29,7 +29,16 @@ fs.readFile(filePath,'utf8',(err:NodeJS.ErrnoException | null,data:any)=>{
         addGun(itemData[i].name);
       }
     }
-    
+
+    const gunString=JSON.stringify(GunList);
+
+    fs.writeFile('./GunNames.txt',gunString, (err:NodeJS.ErrnoException) => {
+      if (err) {
+        console.error('파일 저장 중 오류 발생:', err);
+        return;
+      }
+      console.log('파일이 성공적으로 저장되었습니다.');
+    });
 
   }catch(err){
     console.error('failed to read : ',err);
