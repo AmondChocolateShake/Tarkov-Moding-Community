@@ -17,8 +17,7 @@ let Guns:Gun[]=[{
   id:'',
   category:''
 }]
-
-interface Item2{
+interface Item3{
   categoryId:string,
   id:string,
   shortName:string,
@@ -52,9 +51,71 @@ interface Item2{
   }[]|null
 }
 
-let items:Item2=[{
+interface Item2{
+  [key: string]: any,
+  categoryId:string,
+  id:string,
+  shortName:string,
+  name:string|null,
+  color:string|null,
+  iconLink:string|null,
+  imageLink:string|null,
+  value:{
+    value:number,
+    currencyName:string,
+  }|null,
+  conflictingItemIds:string[]|null,
+  caliber:string|null
+  fireRate:number|null,
+  ergonomics:number|null,
+  verticalRecoil:number|null,
+  horizontalRecoil:number|null,
+  accuracyPercentageModifier:number|null,
+  capacity:number|null,
+  loadSpeedPercentageModifier:number|null,
+  checkSpeedPercentageModifier:number|null,
+  fleshDamage:number|null,
+  penetrationPower:number|null,
+  class:number[]|null,
+  fragmentationChancePercentage:number|null
+  
+  modSlots:{
+    name:string,
+    compatibleItemIds:string[],
+  }[]|null
+}
 
-}];
+let items:Item2={
+  categoryId:'',
+  id:'',
+  shortName:'',
+  name:'',
+  color:'',
+  iconLink:'',
+  imageLink:'',
+  value:{
+    value:0,
+    currencyName:''
+  },
+  conflictingItemIds:[],
+  caliber:'',
+  fireRate:0,
+  ergonomics:0,
+  verticalRecoil:0,
+  horizontalRecoil:0,
+  accuracyPercentageModifier:0,
+  capacity:0,
+  loadSpeedPercentageModifier:0,
+  checkSpeedPercentageModifier:0,
+  fleshDamage:0,
+  penetrationPower:0,
+  class:[],
+  fragmentationChancePercentage:0,
+  modSlots:[{
+    name:'',
+    compatibleItemIds:[]
+  }]
+};
 
 
 function addGunData(name:string,id:string,category:string){
@@ -94,13 +155,18 @@ fs.readFile(filePath,'utf8',(err:NodeJS.ErrnoException | null,data:any)=>{
     
     console.log('successed');
     
-    for(let i=0;i<itemData.length;i++){
-      for(const item in itemData[i]){
-        if()
+    for(let i=0;i<1;i++){
+      for(const data of itemData){
+        // console.log(data);
+        for(const item in data){
+          if(item in items){
+            items[item]=data[item];
+          }
+          // console.log(item);
+        }
       }
     }
-
-
+    console.log(items);
 
   }catch(err){
     console.error('failed to read : ',err);
