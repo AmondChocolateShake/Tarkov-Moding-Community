@@ -5,6 +5,12 @@ const fs=require('fs');
 let GunList=[''];
 let GunIds=[0];
 let categories=[''];
+let itemList=[{}];
+
+function addItemIntoList(item:object){
+  itemList.push(item);
+}
+
 
 interface Gun{
   name:string,
@@ -164,10 +170,11 @@ fs.readFile(filePath,'utf8',(err:NodeJS.ErrnoException | null,data:any)=>{
           }
           // console.log(item);
         }
+        addItemIntoList(items);
+
       }
     }
-    console.log(items);
-
+    console.log(itemList);
   }catch(err){
     console.error('failed to read : ',err);
   }
