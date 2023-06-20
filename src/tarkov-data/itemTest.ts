@@ -3,12 +3,82 @@ const fs=require('fs');
 
 //총 이름을 담는 배열
 let GunList=[''];
+let GunIds=[0];
+let categories=[''];
+
+interface Gun{
+  name:string,
+  id:string,
+  category:string,
+}
+
+let Guns:Gun[]=[{
+  name:'',
+  id:'',
+  category:''
+}]
+
+interface Item2{
+  categoryId:string,
+  id:string,
+  shortName:string,
+  name:string|null,
+  color:string|null,
+  iconLink:string|null,
+  imageLink:string|null,
+  value:{
+    value:number,
+    currencyName:string,
+  }|null,
+  conflictingItemIds:string[]|null,
+  ability:{
+    caliber:string|null
+    fireRate:number|null,
+    ergonomics:number|null,
+    verticalRecoil:number|null,
+    horizontalRecoil:number|null,
+    accuracyPercentageModifier:number|null,
+    capacity:number|null,
+    loadSpeedPercentageModifier:number|null,
+    checkSpeedPercentageModifier:number|null,
+    fleshDamage:number|null,
+    penetrationPower:number|null,
+    class:number[]|null,
+    fragmentationChancePercentage:number|null
+  },
+  modSlots:{
+    name:string,
+    compatibleItemIds:string[],
+  }[]|null
+}
+
+let items:Item2=[{
+
+}];
+
+
+function addGunData(name:string,id:string,category:string){
+  Guns.push({name:name,id:id,category:category})
+
+}
+
 
 //총 이름을 배열에 추가하는 함수
 function addGun(gunName:string){
   GunList.push(gunName);
+
 }
 
+function addId(id:number){
+  GunIds.push(id);
+
+}
+
+
+function addCategory(category:string){
+  categories.push(category);
+
+}
 
 const filePath='./items.json';//아이템 정보가 들어있는 파일
 
@@ -16,6 +86,7 @@ fs.readFile(filePath,'utf8',(err:NodeJS.ErrnoException | null,data:any)=>{
   if(err){
     console.log('error occured');
     return;
+
   }
 
   try{
@@ -24,29 +95,18 @@ fs.readFile(filePath,'utf8',(err:NodeJS.ErrnoException | null,data:any)=>{
     console.log('successed');
     
     for(let i=0;i<itemData.length;i++){
-      if(itemData[i].categoryId==='mainWeapon'){
-        console.log(itemData[i].name);
-        addGun(itemData[i].name);
+      for(const item in itemData[i]){
+        if()
       }
     }
 
-    const gunString=JSON.stringify(GunList);
 
-    fs.writeFile('./GunNames.txt',gunString, (err:NodeJS.ErrnoException) => {
-      if (err) {
-        console.error('파일 저장 중 오류 발생:', err);
-        return;
-      }
-      console.log('파일이 성공적으로 저장되었습니다.');
-    });
 
   }catch(err){
     console.error('failed to read : ',err);
   }
 
 })
-
-
 
 
 
