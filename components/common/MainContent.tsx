@@ -1,6 +1,7 @@
 import React from 'react'
 import Post from '../post/Post'
 import ContentOfGuns from './ContentOfGuns'
+import TagAndPost from './TagAndPost'
 
 const MainContent:React.FC=()=>{
   const fRow:React.CSSProperties={
@@ -37,6 +38,7 @@ const MainContent:React.FC=()=>{
   const container={...fColumn,...jtfyctntStart,...Csize}
   return(
     <div style={container}>
+      <TagAndPost></TagAndPost>
       <ContentOfGuns></ContentOfGuns>
 
     </div>

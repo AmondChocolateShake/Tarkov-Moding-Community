@@ -9,6 +9,19 @@ export function getWeaponList(){
   
 }
 
+let gunName='';
+
+export function getSelectedGunName(){
+  return gunName;
+}
+
+//사용자가 선택한 총기의 이름을 담아주는 함수
+export function select(name:string){
+  gunName=name;
+}
+
+
+
 export const Guns=[{
   name:'AK-47',
   imgLink:'https://assets.tarkov.dev/5c0c1ce886f77401c119d014-image.webp'

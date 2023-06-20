@@ -56,8 +56,8 @@ const LeftMenu:React.FC<weaponList>=(props)=>{
     <div style={container}>
       <div style={listSt}>
         {
-          props.Guns.map(item=>(
-            <WeaponName name={item.name}></WeaponName>
+          props.Guns.map((item,index)=>(
+            <WeaponName name={item.name} key={index}></WeaponName>
           ))
         }
       </div>

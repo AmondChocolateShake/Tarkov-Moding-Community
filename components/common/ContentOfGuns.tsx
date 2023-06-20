@@ -19,8 +19,8 @@ const ContentOfGuns:React.FC=()=>{
   return(
     <div style={container}>
       {
-        Guns.map(item=>(
-          <Gun gunImg={item.imgLink} gunName={item.name}></Gun>
+        Guns.map((item,index)=>(
+          <Gun gunImg={item.imgLink} gunName={item.name} key={index}></Gun>
         ))
       }
     </div>
