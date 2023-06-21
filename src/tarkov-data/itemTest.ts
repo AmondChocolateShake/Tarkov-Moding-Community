@@ -65,7 +65,7 @@ interface Item2{
   name:string|null,
   color:string|null,
   iconLink:string|null,
-  imageLink:string|null,
+  imageLink:string|undefined,
   value:{
     value:number,
     currencyName:string,
@@ -87,9 +87,10 @@ interface Item2{
   
   modSlots:{
     name:string,
-    compatibleItemIds:string[],
+    compatibleItemIds:string[]
   }[]|null
 }
+
 
 let items:Item2={
   categoryId:'',
@@ -124,11 +125,24 @@ let items:Item2={
 };
 
 
+//3개의 값을 Guns배열에 객체로 삽입하는 함수
 function addGunData(name:string,id:string,category:string){
   Guns.push({name:name,id:id,category:category})
+}
+
+
+
+//아이템 객체에 동일한 키가 있는지 비교하는 함수
+function checkPropInObj(prop:any){
+  if(prop in items){
+    return true
+  }else return false
 
 }
 
+function pushPropIntoObj(obj:any,prop:any){
+  
+}
 
 //총 이름을 배열에 추가하는 함수
 function addGun(gunName:string){
@@ -136,16 +150,19 @@ function addGun(gunName:string){
 
 }
 
+//아이디 값 삽입 함수
 function addId(id:number){
   GunIds.push(id);
 
 }
 
-
+// 카테고리 값 삽입 함수
 function addCategory(category:string){
   categories.push(category);
 
 }
+
+
 
 const filePath='./items.json';//아이템 정보가 들어있는 파일
 
@@ -161,20 +178,26 @@ fs.readFile(filePath,'utf8',(err:NodeJS.ErrnoException | null,data:any)=>{
     
     console.log('successed');
     
-    for(let i=0;i<1;i++){
-      for(const data of itemData){
-        // console.log(data);
-        for(const item in data){
-          if(item in items){
-            items[item]=data[item];
-          }
-          // console.log(item);
+    for(const data of itemData){
+      // console.log(data);
+      for(const item in data){
+        if(checkPropInObj(item)){
+          items[item]=data[item];
         }
-        addItemIntoList(items);
-
+        // console.log(item);
+      }
+      addItemIntoList(items);
+      // console.log(items);
+    }
+    
+    for(const arr of itemList){
+      for(const item in arr){
+        if(item==='modSlots'){
+          console.log(item);
+        }
       }
     }
-    console.log(itemList);
+
   }catch(err){
     console.error('failed to read : ',err);
   }

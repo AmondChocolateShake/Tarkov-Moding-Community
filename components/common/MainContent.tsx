@@ -38,9 +38,9 @@ const MainContent:React.FC=()=>{
   const container={...fColumn,...jtfyctntStart,...Csize}
   return(
     <div style={container}>
-      {/* <TagAndPost></TagAndPost>
-      <ContentOfGuns></ContentOfGuns> */}
-      <Post></Post>
+      <TagAndPost></TagAndPost>
+      <ContentOfGuns></ContentOfGuns>
+      {/* <Post></Post> */}
     </div>
 
   );

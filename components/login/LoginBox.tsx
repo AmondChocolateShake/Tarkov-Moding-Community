@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import InputBox from './InputBox'
 import LBtn from './LBtn'
 
@@ -62,8 +63,13 @@ const LoginBox:React.FC =()=>{
       </form>
 
       <div style={loginBoxSt}>
-        <LBtn text='Login'></LBtn>
-        <LBtn text='Sign up'></LBtn>
+        
+        <Link to='/main'>
+          <LBtn text='Login'></LBtn>
+        </Link>
+        <Link to='/signUp'>
+          <LBtn text='Sign up'></LBtn>
+        </Link>
       </div>
 
     </div>

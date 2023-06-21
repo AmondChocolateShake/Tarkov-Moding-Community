@@ -77,7 +77,7 @@ const Post:React.FC=()=>{
         </div>
       </div>
       
-      <Moding></Moding>
+      {/* <Moding></Moding> */}
 
     </div>
   );
