@@ -34,28 +34,13 @@ interface Item{
   }[]|null
 }
 
-interface Data{
-    itemCategory:string,
-    color:string,
-    name:string,
-    iconLink:string|undefined,
-}
 
 
-const SelectBox:React.FC<Data>=(props)=>{
-  const[category,setCategory]=useState(props.itemCategory);
-  const[boxStyle,setBoxStyle]=useState({});
 
-  if(category==='mainWeapon')
-  {
-    setBoxStyle({
-      display:'flex',
-      width:'200px',
-      height:'100px',
-      border:'1px solid white',
-      borderRadius:'10px'
-    })
-  }
+const SelectBox:React.FC=(props:object)=>{
+  const[category,setCategory]=useState();
+  const[boxStyle,setBoxStyle]=useState();
+
 
 
   return(
@@ -69,6 +54,7 @@ const SelectBox:React.FC<Data>=(props)=>{
       </div>
 
       <div>{props.name}</div>
+      <div></div>
 
       <div></div>
     </div>

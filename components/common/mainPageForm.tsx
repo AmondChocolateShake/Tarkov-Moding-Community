@@ -4,7 +4,26 @@ import LeftMenu from './LeftMenu'
 import MainContent from './MainContent'
 import { Guns } from '../global/global'
 
+
+
+
 const mainPageForm:React.FC=()=>{
+  const[pageState,setPageState]=useState('main');
+
+
+  const pageChangedto=(page:string)=>{
+    if(page==='post'){
+      setPageState('post');
+    }else if(page==='main'){
+      setPageState('main');
+    }else if(page==='board'){
+      setPageState('board');
+    }else{
+      console.log("꺼져");
+    }
+
+  }
+
   const fColumn:React.CSSProperties={
     display:'flex',
     flexDirection:'column',
@@ -36,7 +55,7 @@ const mainPageForm:React.FC=()=>{
       
       <div style={mainContainer}>
         <LeftMenu Guns={Guns}></LeftMenu>
-        
+
         <MainContent></MainContent>
       </div>
     </div>

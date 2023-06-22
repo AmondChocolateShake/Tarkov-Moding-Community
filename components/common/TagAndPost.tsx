@@ -1,7 +1,11 @@
 import React from 'react'
 
+interface Props{
+  handler:(page:string)=>void
+}
+
 //메인 컨텐츠 내부 선택된 태그와 글쓰기 버튼
-const TagAndPost=()=>{
+const TagAndPost:React.FC<Props>=(props)=>{
   const post:React.CSSProperties={
     display:'flex',
     justifyContent:'center',
@@ -22,13 +26,22 @@ const TagAndPost=()=>{
     borderBottom:'1px solid white',
     alignSelf:'center'
   }
+
+  //글쓰기 버튼 클릭시 호출되는 함수
+  function postClicked(){
+    //페이지 핸들러로 post 문자열을 보냄
+    props.handler('post');
+  }
+
+
   return(
     <div style={container}>
       <div>
         {}
       </div>
 
-      <div style={post}>
+
+      <div style={post} onClick={postClicked}>
         <div>글쓰기</div>
       </div>
     </div>

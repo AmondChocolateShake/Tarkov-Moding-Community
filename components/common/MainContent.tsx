@@ -1,9 +1,22 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Post from '../post/Post'
 import ContentOfGuns from './ContentOfGuns'
 import TagAndPost from './TagAndPost'
 
 const MainContent:React.FC=()=>{
+  const[pageState,setPageState]=useState('main');
+
+  const pageChangedto=(page:string)=>{
+    if(page==='post'){
+      setPageState('post');
+    }else if(page==='main'){
+      setPageState('main');
+    }else if(page==='board'){
+      setPageState('board');
+    }else{
+      console.log("꺼져");
+    }
+  }
   const fRow:React.CSSProperties={
     display:'flex',
     flexDirection:'row'
@@ -38,9 +51,9 @@ const MainContent:React.FC=()=>{
   const container={...fColumn,...jtfyctntStart,...Csize}
   return(
     <div style={container}>
-      <TagAndPost></TagAndPost>
-      <ContentOfGuns></ContentOfGuns>
-      {/* <Post></Post> */}
+      <TagAndPost handler={pageChangedto}></TagAndPost>
+      {pageState==='main'&& <ContentOfGuns></ContentOfGuns>}
+      {pageState==='post'&&<Post></Post>}
     </div>
 
   );

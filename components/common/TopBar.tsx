@@ -1,6 +1,9 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import Logo from '../../src/img/tarkov_logo.png'
 import Glass from '../../src/img/image 6.png'
+
+
 const TopBar:React.FC=()=>{
   const fRow:React.CSSProperties={
     display:'flex',
@@ -50,9 +53,11 @@ const TopBar:React.FC=()=>{
   
 return(
   <div style={topSt}>
-    <div>
-      <img src={Logo} alt="Logo" style={{width:'300px',height:'150px'}}/>
-    </div>
+    <Link to='/main'>
+      <div>
+        <img src={Logo} alt="Logo" style={{width:'300px',height:'150px'}}/>
+      </div>
+    </Link>
   
     <div style={searchSt}>
       <input style={searchBar}></input>

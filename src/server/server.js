@@ -1,5 +1,6 @@
 const express=require('express');
 const mysql = require('mysql');
+const fs=require('fs');
 
 // 데이터베이스 연결
 const connection = mysql.createConnection({
@@ -22,15 +23,17 @@ app.use(express.json());
 app.listen(port,()=>{
   
   console.log('server is running now... (port:'+port+')');
-})
+});
 
 //정적파일 서빙
-app.use(express.static('../dist'))
+app.use(express.static('../dist'));
 
+
+
+//Dev 페이지에서 아이템 객체 데이터 전송시 디비 삽입 처리
 app.post('/data', (req, res) => {
   const item=req.body;
   console.log(item);
-
   connection.query('INSERT INTO item SET ?', item, (err, result) => {
     if (err) {
       console.error('Error inserting item into database:', err);
@@ -40,8 +43,35 @@ app.post('/data', (req, res) => {
       res.status(200).json({ success: true });
     }
   });
-  // 데이터 처리 로직
-  // ...
+});
 
+fs.readFile('../tarkov-data/itemList.json','utf8',
+  (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return;
+    }
+    try {
+      const itemList = JSON.parse(data);
+      for(let i=0;i<itemList.length;i++){
+        const data=itemList[i];
+        console.log(data);
+      
+          
+          connection.query('INSERT INTO item SET ?', data, (err, result) => {
+            if (err) {
+              console.error('Error inserting item into database:', err);
+            } else {
+              console.log('Item inserted into database:', result);
+            }
+          });
+        
+
+      }
+
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+    }
+  
 });
 

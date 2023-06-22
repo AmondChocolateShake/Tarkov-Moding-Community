@@ -63,7 +63,6 @@ interface Item2{
   id:string,
   shortName:string,
   name:string|null,
-  color:string|null,
   iconLink:string|null,
   imageLink:string|undefined,
   value:{
@@ -97,7 +96,6 @@ let items:Item2={
   id:'',
   shortName:'',
   name:'',
-  color:'',
   iconLink:'',
   imageLink:'',
   value:{
@@ -166,47 +164,73 @@ function addCategory(category:string){
 
 const filePath='./items.json';//아이템 정보가 들어있는 파일
 
-fs.readFile(filePath,'utf8',(err:NodeJS.ErrnoException | null,data:any)=>{
-  if(err){
-    console.log('error occured');
-    return;
+try {
+  const data = fs.readFileSync(filePath, 'utf8');
+  const parsedFile=JSON.parse(data);
 
+
+  for(const obj of parsedFile){
+
+    let items:Item2={
+      categoryId:'',
+      id:'',
+      shortName:'',
+      name:'',
+      iconLink:'',
+      imageLink:'',
+      value:{
+        value:0,
+        currencyName:''
+      },
+      conflictingItemIds:[],
+      caliber:'',
+      fireRate:0,
+      ergonomics:0,
+      verticalRecoil:0,
+      horizontalRecoil:0,
+      accuracyPercentageModifier:0,
+      capacity:0,
+      loadSpeedPercentageModifier:0,
+      checkSpeedPercentageModifier:0,
+      fleshDamage:0,
+      penetrationPower:0,
+      class:[],
+      fragmentationChancePercentage:0,
+      modSlots:[{
+        name:'',
+        compatibleItemIds:[]
+      }]
+    };
+
+    for(const item in obj){
+      if(item in items){
+
+        items[item]=obj[item];
+        items['conflictingItemIds']=null;
+        items['class']=null;
+        items['value']=null;
+        items['modSlots']=null;
+      }
+    }
+    console.log(items);
+    addItemIntoList(items);
   }
 
-  try{
-    const itemData=JSON.parse(data);
-    
-    console.log('successed');
-    
-    for(const data of itemData){
-      // console.log(data);
-      for(const item in data){
-        if(checkPropInObj(item)){
-          items[item]=data[item];
-        }
-        // console.log(item);
-      }
-      addItemIntoList(items);
-      // console.log(items);
-    }
-    
-    for(const arr of itemList){
-      for(const item in arr){
-        if(item==='modSlots'){
-          console.log(item);
-        }
-      }
-    }
+} catch (err) {
+  console.error('Error reading file:', err);
+}
 
-  }catch(err){
-    console.error('failed to read : ',err);
+
+
+const jsonData = JSON.stringify(itemList);
+
+fs.writeFile('itemList.json', jsonData, (err:Error | null) => {
+  if (err) {
+    console.error('Error writing JSON file:', err);
+  } else {
+    console.log('JSON file saved successfully.');
   }
-
-})
-
-
-
-
+});
 
 
 
