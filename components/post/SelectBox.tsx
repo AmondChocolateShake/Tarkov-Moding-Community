@@ -34,12 +34,47 @@ interface Item{
   }[]|null
 }
 
+interface item{
+  item:{
+categoryId:string,
+id:string,
+shortName:string,
+name:string,
+iconLink:string,
+value:null,
+conflictingItemIds:null,
+caliber:string,
+fireRate:number,
+ergonomics:number,
+verticalRecoil:number,
+horizontalRecoil:number,
+accuracyPercentageModifier:number,
+capacity:number,
+loadSpeedPercentageModifier:number,
+checkSpeedPercentageModifier:number,
+fleshDamage:number,
+penetrationPower:number,
+class:null,
+fragmentationChancePercentage:number,
+modSlots:null}
+}
 
 
+const SelectBox:React.FC<item>=(props)=>{
+  const[category,setCategory]=useState(props.item.categoryId);
+  const[iconLink,setIconLink]=useState(props.item.iconLink);
+  const[boxStyle,setBoxStyle]=useState({
+    display:'flex',
+    width:'400px',
+    height:'100px',
+    border:'1px solid white',
+    borderRadius:'10px'
+  });
 
-const SelectBox:React.FC=(props:object)=>{
-  const[category,setCategory]=useState();
-  const[boxStyle,setBoxStyle]=useState();
+
+  if(category==='mainWeapon'){
+    // setBoxStyle()
+  }
 
 
 
@@ -50,13 +85,11 @@ const SelectBox:React.FC=(props:object)=>{
         height:'100%',
         borderLeft:'1px solid white'
       }}>
-        <img src={props.iconLink} alt="" style={{width:'100%',height:'100%'}}/>
+        <img src={iconLink} alt="icon" style={{width:'100%',height:'100%'}}/>
       </div>
 
-      <div>{props.name}</div>
-      <div></div>
-
-      <div></div>
+      <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>{props.item.name}</div>
+      <div className='cross'></div>
     </div>
   );
 }
