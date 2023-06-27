@@ -45,7 +45,7 @@ app.post('/data', (req, res) => {
   });
 });
 
-fs.readFile('../tarkov-data/itemList.json','utf8',
+fs.readFile('../tarkov-data/modSlotData.json','utf8',
   (err, data) => {
     if (err) {
       console.error('Error reading file:', err);
@@ -56,9 +56,9 @@ fs.readFile('../tarkov-data/itemList.json','utf8',
       for(let i=0;i<itemList.length;i++){
         const data=itemList[i];
         console.log(data);
-      
+        
           
-          connection.query('INSERT INTO item SET ?', data, (err, result) => {
+          connection.query('INSERT INTO modSlots SET ?', data, (err, result) => {
             if (err) {
               console.error('Error inserting item into database:', err);
             } else {
