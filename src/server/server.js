@@ -23,10 +23,21 @@ app.use(express.json());
 app.listen(port,()=>{
   
   console.log('server is running now... (port:'+port+')');
+
 });
 
 //정적파일 서빙
 app.use(express.static('../dist'));
+
+
+
+app.post('/select_post',(req,res)=>{
+  const id = req.body.id;
+  const data = getPostData(id);
+  console.log(data);
+  res.json(data);
+})
+
 
 
 
@@ -45,33 +56,98 @@ app.post('/data', (req, res) => {
   });
 });
 
-fs.readFile('../tarkov-data/modSlotData.json','utf8',
-  (err, data) => {
-    if (err) {
-      console.error('Error reading file:', err);
-      return;
-    }
-    try {
-      const itemList = JSON.parse(data);
-      for(let i=0;i<itemList.length;i++){
-        const data=itemList[i];
-        console.log(data);
+
+
+/*데이터 db로 삽입하는 코드
+// fs.readFile('../tarkov-data/itemList.json','utf8',
+//   (err, data) => {
+//     if (err) {
+//       console.error('Error reading file:', err);
+//       return;
+//     }
+//     try {
+//       const itemList = JSON.parse(data);
+//       for(let i=0;i<itemList.length;i++){
+//         const data=itemList[i];
+//         console.log(data);
         
           
-          connection.query('INSERT INTO modSlots SET ?', data, (err, result) => {
-            if (err) {
-              console.error('Error inserting item into database:', err);
-            } else {
-              console.log('Item inserted into database:', result);
-            }
-          });
+//           connection.query('INSERT INTO item SET ?', data, (err, result) => {
+//             if (err) {
+//               console.error('Error inserting item into database:', err);
+//             } else {
+//               console.log('Item inserted into database:', result);
+//             }
+//           });
         
 
-      }
+//       }
 
-    } catch (error) {
-      console.error('Error parsing JSON:', error);
-    }
+//     } catch (error) {
+//       console.error('Error parsing JSON:', error);
+//     }
   
-});
+// });
+*/
 
+
+
+
+
+
+
+
+
+  //게시글 데이터 가져오기
+async function getPostData(id){
+  const mysql=require('mysql');
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'Tarkov_Moding',
+  });
+  console.log('id: '+id);
+  //SELECT * FROM posts WHERE id = '5acf7dd986f774486e1281bf';
+  const query = 'SELECT * FROM posts WHERE id = ?';
+  const values = id;
+  let data;
+
+
+  try {
+    const data = await new Promise((resolve, reject) => {
+      connection.query(query, values, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
+    connection.end();
+    console.log(data);
+    return data;
+  } catch (error) {
+    connection.end();
+    throw error;
+  }
+
+
+  // connection.query(query,values,(error, results) => {
+  //   if (error) {
+  //     throw error;
+  //   }else{
+  //     data=results;
+  //   }
+  // });
+
+  // connection.end();
+  
+  // console.log(data);
+  // return data;
+  
+}
+
+
+// getPostData('5acf7dd986f774486e1281bf');
