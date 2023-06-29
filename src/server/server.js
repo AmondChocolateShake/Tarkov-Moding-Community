@@ -31,11 +31,16 @@ app.use(express.static('../dist'));
 
 
 
-app.post('/select_post',(req,res)=>{
+app.post('/select_post',async (req,res)=>{
   const id = req.body.id;
-  const data = getPostData(id);
-  console.log(data);
-  res.json(data);
+  try {
+    const data = await getPostData(id);
+    console.log('SS) data : ', data);
+    res.json(data); // 데이터를 JSON 형식으로 클라이언트에게 응답
+  } catch (error) {
+    console.error('에러 발생:', error);
+    res.status(500).json({ error: '에러 발생' }); // 에러 응답
+  }
 })
 
 
@@ -101,7 +106,7 @@ app.post('/data', (req, res) => {
   //게시글 데이터 가져오기
 async function getPostData(id){
   const mysql=require('mysql');
-  const connection = mysql.createConnection({
+  const connection2 = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '1234',
@@ -111,12 +116,11 @@ async function getPostData(id){
   //SELECT * FROM posts WHERE id = '5acf7dd986f774486e1281bf';
   const query = 'SELECT * FROM posts WHERE id = ?';
   const values = id;
-  let data;
 
 
   try {
-    const data = await new Promise((resolve, reject) => {
-      connection.query(query, values, (error, results) => {
+    return await new Promise((resolve, reject) => {
+      connection2.query(query, values, (error, results) => {
         if (error) {
           reject(error);
         } else {
@@ -125,11 +129,9 @@ async function getPostData(id){
       });
     });
 
-    connection.end();
-    console.log(data);
-    return data;
+
   } catch (error) {
-    connection.end();
+    connection2.end();
     throw error;
   }
 
