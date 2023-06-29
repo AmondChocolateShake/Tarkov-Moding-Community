@@ -1,26 +1,26 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Post from '../post/Post'
 import ContentOfGuns from './ContentOfGuns'
 import TagAndPost from './TagAndPost'
 import Board from '../board/Board'
 
-const MainContent:React.FC=()=>{
-  const[pageState,setPageState]=useState('posts');
-  const[gun,setGun]=useState('AK-101');
+interface props{
+  pageState:string
+  setPageState:(page:string)=>void
+}
 
-
-
-  const pageChangedto=(page:string)=>{
-    if(page==='post'){
-      setPageState('post');
-    }else if(page==='main'){
-      setPageState('main');
-    }else if(page==='board'){
-      setPageState('board');
-    }else{
-      console.log("꺼져");
-    }
+const MainContent:React.FC<props>=(props)=>{
+  const[pageState2,setPageState2]=useState(props.pageState);
+  
+  function updatePageState(page:string){
+    setPageState2(page);
   }
+
+  useEffect(()=>{
+    console.log('mainpage : '+props.pageState)
+    updatePageState(props.pageState);
+  },[props.pageState]);
+
   const fRow:React.CSSProperties={
     display:'flex',
     flexDirection:'row'
@@ -55,14 +55,15 @@ const MainContent:React.FC=()=>{
   const container={...fColumn,...jtfyctntStart,...Csize}
   return(
     <div style={container}>
-      {pageState!=='posts'&&<TagAndPost handler={pageChangedto}></TagAndPost>}
-      {pageState==='main'&& <ContentOfGuns></ContentOfGuns>}
-      {pageState==='post'&&<Post></Post>}
-      {pageState==='posts'&&<Board name='AK-101' id='5acf7dd986f774486e1281bf'></Board>}
+      {pageState2!=='posts'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
+      {pageState2==='main'&& <ContentOfGuns pageState={props.pageState} setPageState={props.setPageState}></ContentOfGuns>}
+      {pageState2==='post'&&<Post></Post>}
+      {pageState2==='posts'&&<Board name='AK-101' id='5acf7dd986f774486e1281bf'></Board>}
+
     </div>
 
   );
-}
+};
 
 
-export default MainContent
+export default MainContent;

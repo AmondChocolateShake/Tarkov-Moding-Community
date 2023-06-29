@@ -3,8 +3,13 @@ import {Link} from 'react-router-dom'
 import Logo from '../../src/img/tarkov_logo.png'
 import Glass from '../../src/img/glass.png'
 
+interface props{
+  pageState:string
+  setPageState:(page:string)=>void
+}
 
-const TopBar:React.FC=()=>{
+
+const TopBar:React.FC<props>=(props)=>{
   const fRow:React.CSSProperties={
     display:'flex',
     flexDirection:'row'
@@ -50,11 +55,13 @@ const TopBar:React.FC=()=>{
   const topSt={...fRow,...jtfyctntStart,...alignCenter}
   const searchSt={...fRow,...jtfyctntCenter,...alignCenter,...SCsize}
   
-  
+  function clicked(){
+    props.setPageState('main');
+  }
 return(
   <div style={topSt}>
     <Link to='/main'>
-      <div>
+      <div onClick={clicked}>
         <img src={Logo} alt="Logo" style={{width:'300px',height:'150px'}}/>
       </div>
     </Link>

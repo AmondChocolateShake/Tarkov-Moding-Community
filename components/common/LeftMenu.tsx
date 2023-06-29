@@ -4,13 +4,37 @@ import WeaponName from './WeaponName';
 interface weaponList{
   Guns:{
     name:string,
-    imgLink:string
+    imageLink:string,
+    id:string,
+    
   }[]
 }
 
 //메인 페이지 왼쪽 총기 리스트 박스
-const LeftMenu:React.FC<weaponList>=(props)=>{
-  
+const LeftMenu:React.FC<weaponList>=({Guns})=>{
+  const[guns,setGuns]=useState(Guns)
+
+  useEffect(()=>{
+    fetch('/all_gun_list',{
+      method:'POST',
+      headers:{
+        'Context-Type':'application/json'
+      }
+  })
+    .then(response=>response.json())
+    .then(data=>{
+      console.log(data);
+      setGuns(data);
+    })
+    .catch(error=>{
+      console.error(error);
+    })
+  },[]);
+
+  useEffect(()=>{
+    console.log('left menu : '+guns);
+  },[guns])
+
 
   const fRow:React.CSSProperties={
     display:'flex',
@@ -56,7 +80,7 @@ const LeftMenu:React.FC<weaponList>=(props)=>{
     <div style={container}>
       <div style={listSt}>
         {
-          props.Guns.map((item,index)=>(
+            guns.map((item,index)=>(
             <WeaponName name={item.name} key={index}></WeaponName>
           ))
         }

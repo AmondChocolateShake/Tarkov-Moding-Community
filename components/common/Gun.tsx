@@ -2,8 +2,10 @@ import React from 'react'
 
 
 interface GunData{
-  gunImg:string,
+  gunImg:string
   gunName:string
+  id:string
+  setPageState:(page:string)=>void
 }
 const Gun:React.FC<GunData>=(props)=>{
 

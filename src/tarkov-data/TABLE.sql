@@ -44,8 +44,8 @@ context,tags,ergomics,
 price,verticalRecoil,
 horizontalRecoil,favoirte,
 modingDataId,id,likes,author)
-VALUES (1,'가성비 모딩','https://assets.tarkov.dev/5acf7dd986f774486e1281bf-image.webp',
-'쌉가성비 모딩 입니다.','가성비,국밥','30', 
-'200000','49',
-'79','',
-1,'5acf7dd986f774486e1281bf','321','DJ');
+VALUES (2,'너무 비싼 모딩','https://assets.tarkov.dev/5acf7dd986f774486e1281bf-image.webp',
+'너무 비싼 모딩 입니다.','브루주아','50', 
+'3000000','40',
+'60','',
+2,'5acf7dd986f774486e1281bf','999','DJ');
