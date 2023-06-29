@@ -2,9 +2,13 @@ import React,{useState} from 'react'
 import Post from '../post/Post'
 import ContentOfGuns from './ContentOfGuns'
 import TagAndPost from './TagAndPost'
+import Board from '../board/Board'
 
 const MainContent:React.FC=()=>{
-  const[pageState,setPageState]=useState('main');
+  const[pageState,setPageState]=useState('posts');
+  const[gun,setGun]=useState('AK-101');
+
+
 
   const pageChangedto=(page:string)=>{
     if(page==='post'){
@@ -51,9 +55,10 @@ const MainContent:React.FC=()=>{
   const container={...fColumn,...jtfyctntStart,...Csize}
   return(
     <div style={container}>
-      <TagAndPost handler={pageChangedto}></TagAndPost>
+      {pageState!=='posts'&&<TagAndPost handler={pageChangedto}></TagAndPost>}
       {pageState==='main'&& <ContentOfGuns></ContentOfGuns>}
       {pageState==='post'&&<Post></Post>}
+      {pageState==='posts'&&<Board name='AK-101' id='5acf7dd986f774486e1281bf'></Board>}
     </div>
 
   );

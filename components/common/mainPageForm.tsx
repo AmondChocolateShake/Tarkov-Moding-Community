@@ -7,22 +7,10 @@ import { Guns } from '../global/global'
 
 
 
-const mainPageForm:React.FC=()=>{
+const mainPageForm:React.FC=(props)=>{
   const[pageState,setPageState]=useState('main');
 
 
-  const pageChangedto=(page:string)=>{
-    if(page==='post'){
-      setPageState('post');
-    }else if(page==='main'){
-      setPageState('main');
-    }else if(page==='board'){
-      setPageState('board');
-    }else{
-      console.log("꺼져");
-    }
-
-  }
 
   const fColumn:React.CSSProperties={
     display:'flex',
