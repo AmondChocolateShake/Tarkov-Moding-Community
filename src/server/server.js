@@ -77,7 +77,17 @@ async function getGunList(){
     }
   }
 
+app.post('/get_name_by_id',(req,res)=>{
+  const id=req.body;
+  connection.query('SELECT shortName FROM item WHERE id = ?',id,(err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.json(result);
+    }
+  })
 
+})
 
 
 //Dev 페이지에서 아이템 객체 데이터 전송시 디비 삽입 처리
