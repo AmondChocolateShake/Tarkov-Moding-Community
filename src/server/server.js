@@ -49,6 +49,37 @@ app.post('/all_gun_list',async (req,res)=>{
   res.json(guns);
 })
 
+app.post('/all_gun_short_name',async (req,res)=>{
+  const guns=await getGunShortName();
+  console.log(guns);
+  res.json(guns);
+})
+
+async function getGunShortName(){
+  const query='SELECT id, shortName, imageLink FROM item WHERE categoryId = ?'
+  const value='mainWeapon'
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'Tarkov_Moding',
+  });
+  try {
+    return await new Promise((resolve, reject) => {
+      connection.query(query, value, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+          console.log(results);
+        }
+      });
+    });
+    }catch (error) {
+      connection.end();
+      throw error;
+    }
+  }
 
 
 async function getGunList(){
@@ -83,6 +114,7 @@ app.post('/get_name_by_id',(req,res)=>{
     if (err) {
       console.error(err);
     } else {
+      console.log(result);
       res.json(result);
     }
   })
