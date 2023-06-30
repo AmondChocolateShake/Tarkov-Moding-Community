@@ -33,6 +33,7 @@ const TagAndPost:React.FC<props>=(props)=>{
   function postClicked(){
     //페이지 핸들러로 post 문자열을 보냄
     props.setPageState('post');
+    console.log('clicked');
   }
 
 

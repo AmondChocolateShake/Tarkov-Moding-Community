@@ -8,7 +8,7 @@ interface props{
 
 
 const PostsOnBoard:React.FC<props>=(props)=>{
-  const[id,setId]=useState('5acf7dd986f774486e1281bf');
+  const[id,setId]=useState(props.id);
   const[posts,setPosts]=useState([] as any);
   const[flag,setFlag]=useState(0);
   useEffect(()=>{

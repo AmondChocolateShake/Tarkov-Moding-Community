@@ -4,22 +4,17 @@ import ContentOfGuns from './ContentOfGuns'
 import TagAndPost from './TagAndPost'
 import Board from '../board/Board'
 
+
 interface props{
   pageState:string
   setPageState:(page:string)=>void
 }
 
 const MainContent:React.FC<props>=(props)=>{
-  const[pageState2,setPageState2]=useState(props.pageState);
+  const[id,setId]=useState('');
   
-  function updatePageState(page:string){
-    setPageState2(page);
-  }
+  
 
-  useEffect(()=>{
-    console.log('mainpage : '+props.pageState)
-    updatePageState(props.pageState);
-  },[props.pageState]);
 
   const fRow:React.CSSProperties={
     display:'flex',
@@ -55,10 +50,10 @@ const MainContent:React.FC<props>=(props)=>{
   const container={...fColumn,...jtfyctntStart,...Csize}
   return(
     <div style={container}>
-      {pageState2!=='posts'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
-      {pageState2==='main'&& <ContentOfGuns pageState={props.pageState} setPageState={props.setPageState}></ContentOfGuns>}
-      {pageState2==='post'&&<Post></Post>}
-      {pageState2==='posts'&&<Board name='AK-101' id='5acf7dd986f774486e1281bf'></Board>}
+      {props.pageState!=='posts'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
+      {props.pageState==='main'&& <ContentOfGuns setId={setId} pageState={props.pageState} setPageState={props.setPageState}></ContentOfGuns>}
+      {props.pageState==='post'&&<Post></Post>}
+      {props.pageState==='posts'&&<Board id={id}></Board>}
 
     </div>
 

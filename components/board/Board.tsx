@@ -1,16 +1,36 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import ResultOf from './ResultOf';
 import PostsOnBoard from './PostsOnBoard';
 interface Name{
-  name:string
   id:string
 }
 
 const Board:React.FC<Name>=(props)=>{
+  const[name,setName]=useState('');
+
+  useEffect(()=>{
+    fetch('/get_name_by_id',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body:JSON.stringify({id:props.id})
+    })
+    .then(response=>response.json())
+    .then(data=>{
+      setName(data);
+    })
+    .catch(error=>{
+      console.error('Error :',error);
+    })
+
+  },[])
+  
+
 
   return(
     <div>
-      <ResultOf name={props.name}></ResultOf>
+      <ResultOf name={name}></ResultOf>
       <PostsOnBoard id={props.id}></PostsOnBoard>
     </div>
   );

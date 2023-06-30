@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import Gun from './Gun'
-import { Guns } from '../global/global'
 
 
 
 interface props{
   pageState:string
   setPageState:(page:string)=>void
+  setId:(id:string)=>void
 }
 
 
 interface GunData {
-  id: string;
-  name: string;
-  imageLink: string;
+  id: string
+  name: string
+  imageLink: string
 }
 
 const ContentOfGuns:React.FC<props>=(props)=>{
@@ -44,11 +44,12 @@ const ContentOfGuns:React.FC<props>=(props)=>{
     width:'95%',
     height:'95%'
   }
+
   return(
     <div style={container}>
       {guns.length>0 &&
         guns.map((item,index)=>(
-          <Gun gunImg={item.imageLink} gunName={item.name} key={index} id={item.id} setPageState={props.setPageState}></Gun>
+          <Gun setId={props.setId} setPageState={props.setPageState} gunImg={item.imageLink} gunName={item.name} key={index} id={item.id}></Gun>
         ))
       }
     </div>

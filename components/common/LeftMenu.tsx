@@ -3,7 +3,7 @@ import WeaponName from './WeaponName';
 
 interface weaponList{
   Guns:{
-    name:string,
+    shortName:string,
     imageLink:string,
     id:string,
     
@@ -15,7 +15,7 @@ const LeftMenu:React.FC<weaponList>=({Guns})=>{
   const[guns,setGuns]=useState(Guns)
 
   useEffect(()=>{
-    fetch('/all_gun_list',{
+    fetch('/all_gun_short_name',{
       method:'POST',
       headers:{
         'Context-Type':'application/json'
@@ -23,7 +23,7 @@ const LeftMenu:React.FC<weaponList>=({Guns})=>{
   })
     .then(response=>response.json())
     .then(data=>{
-      console.log(data);
+      console.log( 'leftmenu2 :'+data);
       setGuns(data);
     })
     .catch(error=>{
@@ -73,15 +73,15 @@ const LeftMenu:React.FC<weaponList>=({Guns})=>{
     
   }
 
-  const container={...fColumn,...jtfyctntCenter,...alignCenter,...Csize}
+  const container={...fColumn,...jtfyctntStart,...alignCenter,...Csize}
   const listSt={...fColumn,...alignStart,...listSize}
 
   return(
     <div style={container}>
       <div style={listSt}>
-        {
+        {guns&&
             guns.map((item,index)=>(
-            <WeaponName name={item.name} key={index}></WeaponName>
+            <WeaponName name={item.shortName} key={index}></WeaponName>
           ))
         }
       </div>

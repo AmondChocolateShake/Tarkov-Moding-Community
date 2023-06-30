@@ -2,7 +2,6 @@ import React, { useState ,useEffect} from 'react'
 import TopBar from './TopBar'
 import LeftMenu from './LeftMenu'
 import MainContent from './MainContent'
-import { Guns } from '../global/global'
 
 
 
@@ -11,11 +10,22 @@ const mainPageForm:React.FC=(props)=>{
   const[pageState,setPageState]=useState('main');
   const[gunList,setGunList]=useState([]);
 
+  const getPageState=()=>{
+    return pageState;
+  }
+  
 
-  const fColumn:React.CSSProperties={
+
+
+
+  
+
+  const outter:React.CSSProperties={
     display:'flex',
     flexDirection:'column',
-    backgroundColor:'black'
+    backgroundColor:'black',
+    width:'100vw',
+    height:'100vh'
   }
 
   const fRow:React.CSSProperties={
@@ -39,7 +49,7 @@ const mainPageForm:React.FC=(props)=>{
 
 
   return(
-    <div style={fColumn}>
+    <div style={outter}>
       <header>
         <TopBar pageState={pageState} setPageState={setPageState}></TopBar>
       </header>

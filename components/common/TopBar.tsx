@@ -56,7 +56,7 @@ const TopBar:React.FC<props>=(props)=>{
   const searchSt={...fRow,...jtfyctntCenter,...alignCenter,...SCsize}
   
   function clicked(){
-    props.setPageState('main');
+    props.setPageState('main')
   }
 return(
   <div style={topSt}>

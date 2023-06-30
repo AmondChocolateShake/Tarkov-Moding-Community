@@ -8,7 +8,7 @@ interface WName{
 const WeaponName:React.FC<WName>=(props)=>{
   const nameSt:React.CSSProperties={
     color:'rgba(255,255,255,0.8)',
-    fontSize:'20px'
+    fontSize:'20px',
   }
 
   return(
