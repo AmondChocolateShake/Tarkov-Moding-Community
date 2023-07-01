@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface Item{
   category:string,
@@ -62,7 +62,7 @@ modSlots:null}
 
 const SelectBox:React.FC<item>=(props)=>{
   const[category,setCategory]=useState(props.item.categoryId);
-  const[iconLink,setIconLink]=useState(props.item.iconLink);
+  const[item,setItem]=useState(props.item);
   const[boxStyle,setBoxStyle]=useState({
     display:'flex',
     width:'400px',
@@ -71,25 +71,44 @@ const SelectBox:React.FC<item>=(props)=>{
     borderRadius:'10px'
   });
 
+  useEffect(()=>{
+    
+
+  },[])
+
+
 
   if(category==='mainWeapon'){
     // setBoxStyle()
   }
 
+  const container:React.CSSProperties={
+    display:'flex',
+    width:'400px',
+    height:'430px',
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'flex-start'
+  }
 
 
   return(
-    <div style={boxStyle}>
-      <div style={{
-        width:'33%',
-        height:'100%',
-        borderLeft:'1px solid white'
-      }}>
-        <img src={iconLink} alt="icon" style={{width:'100%',height:'100%'}}/>
-      </div>
+    <div style={container}>
+      <div>{}</div>
+      <div style={boxStyle}>
+        <div style={{
+          width:'33%',
+          height:'100%',
+          borderLeft:'1px solid white'
+        }}>
+          <img src={item.iconLink} alt="icon" style={{width:'100%',height:'100%'}}/>
+        </div>
 
-      <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>{props.item.name}</div>
-      <div className='cross'></div>
+        <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>{item.name}</div>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+          <div className='cross'></div>
+        </div>  
+      </div>
     </div>
   );
 }

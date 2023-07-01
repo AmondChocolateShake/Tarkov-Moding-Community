@@ -4,6 +4,8 @@ import MainWeaponSelect from './MainWeaponSelect';
 
 
 const Moding:React.FC=()=>{
+  
+
   const container:React.CSSProperties={
     display:'flex',
     width:'80%',
@@ -15,7 +17,9 @@ const Moding:React.FC=()=>{
   return(
     <div style={container}>
       <MainWeaponSelect></MainWeaponSelect>
-      
+      {
+
+      }
     </div>
   );
 }
