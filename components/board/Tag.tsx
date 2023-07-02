@@ -11,7 +11,10 @@ const Tag:React.FC<Tag>=(props)=>{
       width:'70px',
       height:'30px',
       justifyContent:'center',
-      alignItems:'center'
+      alignItems:'center',
+      border:'1px solid white',
+      borderRadius:'10px',
+      marginLeft:'6px'
     }}>
       <div style={{color:'white'}}>{props.tagName}</div>
     </div>

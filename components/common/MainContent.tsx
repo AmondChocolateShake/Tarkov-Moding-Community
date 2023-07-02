@@ -3,7 +3,7 @@ import Post from '../post/Post'
 import ContentOfGuns from './ContentOfGuns'
 import TagAndPost from './TagAndPost'
 import Board from '../board/Board'
-
+import PostInner from '../board/PostInner'
 
 interface props{
   pageState:string
@@ -51,11 +51,11 @@ const MainContent:React.FC<props>=(props)=>{
   const container={...fColumn,...jtfyctntStart,...Csize}
   return(
     <div style={container}>
-      {props.pageState!=='posts'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
+      {/* {props.pageState!=='posts'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
       {props.pageState==='main'&& <ContentOfGuns setId={setId} pageState={props.pageState} setPageState={props.setPageState}></ContentOfGuns>}
       {props.pageState==='post'&&<Post></Post>}
-      {props.pageState==='posts'&&<Board id={id}></Board>}
-
+      {props.pageState==='posts'&&<Board id={id}></Board>} */}
+      <PostInner></PostInner>
     </div>
 
   );
