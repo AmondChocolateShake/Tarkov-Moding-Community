@@ -56,8 +56,7 @@ app.post('/all_gun_short_name',async (req,res)=>{
 })
 
 async function getGunShortName(){
-  const query='SELECT id, shortName, imageLink FROM item WHERE categoryId = ?'
-  const value='mainWeapon'
+  const query='SELECT shortName FROM DefaultWeapon'
   const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -66,7 +65,7 @@ async function getGunShortName(){
   });
   try {
     return await new Promise((resolve, reject) => {
-      connection.query(query, value, (error, results) => {
+      connection.query(query, null, (error, results) => {
         if (error) {
           reject(error);
         } else {
