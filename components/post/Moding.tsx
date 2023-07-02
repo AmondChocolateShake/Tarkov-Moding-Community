@@ -17,9 +17,7 @@ const Moding:React.FC=()=>{
   return(
     <div style={container}>
       <MainWeaponSelect></MainWeaponSelect>
-      {
-        
-      }
+      
     </div>
   );
 }

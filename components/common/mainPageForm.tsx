@@ -15,16 +15,12 @@ const mainPageForm:React.FC=(props)=>{
   }
   
 
-
-
-
-  
-
   const outter:React.CSSProperties={
     display:'flex',
     flexDirection:'column',
     backgroundColor:'black',
     width:'100vw',
+    minWidth:'1280px',
     height:'100vh'
   }
 

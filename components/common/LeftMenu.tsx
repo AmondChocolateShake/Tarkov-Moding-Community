@@ -65,12 +65,13 @@ const LeftMenu:React.FC<weaponList>=({Guns})=>{
   const Csize:React.CSSProperties={
     width:'200px',
     minHeight:'500px',
-    backgroundColor:'#1E1E1E'
+    backgroundColor:'#1E1E1E',
+    height:'fit-content'
+
   }
   const listSize:React.CSSProperties={
     width:'90%',
     minHeight:'90%',
-    
   }
 
   const container={...fColumn,...jtfyctntStart,...alignCenter,...Csize}
