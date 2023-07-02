@@ -7,12 +7,12 @@ interface Item{
   fullName:string,
   iconLink:string,
   color:string,
-  value:{
-    price:number,
-    currency:string,
-  }|null,
+
+  price:number,
+  currency:string,
+  
   conflictItems:string[]|null,
-  ability:{
+
     ammunitionType:string|null
     rpm:number|null,
     ergo:number|null,
@@ -26,7 +26,7 @@ interface Item{
     penetrationPower:number|null,
     class:number[]|null,
     fragmentationChance:number|null
-  },
+
   modSlot:{
     slotName:string,
     capatibleItems:string[],
@@ -61,6 +61,7 @@ modSlots:null}
 
 
 const SelectBox:React.FC<item>=(props)=>{
+  const[clicked,setClicked]=useState(false);
   const[category,setCategory]=useState(props.item.categoryId);
   const[item,setItem]=useState(props.item);
   const[boxStyle,setBoxStyle]=useState({
@@ -76,6 +77,10 @@ const SelectBox:React.FC<item>=(props)=>{
 
   },[])
 
+  function clickHandler(){
+    setClicked(true);
+    console.log('item select component clicked');
+  }
 
 
   if(category==='mainWeapon'){
@@ -92,8 +97,9 @@ const SelectBox:React.FC<item>=(props)=>{
   }
 
 
+
   return(
-    <div style={container}>
+    <div style={container} onClick={clickHandler}>
       <div>{}</div>
       <div style={boxStyle}>
         <div style={{
@@ -107,9 +113,12 @@ const SelectBox:React.FC<item>=(props)=>{
         <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>{item.name}</div>
         <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
           <div className='cross'></div>
-        </div>  
+        </div>
       </div>
     </div>
+    
+
+
   );
 }
 
