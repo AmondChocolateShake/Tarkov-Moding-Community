@@ -15,7 +15,7 @@ interface PostData{
     author:string,
     likes:number,
     postId:number
-    postIdHandler(id:number):()=>void
+    postIdHandler:(id:number)=>void
 }
 
 const PostForm:React.FC<PostData>=(props)=>{

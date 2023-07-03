@@ -3,7 +3,7 @@ import PostForm from './PostForm';
 
 interface props{
   id:string
-  postIdHandler(id:number):()=>void
+  postIdHandler:(id:number)=>void
 }
 
 

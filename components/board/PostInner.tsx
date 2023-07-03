@@ -1,6 +1,6 @@
 import React , {useState}from 'react'
 import TopInfoInPostInner from './TopInfoInPostInner';
-import ModList from './ModList';
+// import ModList from './ModList';
 
 
 interface Props{
@@ -72,7 +72,7 @@ const PostInner:React.FC<Post>=(props)=>{
       <TopInfoInPostInner img={img} info={info} tags={tags} likes={likes} context={context}></TopInfoInPostInner>
       <div style={ModsContainer}>
         {/* 모드 리스트를 props로 넘겨야함 */}
-        <ModList mods={modList}></ModList>
+        {/* <ModList mods={modList}></ModList> */}
       </div>
     </div>
   );

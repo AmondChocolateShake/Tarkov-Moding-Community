@@ -15,10 +15,12 @@ async function putPriceIntoDB(){
   const parsedData=JSON.parse(price);
 
   for(let item of parsedData){
-
-    let values=[item.itemId,item.value,item.currencyName];
-    const query='INSERT INTO itemPrice (id,price,currency) VALUES (?,?,?)'
-    await connection.query(query,values);
+    if(item.merchant==="flea-market") console.log('플리제외');
+    else{
+      let values=[item.itemId,item.value,item.currencyName];
+      const query='INSERT INTO itemPrice (id,price,currency) VALUES (?,?,?)'
+      await connection.query(query,values);
+    }
 
   }
 }

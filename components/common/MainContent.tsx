@@ -30,7 +30,21 @@ const MainContent:React.FC<props>=(props)=>{
   const[id,setId]=useState('');
   const[postId,setPostId]=useState(0);
   const[postClicked,setPostClicked]=useState(false);
-  const[postData,setPostData]=useState({});
+  const[postData,setPostData]=useState({
+    img:'',
+    info:{
+      price:0,
+      ergo:0,
+      vertical:0,
+      horizontal:0
+    },
+    tags:[''],
+    likes:0,
+    context:''
+  });
+
+
+
   const fRow:React.CSSProperties={
     display:'flex',
     flexDirection:'row'
@@ -72,7 +86,10 @@ const MainContent:React.FC<props>=(props)=>{
   }
 
   useEffect(()=>{
+
+    // console.log(getPostData(postId));
     
+    // setPostData(post);
   },[postClicked])
 
 
@@ -82,7 +99,7 @@ const MainContent:React.FC<props>=(props)=>{
       {props.pageState==='main'&& <ContentOfGuns setId={setId} pageState={props.pageState} setPageState={props.setPageState}></ContentOfGuns>}
       {props.pageState==='post'&&<Post></Post>}
       {props.pageState==='posts'&&<Board postIdHandler={postIdHandler} id={id}></Board>}
-      {postClicked===true&&<PostInner post={}></PostInner>}
+      {postClicked===true&&<PostInner post={postData}></PostInner>}
     </div>
 
   );

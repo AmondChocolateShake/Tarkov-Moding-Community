@@ -14,7 +14,7 @@ const PriceBox:React.FC<Props>=(props)=>{
   const priceBox:React.CSSProperties={
     display:'flex',
     flexDirection:'row',
-    justifyContent:'flex-end',
+    justifyContent:'',
     alignItems:'center',
     width:'90%',
     height:'15px',
