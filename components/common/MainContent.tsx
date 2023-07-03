@@ -86,12 +86,22 @@ const MainContent:React.FC<props>=(props)=>{
     setPostClicked(true);
     props.setPageState('postView');
   }
+  
 
+  useEffect(()=>{
+    if(props.pageState==='postView'){
+
+    }else{
+      setPostClicked(false);
+    }
+  },[props.pageState])
+
+  
   useEffect(()=>{
     fetch('/post_data',{
       method:'POST',
       headers:{
-        'Context-Type':'application/json'
+        'Content-Type':'application/json'
       },
       body:JSON.stringify({postId:postId})
     })
@@ -101,7 +111,6 @@ const MainContent:React.FC<props>=(props)=>{
       // setPostData(data);
       console.log(data);
     })
-
 
   },[postClicked])
 

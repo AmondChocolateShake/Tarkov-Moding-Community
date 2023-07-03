@@ -30,8 +30,19 @@ app.listen(port,()=>{
 app.use(express.static('../dist'));
 
 app.post('/post_data',async (req,res)=>{
-  const postId=req.body.postId
-  console.log(typeof(postId));
+  try{
+    const postId=req.body.postId
+    console.log("post_data : ",postId);
+    const postData=await getPostDetail(postId);
+    res.json(postData); // 데이터를 JSON 형식으로 클라이언트에게 응답
+  } catch (error) {
+    console.error('에러 발생:', error);
+    res.status(500).json({ error: '에러 발생' }); // 에러 응답
+  }
+})
+
+//postId 를 이용해 1개의 게시글을 조회
+async function getPostDetail(postId){
   const query='SELECT * FROM posts WHERE postId = ?'
 
   try{
@@ -42,15 +53,14 @@ app.post('/post_data',async (req,res)=>{
           reject(err);
         }else{
           resolve(results);
-          
         }
       })
     })
   }catch(err){
-
+    console.error(err);
   }
+}
 
-})
 
 app.post('/select_post',async (req,res)=>{
   const id = req.body.id;
