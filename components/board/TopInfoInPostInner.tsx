@@ -1,9 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Tag from './Tag'
 
-//게시글 클릭시 나타나는 PostInner 컴포넌트의 상단 정보 박스 컴포넌트
-const TopInfoInPostInner:React.FC=(props)=>{
+interface Post{
+  img:string,
+  info:{
+    price:number,
+    ergo:number,
+    vertical:number,
+    horizontal:number
+  },
+  tags:string[],
+  likes:number,
+  context:string
+}
 
+
+//게시글 클릭시 나타나는 PostInner 컴포넌트의 상단 정보 박스 컴포넌트
+const TopInfoInPostInner:React.FC<Post>=(props)=>{
+  const[img,setImg]=useState(props.img);
+  const[info,setInfo]=useState(props.info);
+  const[tags,setTags]=useState(props.tags);
+  const[likes,setLikes]=useState(props.likes);
+  const[context,setContext]=useState(props.context);
 
   const container:React.CSSProperties={
     display:'flex',
@@ -11,7 +29,7 @@ const TopInfoInPostInner:React.FC=(props)=>{
     justifyContent:'flex-start',
     alignItems:'center',
     width:'100%',
-    height:'100%'
+    height:'80%'
   }
 
   const titleBox:React.CSSProperties={
@@ -30,7 +48,7 @@ const TopInfoInPostInner:React.FC=(props)=>{
     alignItems:'center',
     borderBottom:'1px solid white',
     width:'100%',
-    height:'100px'
+    height:'150px'
   }
 
   const imgAndNumBox:React.CSSProperties={
@@ -39,7 +57,7 @@ const TopInfoInPostInner:React.FC=(props)=>{
     justifyContent:'space-around',
     alignContent:'center',
     width:'80%',
-    height:'95%'
+    height:'80%'
 
   }
 
@@ -72,6 +90,17 @@ const TopInfoInPostInner:React.FC=(props)=>{
     width:'100%',
   }
 
+  const contextBox:React.CSSProperties={
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'flex-start',
+    width:'100%',
+    minHeight:'200px',
+    borderBottom:'1px solid white'
+  }
+
+
   return(
     <div style={container}>
       {/* //제목 */}
@@ -84,29 +113,30 @@ const TopInfoInPostInner:React.FC=(props)=>{
         
         <div style={imgAndNumBox}>
           {/* //총기 이미지 */}
-          <div style={{width:'150px',height:'100%'}}>
-            <img style={{width:'100%',height:'100%'}} src="https://assets.tarkov.dev/59e8d2ab86f77407f03fc9c2-image.webp" alt="weapon icon"/>
+          <div style={{width:'200px',height:'100%'}}>
+            <img style={{width:'100%',height:'100%'}} src={img} alt="weapon icon"/>
           </div>
 
           <div style={numAndTagBox}>
             {/* //가격,성능 */}
             <div style={numBox}>
               {/* 가격 */}
-              <div>가격 : 300000</div>
+              <div>가격 : {info.price}</div>
               {/* 에르고 */}
-              <div>에르고 : 70</div>
+              <div>에르고 : {info.ergo}</div>
               {/* 수직반동 */}
-              <div>수직반동 : 40</div>
+              <div>수직반동 : {info.vertical}</div>
               {/* 수평반동 */}
-              <div>수직반동 : 100</div>
+              <div>수직반동 : {info.horizontal}</div>
             </div>
 
             {/* //태그 */}
             <div style={tagBox}>
-              <Tag tagName='가성비'></Tag>
-              <Tag tagName='가성비'></Tag>
-              <Tag tagName='가성비'></Tag>
-
+              {
+                tags.map((item,index)=>(
+                  <Tag tagName={item} key={index}></Tag>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -122,7 +152,9 @@ const TopInfoInPostInner:React.FC=(props)=>{
       </div>
 
       {/* //본문 */}
-      <div>{}</div>
+      <div style={contextBox}>
+        <div>{props.context}</div>
+      </div>
 
     </div>
   )
