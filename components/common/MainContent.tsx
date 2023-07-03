@@ -114,7 +114,6 @@ const MainContent:React.FC<props>=(props)=>{
       {props.pageState==='posts'&&<Board postIdHandler={postIdHandler} id={id}></Board>}
       {postClicked===true&&<PostInner post={postData}></PostInner>}
     </div>
-
   );
 };
 
