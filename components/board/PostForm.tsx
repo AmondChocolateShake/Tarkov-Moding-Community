@@ -13,8 +13,9 @@ interface PostData{
     horizontal:number,
     price:number,
     author:string,
-    likes:number
-
+    likes:number,
+    postId:number
+    postIdHandler(id:number):()=>void
 }
 
 const PostForm:React.FC<PostData>=(props)=>{
@@ -66,8 +67,12 @@ const PostForm:React.FC<PostData>=(props)=>{
   }
 
 
+  const clickEvent=()=>{
+    props.postIdHandler(props.postId);
+  }
+
   return(
-    <div style={container}>
+    <div style={container} onClick={clickEvent}>
       <div style={{width:'250px', height:'100%'}}>
         <img src={props.imageLink} alt="weaponImage" style={{width:'100%',height:'100%'}}/>
       </div>

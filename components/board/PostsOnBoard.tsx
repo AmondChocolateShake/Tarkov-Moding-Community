@@ -3,6 +3,7 @@ import PostForm from './PostForm';
 
 interface props{
   id:string
+  postIdHandler(id:number):()=>void
 }
 
 
@@ -42,8 +43,8 @@ const PostsOnBoard:React.FC<props>=(props)=>{
     <div>
       {flag===1&&
           posts.map((item:any,index:any)=>(
-
             <PostForm 
+            postIdHandler={props.postIdHandler}
             imageLink={item.imageLink}
             title={item.title}
             context={item.context}
@@ -55,6 +56,7 @@ const PostsOnBoard:React.FC<props>=(props)=>{
             author={item.author}
             likes={item.likes}
             key={index}
+            postId={item.postId}
             ></PostForm>
           ))
         }

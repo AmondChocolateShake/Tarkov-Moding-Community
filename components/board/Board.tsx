@@ -3,6 +3,7 @@ import ResultOf from './ResultOf';
 import PostsOnBoard from './PostsOnBoard';
 interface Name{
   id:string
+  postIdHandler:(id:number)=>void
 }
 
 const Board:React.FC<Name>=(props)=>{
@@ -31,7 +32,7 @@ const Board:React.FC<Name>=(props)=>{
   return(
     <div>
       <ResultOf name={name}></ResultOf>
-      <PostsOnBoard id={props.id}></PostsOnBoard>
+      <PostsOnBoard postIdHandler={props.postIdHandler} id={props.id}></PostsOnBoard>
     </div>
   );
 }

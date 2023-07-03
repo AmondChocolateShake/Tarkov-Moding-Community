@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
 import ModInfoBox from './ModInfoBox';
 
+interface Props{
+  mods:{
+    slotName:string,
+    iconLink:string,
+    shortName:string,
+    name:string,
 
-const ModList=()=>{
-  const[slotName,setSlotName]=useState();
-  const[iconLink,setIconLink]=useState();
-  const[shortName,setShortName]=useState();
-  const[name,setName]=useState();
-  const[ergo,setErgo]=useState();
-  const[vertical,setVertical]=useState();
-  const[price,setPrice]=useState();
+    ergo:number,
+    recoil:number,
+    
+    price:{
+      price:number,
+      currency:string,
+    }[]
+  }[]
+}
+
+const ModList:React.FC<Props>=(props)=>{
+  const[mods,setMods]=useState(props.mods);
   
 
   const container:React.CSSProperties={
@@ -25,7 +35,20 @@ const ModList=()=>{
 
   return(
     <div style={container}>
-      <ModInfoBox></ModInfoBox>
+      {
+        mods.map((item,index)=>(
+          <ModInfoBox
+          slotName={item.slotName}
+          iconLink={item.iconLink}
+          shortName={item.shortName}
+          name={item.name}
+          ergo={item.ergo}
+          recoil={item.recoil}
+          price={item.price}
+          key={index}
+          ></ModInfoBox>
+        ))
+      }
 
     </div>
   );

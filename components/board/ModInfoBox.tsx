@@ -1,11 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { defaultMethod } from 'react-router-dom/dist/dom';
 import PriceBox from './priceBox';
+import Ability from './Ability';
 
+interface Props{
+  slotName:string,
+  iconLink:string,
+  shortName:string,
+  name:string,
 
+  ergo:number,
+  recoil:number,
+  
+  price:{
+    price:number,
+    currency:string,
+  }[]
+}
 
 // 게시글 상세 뷰 내 사용된 모드 파츠에 대한 인포 박스 입니다.
-const ModInfoBox=()=>{
+const ModInfoBox:React.FC<Props>=(props)=>{
+  const[slotName,setSlotName]=useState(props.slotName);
+  const[iconLink,setIconLink]=useState(props.iconLink);
+  const[shortName,setShortName]=useState(props.shortName);
+  const[name,setName]=useState(props.name);
+  const[ergo,setErgo]=useState(props.ergo);
+  const[recoil,setRecoil]=useState(props.recoil);
+  const[price,setPrice]=useState(props.price);
+
+
   const container:React.CSSProperties={
     display:'flex',
     flexDirection:'row',
@@ -70,7 +93,7 @@ const ModInfoBox=()=>{
           display:'flex',
           justifyContent:'center',
           alignItems:'center',}}>
-          <div>scope</div>
+          <div>{slotName}</div>
         </div>
 
         {/* 아이콘 */}
@@ -80,7 +103,7 @@ const ModInfoBox=()=>{
           alignItems:'center',
           width:'100%',
           height:'63px'}}>
-          <img style={{width:'63px',height:'63px'}} src="https://assets.tarkov.dev/58491f3324597764bc48fa02-icon.webp" alt="mod icon" />
+          <img style={{width:'63px',height:'63px'}} src={iconLink} alt="mod icon" />
         </div>
 
         {/* 짧은 이름 */}
@@ -89,30 +112,32 @@ const ModInfoBox=()=>{
           justifyContent:'center',
           alignItems:'center'
         }}>
-          <div>XPS3-0</div>
+          <div>{shortName}</div>
         </div>
       </div>
 
       {/* 전체 이름 */}
       <div style={nameBox}>
-        <div>EOTech XPS3-0 holographic sight</div>
+        <div>{name}</div>
       </div>
 
       {/* 성능 */}
       <div style={abilityBox}>
         {/* 에르고 */}
-        <div>ergo : 60</div>
+        <Ability name='Ergo' stat={ergo}></Ability>
         {/* 반동향상 퍼센트 */}
-        <div>recoil: 50</div>
+        <Ability name='Recoil' stat={recoil}></Ability>
 
 
       </div>
 
       {/* 가격 */}
       <div style={priceContainer}>
-        <PriceBox price={10000} currency='RUB'></PriceBox>
-        <PriceBox price={10000} currency='USD'></PriceBox>
-        <PriceBox price={10000} currency='EUR'></PriceBox>
+        {
+          price.map((item,index)=>(
+            <PriceBox price={item.price} currency={item.currency} key={index}></PriceBox>
+          ))
+        }
       </div>
 
     </div>

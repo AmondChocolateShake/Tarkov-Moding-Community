@@ -2,18 +2,51 @@ import React , {useState}from 'react'
 import TopInfoInPostInner from './TopInfoInPostInner';
 import ModList from './ModList';
 
-export default function PostInner(){
-  const[img,setImg]=useState('');
-  const[info,setInfo]=useState({
-    price:0,
-    ergo:0,
-    vertical:0,
-    horizontal:0
-  });
-  const[tags,setTags]=useState([]);
-  const[likes,setLikes]=useState(0);
-  const[context,setContext]=useState('');
 
+interface Props{
+  mods:{
+    slotName:string,
+    iconLink:string,
+    shortName:string,
+    name:string,
+
+    ergo:number,
+    recoil:number,
+    
+    price:{
+      price:number,
+      currency:string,
+    }[]
+  }[]
+}
+
+interface Post{
+  post:{
+    img:string,
+    info:{
+      price:number,
+      ergo:number,
+      vertical:number,
+      horizontal:number
+    },
+    tags:string[],
+    likes:number,
+    context:string
+  }
+}
+
+
+//게시글 상세 뷰 컴포넌트
+const PostInner:React.FC<Post>=(props)=>{
+  const[post,setPost]=useState(props.post);
+  const[img,setImg]=useState(post.img);
+  const[info,setInfo]=useState(post.info);
+  const[tags,setTags]=useState(post.tags);
+  const[likes,setLikes]=useState(post.likes);
+  const[context,setContext]=useState(post.context);
+  
+  //모드리스트에 넣을 모드 데이터 객체 배열 저장 공간
+  const[modList,setModList]=useState();
 
 
 
@@ -38,9 +71,13 @@ export default function PostInner(){
     <div style={container}>
       <TopInfoInPostInner img={img} info={info} tags={tags} likes={likes} context={context}></TopInfoInPostInner>
       <div style={ModsContainer}>
-        <ModList></ModList>
+        {/* 모드 리스트를 props로 넘겨야함 */}
+        <ModList mods={modList}></ModList>
       </div>
-
     </div>
   );
 }
+
+
+
+export default PostInner;

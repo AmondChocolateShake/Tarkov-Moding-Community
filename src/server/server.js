@@ -210,6 +210,7 @@ async function getPostData(id){
   }
 
 
+
   // connection.query(query,values,(error, results) => {
   //   if (error) {
   //     throw error;
