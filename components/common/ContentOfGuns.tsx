@@ -39,7 +39,7 @@ const ContentOfGuns:React.FC<props>=(props)=>{
   const container:React.CSSProperties={
     display:'flex',
     flexDirection:'row',
-    alignItems:'flex-start',
+    alignItems:'center',
     justifyContent:'center',
     flexWrap:'wrap',
     width:'95%',

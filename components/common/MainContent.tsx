@@ -83,19 +83,31 @@ const MainContent:React.FC<props>=(props)=>{
   const postIdHandler=(id:number)=>{
     setPostId(id);
     setPostClicked(true);
+    props.setPageState('postView');
   }
 
   useEffect(()=>{
+    fetch('/select_post',{
+      method:'POST',
+      headers:{
+        'Context-Type':'application/json'
+      },
+      body:JSON.stringify({id:postId})
+    })
+    .then(response=>response.json())
+    .then(data=>{
 
-    // console.log(getPostData(postId));
-    
-    // setPostData(post);
+      // setPostData(data);
+      console.log(data);
+    })
+
+
   },[postClicked])
 
 
   return(
     <div style={container}>
-      {props.pageState!=='posts'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
+      {props.pageState!=='posts'&&props.pageState!=='postView'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
       {props.pageState==='main'&& <ContentOfGuns setId={setId} pageState={props.pageState} setPageState={props.setPageState}></ContentOfGuns>}
       {props.pageState==='post'&&<Post></Post>}
       {props.pageState==='posts'&&<Board postIdHandler={postIdHandler} id={id}></Board>}
