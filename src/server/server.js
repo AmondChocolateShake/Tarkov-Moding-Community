@@ -30,7 +30,6 @@ app.listen(port,()=>{
 app.use(express.static('../dist'));
 
 
-
 app.post('/select_post',async (req,res)=>{
   const id = req.body.id;
   try {
