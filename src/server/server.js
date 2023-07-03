@@ -83,17 +83,6 @@ app.post('/get_mod_list',async (req,res)=>{
 // }[]
 
 
-//postId에 해당하는 모드 리스트를 리턴하는 함수
-function getModListByPostId(postId){
-  let modList=[{}];
-  const query='SELECT '
-
-  connection.query()
-  return modList;
-
-}
-
-
 
 
 app.post('/select_post',async (req,res)=>{
