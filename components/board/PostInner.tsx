@@ -1,4 +1,4 @@
-import React , {useState}from 'react'
+import React , {useEffect, useState}from 'react'
 import TopInfoInPostInner from './TopInfoInPostInner';
 import ModList from './ModList';
 
@@ -22,6 +22,7 @@ interface Props{
 
 interface Post{
   post:{
+    postId:number,
     title:string,
     img:string,
     info:{
@@ -46,10 +47,24 @@ const PostInner:React.FC<Post>=(props)=>{
   const[tags,setTags]=useState(post.tags);
   const[likes,setLikes]=useState(post.likes);
   const[context,setContext]=useState(post.context);
+  const[postId,setPostId]=useState(post.postId);
   
   //모드리스트에 넣을 모드 데이터 객체 배열 저장 공간
   const[modList,setModList]=useState();
 
+  useEffect(()=>{
+    fetch('/get_mods',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({postId:postId})
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data);
+    })
+  },[post])
 
 
   const container:React.CSSProperties={
@@ -74,7 +89,7 @@ const PostInner:React.FC<Post>=(props)=>{
       <TopInfoInPostInner title={title} img={img} info={info} tags={tags} likes={likes} context={context}></TopInfoInPostInner>
       <div style={ModsContainer}>
         {/* 모드 리스트를 props로 넘겨야함 */}
-        {/* <ModList mods={modList}></ModList> */}
+        <ModList mods={modList}></ModList>
       </div>
     </div>
   );

@@ -32,7 +32,8 @@ const TopInfoInPostInner:React.FC<Post>=(props)=>{
     justifyContent:'flex-start',
     alignItems:'center',
     width:'100%',
-    height:'80%'
+    height:'80%',
+    color:'white'
   }
 
   const titleBox:React.CSSProperties={
@@ -108,7 +109,7 @@ const TopInfoInPostInner:React.FC<Post>=(props)=>{
     <div style={container}>
       {/* //제목 */}
       <div style={titleBox}>
-        <div style={{color:'white',fontSize:'20px'}}></div>
+        <div style={{color:'white',fontSize:'20px'}}>{title}</div>
       </div>
 
       {/* //모딩 데이터 최종값 */}
@@ -156,7 +157,7 @@ const TopInfoInPostInner:React.FC<Post>=(props)=>{
 
       {/* //본문 */}
       <div style={contextBox}>
-        <div>{props.context}</div>
+        <div>{context}</div>
       </div>
 
     </div>

@@ -34,7 +34,6 @@ app.post('/post_data',async (req,res)=>{
     const postId=req.body.postId
     console.log("post_data : ",postId);
     const postData=await getPostDetail(postId);
-    const tags=postData[0].tags.split(',');
     
     console.log(postData);
     res.json(postData); // 데이터를 JSON 형식으로 클라이언트에게 응답
@@ -63,6 +62,38 @@ async function getPostDetail(postId){
     console.error(err);
   }
 }
+
+app.post('/get_mod_list',async (req,res)=>{
+  const postId=req.body.postId;
+
+
+})
+
+// mods: {
+//   slotName: string;
+//   iconLink: string;
+//   shortName: string;
+//   name: string;
+//   ergo: number;
+//   recoil: number;
+//   price: {
+//       price: number;
+//       currency: string;
+//   }[];
+// }[]
+
+
+//postId에 해당하는 모드 리스트를 리턴하는 함수
+function getModListByPostId(postId){
+  let modList=[{}];
+  const query='SELECT '
+
+  connection.query()
+  return modList;
+
+}
+
+
 
 
 app.post('/select_post',async (req,res)=>{

@@ -21,27 +21,30 @@
 
 
 
-function pushStateDataToGlobal(name:string,data:any){
-  const fs=require('fs');
+// function pushStateDataToGlobal(name:string,data:any){
+//   const fs=require('fs');
 
-  let jsonData=[];
+//   let jsonData=[];
 
-  try{
-    const fileData=fs.readFileSync('./temp/data.json','utf-8');
-    jsonData=JSON.parse(fileData);
-  }catch(error){
-    console.error(error);
-  }
+//   try{
+//     const fileData=fs.readFileSync('./temp/data.json','utf-8');
+//     jsonData=JSON.parse(fileData);
+//   }catch(error){
+//     console.error(error);
+//   }
 
 
-  const temp={
-    name:name,
-    data:data
-  };
-  jsonData.push(temp);
-  const update=JSON.stringify(jsonData,null,2);
-  fs.writeFileSync('./temp/data.json',update,'utf-8');
+//   const temp={
+//     name:name,
+//     data:data
+//   };
+//   jsonData.push(temp);
+//   const update=JSON.stringify(jsonData,null,2);
+//   fs.writeFileSync('./temp/data.json',update,'utf-8');
 
-}
+// }
 
-pushStateDataToGlobal('pageState','main');
+// pushStateDataToGlobal('pageState','main');
+
+
+
