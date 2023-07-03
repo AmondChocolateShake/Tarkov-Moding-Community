@@ -1,6 +1,6 @@
 import React , {useState}from 'react'
 import TopInfoInPostInner from './TopInfoInPostInner';
-// import ModList from './ModList';
+import ModList from './ModList';
 
 
 interface Props{

@@ -82,17 +82,18 @@ const MainContent:React.FC<props>=(props)=>{
   
   const postIdHandler=(id:number)=>{
     setPostId(id);
+    console.log(id);
     setPostClicked(true);
     props.setPageState('postView');
   }
 
   useEffect(()=>{
-    fetch('/select_post',{
+    fetch('/post_data',{
       method:'POST',
       headers:{
         'Context-Type':'application/json'
       },
-      body:JSON.stringify({id:postId})
+      body:JSON.stringify({postId:postId})
     })
     .then(response=>response.json())
     .then(data=>{

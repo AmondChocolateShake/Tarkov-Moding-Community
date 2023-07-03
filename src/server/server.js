@@ -29,6 +29,28 @@ app.listen(port,()=>{
 //정적파일 서빙
 app.use(express.static('../dist'));
 
+app.post('/post_data',async (req,res)=>{
+  const postId=req.body.postId
+  console.log(typeof(postId));
+  const query='SELECT * FROM posts WHERE postId = ?'
+
+  try{
+    return await new Promise((resolve,reject)=>{
+      connection.query(query,postId,(err,results)=>{
+        if(err){
+          console.error(err);
+          reject(err);
+        }else{
+          resolve(results);
+          
+        }
+      })
+    })
+  }catch(err){
+
+  }
+
+})
 
 app.post('/select_post',async (req,res)=>{
   const id = req.body.id;
@@ -227,3 +249,5 @@ async function getPostData(id){
 
 
 // getPostData('5acf7dd986f774486e1281bf');
+
+
