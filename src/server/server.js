@@ -34,21 +34,10 @@ app.post('/post_data',async (req,res)=>{
     const postId=req.body.postId
     console.log("post_data : ",postId);
     const postData=await getPostDetail(postId);
-    const tags=postData.tags.split(',');
-    const form={
-      img:postData.img,
-      info:{
-        price:postData.price,
-        ergo:postData.ergomics,
-        vertical:postData.verticalRecoil,
-        horizontal:postData.horizontalRecoil
-      },
-      tags:tags,
-      likes:postData.likes,
-      context:postData.context
-    }
-
-    res.json(form); // 데이터를 JSON 형식으로 클라이언트에게 응답
+    const tags=postData[0].tags.split(',');
+    
+    console.log(postData);
+    res.json(postData); // 데이터를 JSON 형식으로 클라이언트에게 응답
   } catch (error) {
     console.error('에러 발생:', error);
     res.status(500).json({ error: '에러 발생' }); // 에러 응답
