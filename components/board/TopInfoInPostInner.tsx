@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Tag from './Tag'
 
 interface Post{
+  title:string,
   img:string,
   info:{
     price:number,
@@ -17,11 +18,13 @@ interface Post{
 
 //게시글 클릭시 나타나는 PostInner 컴포넌트의 상단 정보 박스 컴포넌트
 const TopInfoInPostInner:React.FC<Post>=(props)=>{
+  const[title,setTitle]=useState(props.title);
   const[img,setImg]=useState(props.img);
   const[info,setInfo]=useState(props.info);
   const[tags,setTags]=useState(props.tags);
   const[likes,setLikes]=useState(props.likes);
   const[context,setContext]=useState(props.context);
+
 
   const container:React.CSSProperties={
     display:'flex',
@@ -105,7 +108,7 @@ const TopInfoInPostInner:React.FC<Post>=(props)=>{
     <div style={container}>
       {/* //제목 */}
       <div style={titleBox}>
-        <div style={{color:'white',fontSize:'20px'}}>가성비 모딩입니다.</div>
+        <div style={{color:'white',fontSize:'20px'}}></div>
       </div>
 
       {/* //모딩 데이터 최종값 */}

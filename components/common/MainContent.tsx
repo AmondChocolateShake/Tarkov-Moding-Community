@@ -4,6 +4,7 @@ import ContentOfGuns from './ContentOfGuns'
 import TagAndPost from './TagAndPost'
 import Board from '../board/Board'
 import PostInner from '../board/PostInner'
+import PostForm from '../board/PostForm'
 
 interface props{
   pageState:string
@@ -30,7 +31,8 @@ const MainContent:React.FC<props>=(props)=>{
   const[id,setId]=useState('');
   const[postId,setPostId]=useState(0);
   const[postClicked,setPostClicked]=useState(false);
-  const[postData,setPostData]=useState({
+  const[postData,setPostData]=useState({  
+    title:'',  
     img:'',
     info:{
       price:0,
@@ -106,11 +108,27 @@ const MainContent:React.FC<props>=(props)=>{
       body:JSON.stringify({postId:postId})
     })
     .then(response=>response.json())
-    .then(data=>{
+    .then(postData=>{
+      console.log(postData);
+      const tags=postData[0].tags.split(',');
+      const post={
+        title:postData[0].title,
+        img:postData[0].imageLink,
+        info:{
+          price:postData[0].price,
+          ergo:postData[0].ergomics,
+          vertical:postData[0].verticalRecoil,
+          horizontal:postData[0].horizontalRecoil
+        },
+        tags:tags,
+        likes:postData[0].likes,
+        context:postData[0].context
+      }
+      console.log(post);
 
-      // setPostData(data);
-      console.log(data);
+      setPostData(post);
     })
+    
 
   },[postClicked])
 

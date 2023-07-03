@@ -22,6 +22,7 @@ interface Props{
 
 interface Post{
   post:{
+    title:string,
     img:string,
     info:{
       price:number,
@@ -39,6 +40,7 @@ interface Post{
 //게시글 상세 뷰 컴포넌트
 const PostInner:React.FC<Post>=(props)=>{
   const[post,setPost]=useState(props.post);
+  const[title,setTitle]=useState(post.title);
   const[img,setImg]=useState(post.img);
   const[info,setInfo]=useState(post.info);
   const[tags,setTags]=useState(post.tags);
@@ -69,7 +71,7 @@ const PostInner:React.FC<Post>=(props)=>{
 
   return(
     <div style={container}>
-      <TopInfoInPostInner img={img} info={info} tags={tags} likes={likes} context={context}></TopInfoInPostInner>
+      <TopInfoInPostInner title={title} img={img} info={info} tags={tags} likes={likes} context={context}></TopInfoInPostInner>
       <div style={ModsContainer}>
         {/* 모드 리스트를 props로 넘겨야함 */}
         {/* <ModList mods={modList}></ModList> */}
