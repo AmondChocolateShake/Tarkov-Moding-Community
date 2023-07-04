@@ -99,13 +99,53 @@ app.post('/item_element',async (req,res)=>{
 })
 
 
-async function get(){
-  const query='SELECT * FROM DefaultWeapon'
+app.post('/get_item_data',async (req,res)=>{
+  const id=req.body.id
+  try{
+    const items=await getItemData(id)
+    console.log(items);
 
+    let obj={
+      imageLink:items[0].imageLink,
+      name:items[0].name
+    }
+
+    console.log(obj);
+    res.json(obj);
+  }catch{
+    connection.end()
+  }
+
+})
+
+app.post('/weapon_modSlots',async (req,res)=>{
+  const id=req.body.id
+  try{
+    const modSlots=await getWeaponModSlots(id)
+    console.log(modSlots);
+
+  }catch{
+    connection.end()
+  }
+
+})
+
+
+
+
+async function getWeaponModSlots(weaponId){
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'Tarkov_Moding',
+  });
+
+  const query='SELECT name,compatibleItemIds FROM modSlots WHERE id = ?'
 
   try{
     return await new Promise((resolve,reject)=>{
-      connection.query(query,null,(err,results)=>{
+      connection.query(query,weaponId,(err,results)=>{
         if(err){
           console.error(err);
           reject(err);

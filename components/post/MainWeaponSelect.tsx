@@ -39,8 +39,8 @@ const MainWeaponSelect:React.FC<Props>=(props)=>{
 
   return(
     <div style={container}>
-      {flag&&<SelectBox compatibleIds={mainIds}></SelectBox>}
-
+      {flag&&<SelectBox slotName='Main Weapon' selectMain={props.selectMain} compatibleIds={mainIds}></SelectBox>}
+      
     </div>
   );
 }

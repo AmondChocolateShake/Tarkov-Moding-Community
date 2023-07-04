@@ -63,6 +63,8 @@ modSlots:null}
 
 interface Props{
   compatibleIds:string[]
+  selectMain:(id:string)=>void|null
+  slotName:string
 }
 
 
@@ -71,8 +73,9 @@ const SelectBox:React.FC<Props>=(props)=>{
   const[id,setId]=useState('');
   const[clicked,setClicked]=useState(false);
   const[compatibleIds,setCompatibleIds]=useState(props.compatibleIds);
+  const[imgHidden,setImgHidden]=useState(true);
   const[item,setItem]=useState({
-    iconLink:'',
+    imageLink:'',
     name:''
   });
   const[boxStyle,setBoxStyle]=useState({
@@ -91,11 +94,15 @@ const SelectBox:React.FC<Props>=(props)=>{
       },
       body:JSON.stringify({id:id})
     })
-    .then(res=>{res.json()})
+    .then(res=>res.json())
     .then(data=>{
       console.log(data);
-      
-
+      setItem({
+        imageLink:data.imageLink,
+        name:data.name
+      })
+      setImgHidden(false);
+      props.selectMain(id);
     })
   },[id])
 
@@ -134,14 +141,14 @@ const SelectBox:React.FC<Props>=(props)=>{
 
   return(
     <div style={container}>
-      <div>{}</div>
+      <div>{props.slotName}</div>
       <div style={boxStyle} onClick={clickHandler}>
         <div style={{
           width:'33%',
           height:'100%',
-          borderRight:'1px solid white'
+          borderRight:'1px solid white',
         }}>
-          <img src={item.iconLink} alt="icon" style={{width:'100%',height:'100%'}}/>
+          {imgHidden!==true&&<img src={item.imageLink} alt="icon" style={{width:'100%',height:'100%',borderRadius:'10px'}}/>}
         </div>
 
         <div style={{

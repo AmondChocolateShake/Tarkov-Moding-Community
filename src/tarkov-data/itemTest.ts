@@ -1,7 +1,40 @@
 
 
 
-function addRecoil(){
+
+// function makeDefaultWeaponFile(){
+//   const mysql=require('mysql');
+//   const fs=require('fs');
+//   const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '1234',
+//     database: 'Tarkov_Moding',
+//   });
+
+//   const sql='SELECT id,name FROM DefaultWeapon'
+
+
+//   connection.query(sql,null,(err:Error,result:any)=>{
+//     if(err){
+      
+//     }else{
+      
+//       const parseData=JSON.stringify(result);
+//       fs.writeFileSync('defaultWeapon.json', parseData, (err:Error) => {
+//         if (err) {
+//           console.error('Error writing to file:', err);
+//         } else {
+//           console.log('File written successfully.');
+//         }});
+//       }
+//     })
+  
+// }
+
+// makeDefaultWeaponFile();
+
+async function addRecoil(){
   const mysql=require('mysql');
   const fs=require('fs');
   const connection = mysql.createConnection({
@@ -11,40 +44,70 @@ function addRecoil(){
     database: 'Tarkov_Moding',
   });
 
+  const weaponData=fs.readFileSync('defaultWeapon.json','utf-8');
   const itemData=fs.readFileSync('items.json','utf-8');
-  const arr=[]
-  const parsedData=JSON.parse(itemData);
-  for(let item of parsedData){
-    if(item['recoilPercentageModifier']===0){
-      // console.log(item);
-    }else if(item['recoilPercentageModifier']===undefined){
 
-    }else{
-      let obj={
-        id:item['id'],
-        recoilPercentageModifier:item['recoilPercentageModifier']
+  const parsedWeapon=JSON.parse(weaponData);
+  const parsedItem=JSON.parse(itemData);
+
+  let arr=[]
+
+  for(let weapon of parsedWeapon){
+    for(let item of parsedItem){
+      if(weapon['id']===item['id']){
+        for(let mod of item['modSlots']){
+          // console.log(mod);
+          let obj={
+            id:item['id'],
+            modSlot:mod
+          }
+          arr.push(obj);
+        }
       }
-      arr.push(obj);
     }
   }
 
-  console.log(arr);
+  // console.log(arr);
 
   for(let item of arr){
-    let temp=[item['id'],item['recoilPercentageModifier']];
-    connection.query('INSERT INTO recoil (id,recoilPercentageModifier) VALUES (?,?)',temp,(err:Error,result:any)=>{
-      if(err){
-        console.error(err);
-      }else{
-        console.log(result);
-      }
-    })
-  }
+    // console.log(item);
+    for(let data of item['modSlot'].compatibleItemIds)
+    {
+      // console.log(item['id']);
+      // console.log(item['modSlot'].name);
+      // console.log(data);
+      await insertDataIntoModSlotList(item['id'],item['modSlot'].name,data);
+    }
 
+  }
+  // insertDataIntoModSlotList('1','1','1');
+  console.log('end')
 }
 
 
-addRecoil();
+async function insertDataIntoModSlotList(id:string,modName:string,compatibleItemIds:string){
+  return new Promise((resolve,reject)=>{
+    const mysql=require('mysql');
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '1234',
+      database: 'Tarkov_Moding',
+    });
+
+    const query='INSERT INTO modSlotList (id,modName,compatibleItemIds) VALUES ( ? , ? , ? )'
+    connection.query(query,[id,modName,compatibleItemIds],(err:Error,results:any)=>{
+      if(err){
+        console.error(err);
+        reject(err)
+      }else{
+        resolve(results);
+        console.log('successed : '+results);
+        connection.end()
+      }
+    })
+  })
+}
 
 
 
