@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SelectBox from './SelectBox';
 
 interface Props{
@@ -6,6 +6,30 @@ interface Props{
 }
 
 const MainWeaponSelect:React.FC<Props>=(props)=>{
+  const[mainIds,setMainIds]=useState(['']);
+  const[flag,setFlag]=useState(false);
+  useEffect(()=>{
+    fetch('/default_weapon',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      // console.log(data);
+
+      let temp=[];
+      for(let item of data){
+        temp.push(item['id']);
+      }
+
+      // console.log(temp);
+      setMainIds(temp);
+    })
+  },[])
+
+
 
   const container:React.CSSProperties={
     color:'white'
@@ -13,8 +37,8 @@ const MainWeaponSelect:React.FC<Props>=(props)=>{
 
   return(
     <div style={container}>
-      <SelectBox id={''}></SelectBox>
-      
+      {flag&&<SelectBox compatibleIds={mainIds}></SelectBox>}
+
     </div>
   );
 }

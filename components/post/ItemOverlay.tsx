@@ -1,14 +1,15 @@
-import React from 'react'
+import React,{useState} from 'react'
 import ItemElement from './ItemElement'
 
 interface Props{
-  setClicked:(state:boolean)=>void
-  compabilityIds:string[]
-  id:string
+  idHandler:(id:string)=>void,
+  openWindow:(state:boolean)=>void
+  compatibleIds:string[]
+
 }
 
 const ItemOverlay:React.FC<Props>=(props)=>{
-
+  const[compatibleIds,setCompatibleIds]=useState(props.compatibleIds);
 
   const container:React.CSSProperties={
     display:'flex',
@@ -24,12 +25,17 @@ const ItemOverlay:React.FC<Props>=(props)=>{
   } 
 
   function clickHandler(){
-    props.setClicked(false)
+    props.openWindow(false)
   }
 
   return(
     <div style={container} >
-      <ItemElement></ItemElement>
+      <div onClick={clickHandler}>X</div>
+      {
+        compatibleIds.map((item,index)=>(
+          <ItemElement idHandler={props.idHandler} id={item} key={index}></ItemElement>
+        ))
+      }
     </div>
   );
 }

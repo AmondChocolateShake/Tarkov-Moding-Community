@@ -32,10 +32,10 @@ app.use(express.static('../dist'));
 app.post('/post_data',async (req,res)=>{
   try{
     const postId=req.body.postId
-    console.log("post_data : ",postId);
+    // console.log("post_data : ",postId);
     const postData=await getPostDetail(postId);
     
-    console.log(postData);
+    // console.log(postData);
     res.json(postData); // 데이터를 JSON 형식으로 클라이언트에게 응답
   } catch (error) {
     console.error('에러 발생:', error);
@@ -65,13 +65,49 @@ async function getPostDetail(postId){
 
 app.post('/default_weapon',async (req,res)=>{
   try{
-    const weapons=getDefaultWeapon()
+    const weapons=await getDefaultWeapon()
+    // console.log(weapons);
     res.json(weapons);
   }catch{
     connection.end()
   }
 
 })
+
+app.post('/item_element',async (req,res)=>{
+  const id=req.body.id
+  try{
+    const items=await getItemData(id)
+    console.log(items);
+    res.json(items);
+  }catch{
+    connection.end()
+  }
+
+})
+
+
+async function get(){
+  const query='SELECT * FROM DefaultWeapon'
+
+
+  try{
+    return await new Promise((resolve,reject)=>{
+      connection.query(query,null,(err,results)=>{
+        if(err){
+          console.error(err);
+          reject(err);
+        }else{
+          resolve(results);
+        }
+      })
+    })
+  }catch(err){
+    console.error(err);
+  }
+}
+
+
 
 async function getDefaultWeapon(){
   const query='SELECT * FROM DefaultWeapon'
@@ -100,16 +136,16 @@ app.post('/get_mod_list',async (req,res)=>{
   const list=await getItemIdByPostId(postId);
   let objArr=[]
   for(let item of list){
-    console.log(item['id']);
+    // console.log(item['id']);
     let itemData=await getItemData(item['id']);
     let price=await getItemPriceByItemId(item['id']);
     let modSlot=await getModSlotDataByItemId(item['id']);
     let recoil=await getRecoilByItemId(item['id']);
     recoil=await JSON.stringify(recoil);
     recoil=await JSON.parse(recoil);
-    console.log(recoil)
+    // console.log(recoil)
     const setData= await setDataIntoModForm(itemData[0],price,modSlot[0],recoil[0]);
-    console.log(setData);
+    // console.log(setData);
     objArr.push(setData);
   }
 
@@ -207,7 +243,7 @@ async function getItemPriceByItemId(id){
         reject(err)
       }else{
         resolve(results);
-        console.log(results);
+        // console.log(results);
       }
     })
   })
@@ -258,7 +294,7 @@ async function getItemIdByPostId(postId){
         reject(err)
       }else{
         resolve(results);
-        console.log(results);
+        // console.log(results);
       }
     })
   })
@@ -307,7 +343,7 @@ app.post('/select_post',async (req,res)=>{
   const id = req.body.id;
   try {
     const data = await getPostData(id);
-    console.log('SS) data : ', data);
+    // console.log('SS) data : ', data);
     res.json(data); // 데이터를 JSON 형식으로 클라이언트에게 응답
   } catch (error) {
     console.error('에러 발생:', error);
@@ -319,13 +355,13 @@ app.post('/select_post',async (req,res)=>{
 
 app.post('/all_gun_list',async (req,res)=>{
   const guns=await getGunList();
-  console.log(guns);
+  // console.log(guns);
   res.json(guns);
 })
 
 app.post('/all_gun_short_name',async (req,res)=>{
   const guns=await getGunShortName();
-  console.log(guns);
+  // console.log(guns);
   res.json(guns);
 })
 
@@ -344,7 +380,7 @@ async function getGunShortName(){
           reject(error);
         } else {
           resolve(results);
-          console.log(results);
+          // console.log(results);
         }
       });
     });
@@ -370,7 +406,7 @@ async function getGunList(){
           reject(error);
         } else {
           resolve(results);
-          console.log(results);
+          // console.log(results);
         }
       });
     });
@@ -386,7 +422,7 @@ app.post('/get_name_by_id',(req,res)=>{
     if (err) {
       console.error(err);
     } else {
-      console.log(result);
+      // console.log(result);
       res.json(result);
     }
   })
@@ -397,7 +433,7 @@ app.post('/get_name_by_id',(req,res)=>{
 //Dev 페이지에서 아이템 객체 데이터 전송시 디비 삽입 처리
 app.post('/data', (req, res) => {
   const item=req.body;
-  console.log(item);
+  // console.log(item);
   connection.query('INSERT INTO item SET ?', item, (err, result) => {
     if (err) {
       console.error('Error inserting item into database:', err);
@@ -460,7 +496,7 @@ async function getPostData(id){
     password: '1234',
     database: 'Tarkov_Moding',
   });
-  console.log('id: '+id);
+  // console.log('id: '+id);
   //SELECT * FROM posts WHERE id = '5acf7dd986f774486e1281bf';
   const query = 'SELECT * FROM posts WHERE id = ?';
   const values = id;

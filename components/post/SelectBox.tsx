@@ -62,6 +62,7 @@ modSlots:null}
 }
 
 interface Props{
+  compatibleIds:string[]
 }
 
 
@@ -69,7 +70,7 @@ const SelectBox:React.FC<Props>=(props)=>{
   const componentRef=useRef(null)
   const[id,setId]=useState('');
   const[clicked,setClicked]=useState(false);
-  const[compatibleIds,setCompatibleIds]=useState([]);
+  const[compatibleIds,setCompatibleIds]=useState(props.compatibleIds);
   const[item,setItem]=useState({
     iconLink:'',
     name:''
@@ -83,7 +84,7 @@ const SelectBox:React.FC<Props>=(props)=>{
   });
 
   useEffect(()=>{
-    fetch('/default_weapon',{
+    fetch('/get_item_data',{
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -157,7 +158,7 @@ const SelectBox:React.FC<Props>=(props)=>{
         </div>
       </div>
 
-      {clicked&&<ItemOverlay compabilityIds={compatibleIds} setClicked={setClicked}></ItemOverlay>}
+      {clicked&&<ItemOverlay idHandler={idHandler} compatibleIds={compatibleIds} openWindow={setClicked}></ItemOverlay>}
 
     </div>
     
