@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MainWeaponSelect from './MainWeaponSelect';
 import WriteBtn from './WriteBtn';
+import SelectBox from './SelectBox';
 
 
 interface Props{
@@ -9,8 +10,12 @@ interface Props{
 
 const Moding:React.FC<Props>=(props)=>{
   const[mainWeaponId,setMainWeaponId]=useState('');
-  const[modSlots,setModSlots]=useState()
+  const[modSlots,setModSlots]=useState([{
+    modName:'',
+    compatibleItemIds:''
+  }])
   const[weaponSelected,setWeaponSelected]=useState(false);
+  const[flag,setFlag]=useState(false);
 
   //아이템Id
   //모드슬롯 이름
@@ -49,6 +54,8 @@ const Moding:React.FC<Props>=(props)=>{
     .then(res=>res.json())
     .then(data=>{
       console.log(data);
+      setModSlots(data);
+      setFlag(true);
     })
 
   },[mainWeaponId])
@@ -56,10 +63,11 @@ const Moding:React.FC<Props>=(props)=>{
   return(
     <div style={container}>
       <MainWeaponSelect selectMain={setMainWeapon}></MainWeaponSelect>
-      {/* {weaponSelected&&
-
-      } */}
-
+      {flag&&
+        modSlots.map((item,index)=>(
+          <SelectBox key={index} compatibleIds={[item.compatibleItemIds]} slotName={item.modName}></SelectBox>
+        ))
+      }
       <div style={btnContainer}>
         <WriteBtn></WriteBtn>
       </div>

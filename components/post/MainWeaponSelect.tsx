@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import SelectBox from './SelectBox';
-
+import MainSelectBox from './MainSelectBox'
 interface Props{
   selectMain:(id:string)=>void
 }
@@ -39,7 +38,7 @@ const MainWeaponSelect:React.FC<Props>=(props)=>{
 
   return(
     <div style={container}>
-      {flag&&<SelectBox slotName='Main Weapon' selectMain={props.selectMain} compatibleIds={mainIds}></SelectBox>}
+      {flag&& <MainSelectBox slotName='Main Weapon' selectMain={props.selectMain} compatibleIds={mainIds}></MainSelectBox>}
       
     </div>
   );

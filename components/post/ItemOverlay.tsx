@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import ItemElement from './ItemElement'
 
 interface Props{
@@ -10,6 +10,7 @@ interface Props{
 
 const ItemOverlay:React.FC<Props>=(props)=>{
   const[compatibleIds,setCompatibleIds]=useState(props.compatibleIds);
+  const[flag,setFlag]=useState(false);
 
   const container:React.CSSProperties={
     display:'flex',
@@ -17,7 +18,7 @@ const ItemOverlay:React.FC<Props>=(props)=>{
     justifyContent:'flex-start',
     alignItems:'center',
     width:'500px',
-    height:'500px',
+    height:'fit-content',
     maxHeight:'300px',
     backgroundColor:'black',
     border:'1px solid white'
@@ -36,11 +37,15 @@ const ItemOverlay:React.FC<Props>=(props)=>{
     props.idHandler(id);
   }
 
+  useEffect(()=>{
+    setFlag(true);
+  },[compatibleIds])
+
   return(
     <div style={container} >
       <div style={{height:'5%'}} onClick={clickHandler}>X</div>
       <div style={scroll}>
-      {
+      {flag&&
         compatibleIds.map((item,index)=>(
           <ItemElement idHandler={idHandler} id={item} key={index}></ItemElement>
         ))

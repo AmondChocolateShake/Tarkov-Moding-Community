@@ -10,20 +10,23 @@ const ItemElement:React.FC<Props>=(props)=>{
   const[id,setId]=useState(props.id);
   const[name,setName]=useState('');
   const[imageLink,setImageLink]=useState('');
+  const[flag,setFlag]=useState(false);
 
   useEffect(()=>{
+    console.log("itemElement : ",id)
     fetch('/item_element',{
       method:'POST',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        "Cache-Control": "no-cache"
       },
       body:JSON.stringify({id:id})
     })
     .then(res=>res.json())
     .then(data=>{
-      // console.log(data);
+      console.log(data);
       setName(data[0].name);
-      setImageLink(data[0].imageLink)
+      setImageLink(data[0].imageLink);
     })
   },[id])
 
@@ -42,21 +45,21 @@ const ItemElement:React.FC<Props>=(props)=>{
   }
 
   return(
-    <div style={container} onClick={selected}>
-      <div style={{width:'40%',height:'100%'}}>
-        <img style={{width:'100%',height:'100%'}} src={imageLink} alt="" />
-      </div>
-
-      <div style={{
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        width:'60%',
-        height:'100%'}}>
-        <div style={{width:'90%'}}>{name}</div>
-      </div>
-
+  <div style={container} onClick={selected}>
+    <div style={{width:'40%',height:'100%'}}>
+      <img style={{width:'100%',height:'100%'}} src={imageLink} alt="" />
     </div>
+
+    <div style={{
+      display:'flex',
+      justifyContent:'center',
+      alignItems:'center',
+      width:'60%',
+      height:'100%'}}>
+      <div style={{width:'90%'}}>{name}</div>
+    </div>
+
+  </div>
   );
 }
 

@@ -63,6 +63,7 @@ modSlots:null}
 
 interface Props{
   compatibleIds:string[]
+  selectMain:((id:string)=>void),
   slotName:string
 }
 
@@ -101,6 +102,7 @@ const SelectBox:React.FC<Props>=(props)=>{
         name:data.name
       })
       setImgHidden(false);
+      props.selectMain(id);
     })
   },[id])
 
@@ -134,6 +136,7 @@ const SelectBox:React.FC<Props>=(props)=>{
 
   const idHandler=(id:string)=>{
     setId(id);
+    
   }
 
 
