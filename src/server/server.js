@@ -78,8 +78,20 @@ app.post('/item_element',async (req,res)=>{
   const id=req.body.id
   try{
     const items=await getItemData(id)
-    console.log(items);
-    res.json(items);
+    
+    let arr=[];
+
+    for(let item of items){
+      let obj={
+        imageLink:item['imageLink'],
+        name:item['name']
+      }
+      arr.push(obj);
+    }
+
+    console.log(arr);
+
+    res.json(arr);
   }catch{
     connection.end()
   }
