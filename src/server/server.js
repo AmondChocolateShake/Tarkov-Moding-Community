@@ -63,6 +63,7 @@ async function getPostDetail(postId){
   }
 }
 
+//게시글 상세 뷰에 사용되는 파츠 리스트를 응답하는 코드
 app.post('/get_mod_list',async (req,res)=>{
   const postId=req.body.postId;
 
@@ -71,7 +72,74 @@ app.post('/get_mod_list',async (req,res)=>{
 })
 
 
+//postSub테이블로 postId와 아이템id 를 넣는 함수
+async function insertDataIntoPostSub(postId,id){
+  return new Promise((resolve,reject)=>{
+    const mysql=require('mysql');
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '1234',
+      database: 'Tarkov_Moding',
+    });
 
+    const query='INSERT INTO postSub (postId,id) VALUES ( ? , ? )'
+    connection.query(query,[postId,id],(err,results)=>{
+      if(err){
+        console.error(err);
+        reject(err)
+      }else{
+        resolve(results);
+      }
+    })
+  })
+}
+
+
+//postId에 해당하는 아이템리스트를 반환하는 함수
+async function getItemIdByPostId(postId){
+  return new Promise((resolve,reject)=>{
+    const mysql=require('mysql');
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '1234',
+      database: 'Tarkov_Moding',
+    });
+    const query='SELECT id FROM postSub WHERE postId = ?'
+    connection.query(query,postId,(err,results)=>{
+      if(err){
+        console.error(err);
+        reject(err)
+      }else{
+        resolve(results);
+      }
+    })
+  })
+}
+
+
+
+async function getItemData(id){
+  return new Promise((resolve,reject)=>{
+    const mysql=require('mysql');
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '1234',
+      database: 'Tarkov_Moding',
+    });
+    const query='SELECT * FROM item WHERE id = ?'
+    connection.query(query,id,(err,results)=>{
+      if(err){
+        console.error(err);
+        reject(err)
+      }else{
+        resolve(results);
+      }
+    })
+  })
+}
 
 // mods: {
 //   slotName: string;
@@ -100,6 +168,8 @@ app.post('/select_all_post',async (req,res)=>{
     res.status(500).json({ error: '에러 발생' }); // 에러 응답
   }
 })
+
+
 
 app.post('/all_gun_list',async (req,res)=>{
   const guns=await getGunList();
