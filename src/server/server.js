@@ -67,8 +67,19 @@ async function getPostDetail(postId){
 app.post('/get_mod_list',async (req,res)=>{
   const postId=req.body.postId;
 
-
-
+  const list=await getItemIdByPostId(postId);
+  let objArr=[]
+  for(let item of list){
+    console.log(item['id']);
+    let itemData=await getItemData(item['id']);
+    //각 아이템 마다 배열로 감싸져 있으므로 배열이 objArr 배열로 푸시되었음. 
+    //아래 코드로 배열을 벗긴 객체 데이터를 배열로 푸시
+    let temp=itemData[0];
+    objArr.push(temp);
+  }
+  
+  res.json(objArr);
+  
 })
 
 
@@ -96,6 +107,8 @@ async function insertDataIntoPostSub(postId,id){
 }
 
 
+
+
 //postId에 해당하는 아이템리스트를 반환하는 함수
 async function getItemIdByPostId(postId){
   return new Promise((resolve,reject)=>{
@@ -113,6 +126,7 @@ async function getItemIdByPostId(postId){
         reject(err)
       }else{
         resolve(results);
+        console.log(results);
       }
     })
   })
@@ -157,7 +171,7 @@ async function getItemData(id){
 
 
 
-app.post('/select_all_post',async (req,res)=>{
+app.post('/select_post',async (req,res)=>{
   const id = req.body.id;
   try {
     const data = await getPostData(id);
