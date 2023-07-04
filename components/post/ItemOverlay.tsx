@@ -17,25 +17,35 @@ const ItemOverlay:React.FC<Props>=(props)=>{
     justifyContent:'flex-start',
     alignItems:'center',
     width:'500px',
-    height:'400px',
+    height:'500px',
     maxHeight:'300px',
     backgroundColor:'black',
     border:'1px solid white'
     
   } 
 
+  const scroll:React.CSSProperties={
+    maxHeight:'95%',
+    overflow:'auto'
+  }
   function clickHandler(){
     props.openWindow(false)
   }
 
+  const idHandler=(id:string)=>{
+    props.idHandler(id);
+  }
+
   return(
     <div style={container} >
-      <div onClick={clickHandler}>X</div>
+      <div style={{height:'5%'}} onClick={clickHandler}>X</div>
+      <div style={scroll}>
       {
         compatibleIds.map((item,index)=>(
-          <ItemElement idHandler={props.idHandler} id={item} key={index}></ItemElement>
+          <ItemElement idHandler={idHandler} id={item} key={index}></ItemElement>
         ))
       }
+      </div>
     </div>
   );
 }

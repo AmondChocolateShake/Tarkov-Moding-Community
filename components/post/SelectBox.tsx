@@ -94,6 +94,8 @@ const SelectBox:React.FC<Props>=(props)=>{
     .then(res=>{res.json()})
     .then(data=>{
       console.log(data);
+      
+
     })
   },[id])
 

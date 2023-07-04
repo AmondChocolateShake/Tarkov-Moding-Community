@@ -25,7 +25,9 @@ const MainWeaponSelect:React.FC<Props>=(props)=>{
       }
 
       // console.log(temp);
+      
       setMainIds(temp);
+      setFlag(true);
     })
   },[])
 

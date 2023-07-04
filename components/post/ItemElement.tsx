@@ -19,10 +19,11 @@ const ItemElement:React.FC<Props>=(props)=>{
       },
       body:JSON.stringify({id:id})
     })
-    .then(res=>res.json)
+    .then(res=>res.json())
     .then(data=>{
-      console.log(data);
-      
+      // console.log(data);
+      setName(data[0].name);
+      setImageLink(data[0].imageLink)
     })
   },[id])
 
@@ -31,7 +32,7 @@ const ItemElement:React.FC<Props>=(props)=>{
     justifyContent:'flex-start',
     alignItems:'center',
     width:'100%',
-    height:'80px',
+    height:'100px',
     backgroundColor:'#1E1E1E',
     border:'1px solid #ACA891'
   }
@@ -42,12 +43,17 @@ const ItemElement:React.FC<Props>=(props)=>{
 
   return(
     <div style={container} onClick={selected}>
-      <div>
-        <img src={imageLink} alt="" />
+      <div style={{width:'40%',height:'100%'}}>
+        <img style={{width:'100%',height:'100%'}} src={imageLink} alt="" />
       </div>
 
-      <div>
-        <div>{name}</div>
+      <div style={{
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        width:'60%',
+        height:'100%'}}>
+        <div style={{width:'90%'}}>{name}</div>
       </div>
 
     </div>
