@@ -1,6 +1,9 @@
 const express=require('express');
 const mysql = require('mysql');
 const fs=require('fs');
+const nocache = require('nocache');
+
+
 
 // 데이터베이스 연결
 const connection = mysql.createConnection({
@@ -28,6 +31,7 @@ app.listen(port,()=>{
 
 //정적파일 서빙
 app.use(express.static('../dist'));
+app.use(nocache());
 
 app.post('/post_data',async (req,res)=>{
   try{
@@ -55,6 +59,7 @@ async function getPostDetail(postId){
           reject(err);
         }else{
           resolve(results);
+          
         }
       })
     })
@@ -76,8 +81,10 @@ app.post('/default_weapon',async (req,res)=>{
 
 app.post('/item_element',async (req,res)=>{
   const id=req.body.id
+  console.log(id);
   try{
     const items=await getItemData(id)
+    // console.log(items);
     
     let arr=[];
 
@@ -88,10 +95,9 @@ app.post('/item_element',async (req,res)=>{
       }
       arr.push(obj);
     }
-
-    console.log(arr);
-
     res.json(arr);
+    // console.log(arr);
+
   }catch{
     connection.end()
   }
@@ -101,19 +107,20 @@ app.post('/item_element',async (req,res)=>{
 
 app.post('/get_item_data',async (req,res)=>{
   const id=req.body.id
+  console.log(id);
   try{
     const items=await getItemData(id)
-    console.log(items);
+    // console.log(items);
 
     let obj={
       imageLink:items[0].imageLink,
       name:items[0].name
     }
 
-    console.log(obj);
+    // console.log(obj);
     res.json(obj);
   }catch{
-    connection.end()
+    // connection.end()
   }
 
 })
@@ -122,8 +129,12 @@ app.post('/weapon_modSlots',async (req,res)=>{
   const id=req.body.id
   try{
     const modSlots=await getWeaponModSlots(id)
-    console.log(modSlots);
+    let objects=[]
 
+    console.log(objects);
+
+    // console.log(modSlots);
+    res.json(modSlots);
   }catch{
     connection.end()
   }
@@ -141,7 +152,7 @@ async function getWeaponModSlots(weaponId){
     database: 'Tarkov_Moding',
   });
 
-  const query='SELECT name,compatibleItemIds FROM modSlots WHERE id = ?'
+  const query='SELECT modName,compatibleItemIds FROM modSlotList WHERE id = ?'
 
   try{
     return await new Promise((resolve,reject)=>{
