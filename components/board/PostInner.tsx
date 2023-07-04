@@ -53,7 +53,7 @@ const PostInner:React.FC<Post>=(props)=>{
   const[modList,setModList]=useState();
 
   useEffect(()=>{
-    fetch('/get_mods',{
+    fetch('/get_mod_list',{
       method:'POST',
       headers:{
         'Content-Type':'application/json'

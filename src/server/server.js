@@ -67,7 +67,11 @@ app.post('/get_mod_list',async (req,res)=>{
   const postId=req.body.postId;
 
 
+
 })
+
+
+
 
 // mods: {
 //   slotName: string;
@@ -85,7 +89,7 @@ app.post('/get_mod_list',async (req,res)=>{
 
 
 
-app.post('/select_post',async (req,res)=>{
+app.post('/select_all_post',async (req,res)=>{
   const id = req.body.id;
   try {
     const data = await getPostData(id);
