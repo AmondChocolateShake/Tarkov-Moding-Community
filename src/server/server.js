@@ -63,6 +63,8 @@ async function getPostDetail(postId){
   }
 }
 
+
+
 //게시글 상세 뷰에 사용되는 파츠 리스트를 응답하는 코드
 app.post('/get_mod_list',async (req,res)=>{
   const postId=req.body.postId;
@@ -72,15 +74,117 @@ app.post('/get_mod_list',async (req,res)=>{
   for(let item of list){
     console.log(item['id']);
     let itemData=await getItemData(item['id']);
-    //각 아이템 마다 배열로 감싸져 있으므로 배열이 objArr 배열로 푸시되었음. 
-    //아래 코드로 배열을 벗긴 객체 데이터를 배열로 푸시
-    let temp=itemData[0];
-    objArr.push(temp);
+    let price=await getItemPriceByItemId(item['id']);
+    let modSlot=await getModSlotDataByItemId(item['id']);
+    let recoil=await getRecoilByItemId(item['id']);
+    recoil=await JSON.stringify(recoil);
+    recoil=await JSON.parse(recoil);
+    console.log(recoil)
+    const setData= await setDataIntoModForm(itemData[0],price,modSlot[0],recoil[0]);
+    console.log(setData);
+    objArr.push(setData);
   }
-  
+
   res.json(objArr);
-  
 })
+
+async function setDataIntoModForm(itemData,price,modSlot,recoil){
+  let modName=modSlot.name.replace('mod_','');
+  let recoilPercentageModifier=0;
+
+  if (recoil && recoil['recoilPercentageModifier']) {
+    // 중첩된 속성에 안전하게 접근
+    recoilPercentageModifier = recoil.recoilPercentageModifier;
+  } else {
+    console.log('recoilPercentageModifier 속성이 존재하지 않습니다.');
+  }
+
+  let resForm={
+    slotName: modName,
+    iconLink: itemData.iconLink,
+    shortName: itemData.shortName,
+    name: itemData.name,
+    ergo: itemData.ergonomics,
+    recoil:recoilPercentageModifier,
+    price:[]
+  }
+
+
+  for(let item of price){
+    resForm.price.push(
+      {
+        price:item.price,
+        currency:item.currency
+      })
+  }
+
+  return resForm
+}
+
+async function getModSlotDataByItemId(id){
+  return new Promise((resolve,reject)=>{
+    const mysql=require('mysql');
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '1234',
+      database: 'Tarkov_Moding',
+    });
+    const query='SELECT * FROM modSlots WHERE id = ?'
+    connection.query(query,id,(err,results)=>{
+      if(err){
+        console.error(err);
+        reject(err)
+      }else{
+        resolve(results);
+      }
+    })
+  })
+}
+
+async function getRecoilByItemId(id){
+  return new Promise((resolve,reject)=>{
+    const mysql=require('mysql');
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '1234',
+      database: 'Tarkov_Moding',
+    });
+    const query='SELECT * FROM recoil WHERE id = ?'
+    connection.query(query,id,(err,results)=>{
+      if(err){
+        console.error(err);
+        reject(err)
+      }else{
+        resolve(results);
+      }
+    })
+  })
+}
+
+async function getItemPriceByItemId(id){
+  return new Promise((resolve,reject)=>{
+    const mysql=require('mysql');
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '1234',
+      database: 'Tarkov_Moding',
+    });
+    const query='SELECT * FROM itemPrice WHERE id = ?'
+    connection.query(query,id,(err,results)=>{
+      if(err){
+        console.error(err);
+        reject(err)
+      }else{
+        resolve(results);
+        console.log(results);
+      }
+    })
+  })
+}
+
 
 
 //postSub테이블로 postId와 아이템id 를 넣는 함수
