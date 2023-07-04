@@ -1,8 +1,10 @@
 import React from 'react'
+import ItemElement from './ItemElement'
 
 interface Props{
   setClicked:(state:boolean)=>void
-
+  compabilityIds:string[]
+  id:string
 }
 
 const ItemOverlay:React.FC<Props>=(props)=>{
@@ -14,11 +16,11 @@ const ItemOverlay:React.FC<Props>=(props)=>{
     justifyContent:'flex-start',
     alignItems:'center',
     width:'500px',
-    height:'200px',
+    height:'400px',
     maxHeight:'300px',
     backgroundColor:'black',
     border:'1px solid white'
-
+    
   } 
 
   function clickHandler(){
@@ -27,7 +29,7 @@ const ItemOverlay:React.FC<Props>=(props)=>{
 
   return(
     <div style={container} >
-      <div></div>
+      <ItemElement></ItemElement>
     </div>
   );
 }

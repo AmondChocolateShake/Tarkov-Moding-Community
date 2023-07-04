@@ -61,15 +61,15 @@ fragmentationChancePercentage:number,
 modSlots:null}
 }
 
-interface id{
-  id:string
+interface Props{
 }
 
 
-const SelectBox:React.FC<id>=(props)=>{
+const SelectBox:React.FC<Props>=(props)=>{
   const componentRef=useRef(null)
-  const[id,setId]=useState(props.id);
+  const[id,setId]=useState('');
   const[clicked,setClicked]=useState(false);
+  const[compatibleIds,setCompatibleIds]=useState([]);
   const[item,setItem]=useState({
     iconLink:'',
     name:''
@@ -108,11 +108,7 @@ const SelectBox:React.FC<id>=(props)=>{
   // }, []);
 
 
-  function clickHandler(){
-    setClicked(true);
-    console.log('item select component clicked');
-  }
-
+  
   const container:React.CSSProperties={
     display:'flex',
     width:'90%',
@@ -122,6 +118,15 @@ const SelectBox:React.FC<id>=(props)=>{
     alignItems:'flex-start'
   }
 
+  
+  function clickHandler(){
+    setClicked(true);
+    console.log('item select component clicked');
+  }
+
+  const idHandler=(id:string)=>{
+    setId(id);
+  }
 
 
   return(
@@ -152,7 +157,8 @@ const SelectBox:React.FC<id>=(props)=>{
         </div>
       </div>
 
-      {clicked&&<ItemOverlay setClicked={setClicked}></ItemOverlay>}
+      {clicked&&<ItemOverlay compabilityIds={compatibleIds} setClicked={setClicked}></ItemOverlay>}
+
     </div>
     
 
