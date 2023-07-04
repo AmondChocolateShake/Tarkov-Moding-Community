@@ -1,15 +1,20 @@
 import React from 'react'
 import SelectBox from './SelectBox';
 
+interface Props{
+  selectMain:(id:string)=>void
+}
 
-const MainWeaponSelect:React.FC=()=>{
+const MainWeaponSelect:React.FC<Props>=(props)=>{
 
   const container:React.CSSProperties={
     color:'white'
   }
+
   return(
     <div style={container}>
-      {/* <SelectBox item={}></SelectBox> */}
+      <SelectBox id={''}></SelectBox>
+      
     </div>
   );
 }

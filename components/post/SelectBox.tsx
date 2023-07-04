@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import ItemOverlay from './ItemOverlay'
 
 interface Item{
   category:string,
@@ -41,8 +42,9 @@ id:string,
 shortName:string,
 name:string,
 iconLink:string,
-value:null,
-conflictingItemIds:null,
+price:number|null,
+currency:string|null,
+conflictingitemIds:string[],
 caliber:string,
 fireRate:number,
 ergonomics:number,
@@ -59,11 +61,19 @@ fragmentationChancePercentage:number,
 modSlots:null}
 }
 
+interface id{
+  id:string
+}
 
-const SelectBox:React.FC<item>=(props)=>{
+
+const SelectBox:React.FC<id>=(props)=>{
+  const componentRef=useRef(null)
+  const[id,setId]=useState(props.id);
   const[clicked,setClicked]=useState(false);
-  const[category,setCategory]=useState(props.item.categoryId);
-  const[item,setItem]=useState(props.item);
+  const[item,setItem]=useState({
+    iconLink:'',
+    name:''
+  });
   const[boxStyle,setBoxStyle]=useState({
     display:'flex',
     width:'400px',
@@ -73,24 +83,40 @@ const SelectBox:React.FC<item>=(props)=>{
   });
 
   useEffect(()=>{
-    
+    fetch('/default_weapon',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({id:id})
+    })
+    .then(res=>{res.json()})
+    .then(data=>{
+      console.log(data);
+    })
+  },[id])
 
-  },[])
+
+  // useEffect(() => {
+  //   const element = componentRef.current;
+  //   const rect = element.getBoundingClientRect();
+  //   const currentPosition = {
+  //     x: rect.left,
+  //     y: rect.top
+  //   };
+  //   console.log(currentPosition);
+  // }, []);
+
 
   function clickHandler(){
     setClicked(true);
     console.log('item select component clicked');
   }
 
-
-  if(category==='mainWeapon'){
-    // setBoxStyle()
-  }
-
   const container:React.CSSProperties={
     display:'flex',
-    width:'400px',
-    height:'430px',
+    width:'90%',
+    minHeight:'500px',
     flexDirection:'column',
     justifyContent:'center',
     alignItems:'flex-start'
@@ -99,22 +125,34 @@ const SelectBox:React.FC<item>=(props)=>{
 
 
   return(
-    <div style={container} onClick={clickHandler}>
+    <div style={container}>
       <div>{}</div>
-      <div style={boxStyle}>
+      <div style={boxStyle} onClick={clickHandler}>
         <div style={{
           width:'33%',
           height:'100%',
-          borderLeft:'1px solid white'
+          borderRight:'1px solid white'
         }}>
           <img src={item.iconLink} alt="icon" style={{width:'100%',height:'100%'}}/>
         </div>
 
-        <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>{item.name}</div>
-        <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+        <div style={{
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center',
+          width:'57%'
+          }}>{item.name}</div>
+        <div style={{
+          display:'flex',
+          alignItems:'center',
+          justifyContent:'center',
+          width:'10%'
+          }}>
           <div className='cross'></div>
         </div>
       </div>
+
+      {clicked&&<ItemOverlay setClicked={setClicked}></ItemOverlay>}
     </div>
     
 

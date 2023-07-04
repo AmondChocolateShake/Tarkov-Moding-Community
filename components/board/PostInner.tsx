@@ -48,9 +48,8 @@ const PostInner:React.FC<Post>=(props)=>{
   const[likes,setLikes]=useState(post.likes);
   const[context,setContext]=useState(post.context);
   const[postId,setPostId]=useState(post.postId);
-  
-  //모드리스트에 넣을 모드 데이터 객체 배열 저장 공간
-  const[modList,setModList]=useState();
+  const[modList,setModList]=useState([]);
+  const[flag,setFlag]=useState(false);
 
   useEffect(()=>{
     fetch('/get_mod_list',{
@@ -62,7 +61,10 @@ const PostInner:React.FC<Post>=(props)=>{
     })
     .then(res=>res.json())
     .then(data=>{
-      console.log(data);
+
+      console.log(data)
+      setModList(data);
+      setFlag(true);
     })
   },[post])
 
@@ -89,7 +91,7 @@ const PostInner:React.FC<Post>=(props)=>{
       <TopInfoInPostInner title={title} img={img} info={info} tags={tags} likes={likes} context={context}></TopInfoInPostInner>
       <div style={ModsContainer}>
         {/* 모드 리스트를 props로 넘겨야함 */}
-        {/* <ModList mods={modList}></ModList> */}
+        {flag&&<ModList mods={modList}></ModList>}
       </div>
     </div>
   );

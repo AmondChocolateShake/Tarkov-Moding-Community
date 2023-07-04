@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { defaultMethod } from 'react-router-dom/dist/dom';
 import PriceBox from './priceBox';
 import Ability from './Ability';
@@ -27,7 +27,20 @@ const ModInfoBox:React.FC<Props>=(props)=>{
   const[ergo,setErgo]=useState(props.ergo);
   const[recoil,setRecoil]=useState(props.recoil);
   const[price,setPrice]=useState(props.price);
+  const[color,setColor]=useState('white');
 
+  useEffect(()=>{
+    if(slotName==='scope') setColor('gold')
+    else if(slotName==='muzzle') setColor('purple')
+    else if(slotName==='foregrip') setColor('blue')
+    else if(slotName==='handguard') setColor('green')
+    else if(slotName==='stock') setColor('red')
+    else if(slotName==='magazine') setColor('brown')
+    // else if(slotName==='') setColor('')
+    
+
+
+  },[])
 
   const container:React.CSSProperties={
     display:'flex',
@@ -49,7 +62,7 @@ const ModInfoBox:React.FC<Props>=(props)=>{
     alignItems:'center',
     width:'10%',
     height:'100%',
-    borderRight:'1px solid white',
+    borderRight:'1px solid'+color,
     
   }
 

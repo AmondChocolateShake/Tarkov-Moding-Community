@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import AddTagBox from './AddTagBox';
 import Moding from './Moding';
 
@@ -6,11 +6,7 @@ import Moding from './Moding';
 
 //총기 모딩 게시글 작성 페이지
 const Post:React.FC=()=>{
-  const formData={
-    title:'',
-    context:'',
-    tags:''
-  }
+  const[modData,setModData]=useState();
 
   const container:React.CSSProperties={
     display:'flex',
@@ -57,6 +53,12 @@ const Post:React.FC=()=>{
     
   }
 
+  let ids=[]
+  const addId=(id:string)=>{
+    ids.push(id);
+
+  }
+
   return(
     <div style={container}>
       <div style={titleSt}>
@@ -77,7 +79,7 @@ const Post:React.FC=()=>{
         </div>
       </div>
       
-      <Moding></Moding>
+      <Moding addId={addId}></Moding>
 
     </div>
   );
