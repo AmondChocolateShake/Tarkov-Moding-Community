@@ -63,7 +63,35 @@ async function getPostDetail(postId){
   }
 }
 
+app.post('/default_weapon',async (req,res)=>{
+  try{
+    const weapons=getDefaultWeapon()
+    res.json(weapons);
+  }catch{
+    connection.end()
+  }
 
+})
+
+async function getDefaultWeapon(){
+  const query='SELECT * FROM DefaultWeapon'
+
+
+  try{
+    return await new Promise((resolve,reject)=>{
+      connection.query(query,null,(err,results)=>{
+        if(err){
+          console.error(err);
+          reject(err);
+        }else{
+          resolve(results);
+        }
+      })
+    })
+  }catch(err){
+    console.error(err);
+  }
+}
 
 //게시글 상세 뷰에 사용되는 파츠 리스트를 응답하는 코드
 app.post('/get_mod_list',async (req,res)=>{
