@@ -89,7 +89,7 @@ const PostInner:React.FC<Post>=(props)=>{
       <TopInfoInPostInner title={title} img={img} info={info} tags={tags} likes={likes} context={context}></TopInfoInPostInner>
       <div style={ModsContainer}>
         {/* 모드 리스트를 props로 넘겨야함 */}
-        <ModList mods={modList}></ModList>
+        {/* <ModList mods={modList}></ModList> */}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const PostsOnBoard:React.FC<props>=(props)=>{
   const[posts,setPosts]=useState([] as any);
   const[flag,setFlag]=useState(0);
   useEffect(()=>{
-    fetch('/select_all_post',{
+    fetch('/select_post',{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
