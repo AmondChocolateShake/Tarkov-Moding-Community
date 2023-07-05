@@ -25,6 +25,7 @@ app.use(nocache());
 app.post('/post_data',async (req,res)=>{
   try{
     const postId=req.body.postId
+    console.log(postId);
     // console.log("post_data : ",postId);
     const postData=await getPostDetail(postId);
     
@@ -39,7 +40,6 @@ app.post('/post_data',async (req,res)=>{
 //postId 를 이용해 1개의 게시글을 조회
 async function getPostDetail(postId){
   const query='SELECT * FROM posts WHERE postId = ?'
-
 
   // 데이터베이스 연결
   const connection = mysql.createConnection({
@@ -81,11 +81,11 @@ app.post('/default_weapon',async (req,res)=>{
 
 app.post('/item_element',async (req,res)=>{
   const id=req.body.id
-  console.log(id);
+  // console.log(id);
   try{
     const items=await getItemData(id)
     // console.log(items);
-    console.log(items);
+    // console.log(items);
 
     let arr=[];
 
@@ -130,9 +130,23 @@ app.post('/weapon_modSlots',async (req,res)=>{
   const id=req.body.id
   try{
     const modSlots=await getWeaponModSlots(id)
-    let objects=[]
+    let objects=[{
+        modName:'chamber0',
+        compatibleItemIds:['1']
+      },
+      {
+        modName:'mod2',
+        compatibleItemIds:['2']
+      }
+    ]
 
     console.log('weapon_modslots : ',objects);
+
+    for(item of modSlots){
+      for(obj of objects){
+        console.log(obj['modName']===item['modName']);
+      }
+    }
 
     // console.log(modSlots);
     res.json(modSlots);
@@ -615,7 +629,7 @@ async function getPostData(id){
           resolve(results);
         }
       });
-    connection.end();
+    connection2.end();
 
     });
 

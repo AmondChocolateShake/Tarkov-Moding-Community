@@ -203,3 +203,23 @@ function getIdsFromPostId(postId:number){
 }
 
 
+
+let stateArr:(()=>any)[]=[];
+
+//state 반환 변수를 배열로 푸시하는 함수
+export function pushGetStateFunc(func:()=>any){
+  stateArr.push(func);
+}
+
+//함수 이름으로 state 반환함수를 찾아 반환하는 함수
+export function selectGetStateFunc(funcName:string){
+  return stateArr.find(func=>func.name===funcName);
+}
+
+let a=1;
+function getA(){
+  return a;
+}
+
+pushGetStateFunc(getA);
+console.log(selectGetStateFunc('getA'));
