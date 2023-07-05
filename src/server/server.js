@@ -86,6 +86,7 @@ app.post('/item_element',async (req,res)=>{
     const items=await getItemData(id)
     // console.log(items);
     
+
     let arr=[];
 
     for(let item of items){
@@ -131,7 +132,7 @@ app.post('/weapon_modSlots',async (req,res)=>{
     const modSlots=await getWeaponModSlots(id)
     let objects=[]
 
-    console.log(objects);
+    console.log('weapon_modslots : ',objects);
 
     // console.log(modSlots);
     res.json(modSlots);
