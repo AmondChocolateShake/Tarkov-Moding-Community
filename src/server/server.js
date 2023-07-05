@@ -4,17 +4,6 @@ const fs=require('fs');
 const nocache = require('nocache');
 
 
-
-// 데이터베이스 연결
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '1234',
-  database: 'Tarkov_Moding',
-});
-
-
-
 const app=express();
 const port=3000;
 
@@ -51,6 +40,15 @@ app.post('/post_data',async (req,res)=>{
 async function getPostDetail(postId){
   const query='SELECT * FROM posts WHERE postId = ?'
 
+
+  // 데이터베이스 연결
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'Tarkov_Moding',
+  });
+
   try{
     return await new Promise((resolve,reject)=>{
       connection.query(query,postId,(err,results)=>{
@@ -62,6 +60,8 @@ async function getPostDetail(postId){
           
         }
       })
+    connection.end();
+
     })
   }catch(err){
     console.error(err);
@@ -81,11 +81,11 @@ app.post('/default_weapon',async (req,res)=>{
 
 app.post('/item_element',async (req,res)=>{
   const id=req.body.id
-  console.log(id);
+  // console.log(id);
   try{
     const items=await getItemData(id)
     // console.log(items);
-    
+    console.log(items);
 
     let arr=[];
 
@@ -165,6 +165,8 @@ async function getWeaponModSlots(weaponId){
           resolve(results);
         }
       })
+    connection.end();
+
     })
   }catch(err){
     console.error(err);
@@ -175,7 +177,12 @@ async function getWeaponModSlots(weaponId){
 
 async function getDefaultWeapon(){
   const query='SELECT * FROM DefaultWeapon'
-
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'Tarkov_Moding',
+  });
 
   try{
     return await new Promise((resolve,reject)=>{
@@ -187,6 +194,8 @@ async function getDefaultWeapon(){
           resolve(results);
         }
       })
+    connection.end();
+
     })
   }catch(err){
     console.error(err);
@@ -267,6 +276,8 @@ async function getModSlotDataByItemId(id){
         resolve(results);
       }
     })
+    connection.end();
+
   })
 }
 
@@ -288,6 +299,8 @@ async function getRecoilByItemId(id){
         resolve(results);
       }
     })
+    connection.end();
+
   })
 }
 
@@ -310,6 +323,8 @@ async function getItemPriceByItemId(id){
         // console.log(results);
       }
     })
+    connection.end();
+
   })
 }
 
@@ -335,6 +350,8 @@ async function insertDataIntoPostSub(postId,id){
         resolve(results);
       }
     })
+    connection.end();
+
   })
 }
 
@@ -361,6 +378,8 @@ async function getItemIdByPostId(postId){
         // console.log(results);
       }
     })
+    connection.end();
+
   })
 }
 
@@ -447,6 +466,8 @@ async function getGunShortName(){
           // console.log(results);
         }
       });
+    connection.end();
+
     });
     }catch (error) {
       connection.end();
@@ -473,7 +494,10 @@ async function getGunList(){
           // console.log(results);
         }
       });
+    connection.end();
+
     });
+
     }catch (error) {
       connection.end();
       throw error;
@@ -482,6 +506,12 @@ async function getGunList(){
 
 app.post('/get_name_by_id',(req,res)=>{
   const id=req.body;
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'Tarkov_Moding',
+  });
   connection.query('SELECT shortName FROM item WHERE id = ?',id,(err, result) => {
     if (err) {
       console.error(err);
@@ -490,6 +520,8 @@ app.post('/get_name_by_id',(req,res)=>{
       res.json(result);
     }
   })
+  connection.end();
+
 
 })
 
@@ -498,6 +530,12 @@ app.post('/get_name_by_id',(req,res)=>{
 app.post('/data', (req, res) => {
   const item=req.body;
   // console.log(item);
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'Tarkov_Moding',
+  });
   connection.query('INSERT INTO item SET ?', item, (err, result) => {
     if (err) {
       console.error('Error inserting item into database:', err);
@@ -507,6 +545,8 @@ app.post('/data', (req, res) => {
       res.status(200).json({ success: true });
     }
   });
+  connection.end();
+
 });
 
 
@@ -575,6 +615,8 @@ async function getPostData(id){
           resolve(results);
         }
       });
+    connection.end();
+
     });
 
 

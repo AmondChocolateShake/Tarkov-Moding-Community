@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import ItemOverlay from './ItemOverlay'
+import MainItemOverlay from './MainItemOverlay'
 
 interface Item{
   category:string,
@@ -168,7 +168,7 @@ const SelectBox:React.FC<Props>=(props)=>{
         </div>
       </div>
 
-      {clicked&&<ItemOverlay idHandler={idHandler} compatibleIds={compatibleIds} openWindow={setClicked}></ItemOverlay>}
+      {clicked&&<MainItemOverlay idHandler={idHandler} compatibleIds={compatibleIds} openWindow={setClicked}></MainItemOverlay>}
 
     </div>
     

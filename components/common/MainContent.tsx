@@ -102,35 +102,37 @@ const MainContent:React.FC<props>=(props)=>{
 
   
   useEffect(()=>{
-    fetch('/post_data',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({postId:postId})
-    })
-    .then(response=>response.json())
-    .then(postData=>{
-      console.log(postData);
-      const tags=postData[0].tags.split(',');
-      const post={
-        postId:postData[0].postId,
-        title:postData[0].title,
-        img:postData[0].imageLink,
-        info:{
-          price:postData[0].price,
-          ergo:postData[0].ergomics,
-          vertical:postData[0].verticalRecoil,
-          horizontal:postData[0].horizontalRecoil
+    if(postClicked){
+      fetch('/post_data',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
         },
-        tags:tags,
-        likes:postData[0].likes,
-        context:postData[0].context
-      }
-      console.log(post);  
-      setPostData(post);
-      setFlag(true);
-    })
+        body:JSON.stringify({postId:postId})
+      })
+      .then(response=>response.json())
+      .then(postData=>{
+        console.log(postData);
+        const tags=postData[0].tags.split(',');
+        const post={
+          postId:postData[0].postId,
+          title:postData[0].title,
+          img:postData[0].imageLink,
+          info:{
+            price:postData[0].price,
+            ergo:postData[0].ergomics,
+            vertical:postData[0].verticalRecoil,
+            horizontal:postData[0].horizontalRecoil
+          },
+          tags:tags,
+          likes:postData[0].likes,
+          context:postData[0].context
+        }
+        console.log(post);  
+        setPostData(post);
+        setFlag(true);
+      })
+    }
     
 
   },[postClicked])
