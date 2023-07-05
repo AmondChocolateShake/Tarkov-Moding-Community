@@ -109,6 +109,8 @@ const Post:React.FC=()=>{
       ergo:totalData.ergo+ergo,
       recoil:totalData.recoil+recoil
     }
+    console.log(obj);
+    console.log(price,ergo,recoil);
     setTotalData(obj);
 
   }

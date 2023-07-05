@@ -134,7 +134,7 @@ const SelectBox:React.FC<Props>=(props)=>{
         if(data.data.item.recoilModifier)setRecoil(data.data.item.recoilModifier);
         if(data.data.item.basePrice)setPrice(data.data.item.basePrice);
         
-        props.setTotal(price,ergo,recoil);
+        props.setTotal(data.data.item.basePrice,data.data.item.ergonomicsModifier,data.data.item.recoilModifier);
 
         setImgHidden(false);
       })
