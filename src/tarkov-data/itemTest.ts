@@ -112,15 +112,6 @@
 
 
 
-function pushModData(){
-
-  const fs=require('fs');
-
-  const file=fs.readFileSync('modSlotData.jso ','utf-8');
-  const parsedData=JSON.parse(file);
-
-}
-
 
 
 

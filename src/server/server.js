@@ -392,23 +392,6 @@ async function getModSlotDataByItemId(id){
   })
 }
 
-FSItemIdToGetModslotData('5c0d5e4486f77478390952fe')
-async function FSItemIdToGetModslotData(id){
-  const fs=require('fs');
-
-  const file=fs.readFileSync('../tarkov-data/items.json','utf-8');
-  const parsedData=JSON.parse(file);
-  let obj={
-    id:'',
-    compatibleItemIds:'',
-    modName:''
-  }
-  for(let item of parsedData){
-    
-  }
-  console.log(modSlot);
-
-}
 
 
 async function getRecoilByItemId(id){
