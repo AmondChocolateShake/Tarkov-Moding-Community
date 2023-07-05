@@ -30,7 +30,7 @@ const MainItemElement:React.FC<Props>=(props)=>{
       })
       .then(res=>res.json())
       .then(data=>{
-        console.log(data);
+        // console.log(data);
         setName(data[0].name);
         setImageLink(data[0].imageLink);
       })

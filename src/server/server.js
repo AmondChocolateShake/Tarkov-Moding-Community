@@ -81,7 +81,7 @@ app.post('/default_weapon',async (req,res)=>{
 
 app.post('/item_element',async (req,res)=>{
   const id=req.body.id
-  // console.log(id);
+  console.log(id);
   try{
     const items=await getItemData(id)
     // console.log(items);

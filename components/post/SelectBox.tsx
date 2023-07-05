@@ -87,19 +87,27 @@ const SelectBox:React.FC<Props>=(props)=>{
 
   useEffect(()=>{
     if(id!==''){
-      fetch('/get_item_data',{
+      const query=`{
+        item(id:`+"\""+id+"\""+`){
+          name,
+          inspectImageLink
+        }
+      }`;
+      console.log(query);
+      fetch('https://api.tarkov.dev/graphql',{
         method:'POST',
         headers:{
-          'Content-Type':'application/json'
+          'Content-Type':'application/json',
+          'Accept': 'application/json',
         },
-        body:JSON.stringify({id:id})
+        body:JSON.stringify({query:query})
       })
       .then(res=>res.json())
       .then(data=>{
         console.log(data);
         setItem({
-          imageLink:data.imageLink,
-          name:data.name
+          imageLink:data.data.item.inspectImageLink,
+          name:data.data.item.name
         })
         
         setImgHidden(false);
@@ -108,6 +116,7 @@ const SelectBox:React.FC<Props>=(props)=>{
         // 오류 처리
         console.error('Fetch Error:', error);
       });
+      
     }
   },[id])
 

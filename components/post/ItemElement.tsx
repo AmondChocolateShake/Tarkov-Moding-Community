@@ -7,35 +7,45 @@ interface Props{
 }
 
 const ItemElement:React.FC<Props>=(props)=>{
-  const[id,setId]=useState('');
+  const[id,setId]=useState(props.id);
   const[name,setName]=useState('');
   const[imageLink,setImageLink]=useState('');
   const[flag,setFlag]=useState(false);
 
-  useEffect(()=>{
-    setId(props.id)
-  },[])
+  
 
 
   useEffect(()=>{
-    fetch('/item_element',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        "Cache-Control": "no-cache"
-      },
-      body:JSON.stringify({id:id})
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data);
-      setName(data[0].name);
-      setImageLink(data[0].imageLink);
-    })
-    .catch(error => {
-      // 오류 처리
-      console.error('Fetch Error:', error);
-    });
+    
+    
+    if(id!==''){
+      console.log(id);
+      const query=`{
+        item(id:`+"\""+id+"\""+`){
+          name,
+          inspectImageLink
+        }
+      }`;
+      console.log(query);
+      fetch('https://api.tarkov.dev/graphql',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'Accept': 'application/json',
+        },
+        body:JSON.stringify({query:query})
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data);
+        setName(data.data.item.name);
+        setImageLink(data.data.item.inspectImageLink);
+      })
+      .catch(error => {
+        // 오류 처리
+        console.error('Fetch Error:', error);
+      });
+    }
 
 
   },[id])
