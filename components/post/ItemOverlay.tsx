@@ -39,6 +39,7 @@ const ItemOverlay:React.FC<Props>=(props)=>{
 
   useEffect(()=>{
     setFlag(true);
+    console.log('item overlay : ',compatibleIds)
   },[compatibleIds])
 
   return(
