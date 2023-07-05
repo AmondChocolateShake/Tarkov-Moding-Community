@@ -65,14 +65,22 @@ interface Props{
   compatibleIds:string[]
   slotName:string
   setParts:(id:string)=>void
+  setTotal:(
+    price: number,
+    ergo: number,
+    recoil: number,
+  )=>void
 }
 
 
 const SelectBox:React.FC<Props>=(props)=>{
-  const componentRef=useRef(null)
   const[id,setId]=useState('');
   const[clicked,setClicked]=useState(false);
   const[compatibleIds,setCompatibleIds]=useState(props.compatibleIds);
+  const[ergo,setErgo]=useState(0);
+  const[recoil,setRecoil]=useState(0);
+  const[price,setPrice]=useState(0);
+  
   const[imgHidden,setImgHidden]=useState(true);
   const[item,setItem]=useState({
     imageLink:'',
@@ -100,7 +108,10 @@ const SelectBox:React.FC<Props>=(props)=>{
       const query=`{
         item(id:`+"\""+id+"\""+`){
           name,
-          inspectImageLink
+          inspectImageLink,
+          ergonomicsModifier,
+          recoilModifier,
+          basePrice,
         }
       }`;
       console.log(query);
@@ -119,7 +130,12 @@ const SelectBox:React.FC<Props>=(props)=>{
           imageLink:data.data.item.inspectImageLink,
           name:data.data.item.name
         })
+        if(data.data.item.ergonomicsModifier)setErgo(data.data.item.ergonomicsModifier);
+        if(data.data.item.recoilModifier)setRecoil(data.data.item.recoilModifier);
+        if(data.data.item.basePrice)setPrice(data.data.item.basePrice);
         
+        props.setTotal(price,ergo,recoil);
+
         setImgHidden(false);
       })
       .catch(error => {
@@ -153,6 +169,15 @@ const SelectBox:React.FC<Props>=(props)=>{
     color:'white'
   }
 
+  const abilityBox:React.CSSProperties={
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'space-around',
+    alignItems:'flex-start',
+    marginLeft:'10px',
+    height:'100%',
+    width:'150px'
+  }
   
   function clickHandler(){
     setClicked(true);
@@ -161,9 +186,11 @@ const SelectBox:React.FC<Props>=(props)=>{
 
   const idHandler=(id:string)=>{
     setId(id);
+    setClicked(false);
     props.setParts(id);
   }
 
+  
 
   return(
     <div style={container}>
@@ -194,8 +221,11 @@ const SelectBox:React.FC<Props>=(props)=>{
             <div className='cross'></div>
           </div>
 
-          <div></div>
-
+        </div>
+        <div style={abilityBox}>
+          <div>ergo : {ergo}</div>
+          <div>recoil : {recoil}%</div>
+          <div>price : {price}</div>
         </div>
       </div>
 

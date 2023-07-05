@@ -68,7 +68,7 @@ interface Props{
 }
 
 
-const SelectBox:React.FC<Props>=(props)=>{
+const MainSelectBox:React.FC<Props>=(props)=>{
   const componentRef=useRef(null)
   const[id,setId]=useState('');
   const[clicked,setClicked]=useState(false);
@@ -80,8 +80,8 @@ const SelectBox:React.FC<Props>=(props)=>{
   });
   const[boxStyle,setBoxStyle]=useState({
     display:'flex',
-    width:'400px',
-    height:'100px',
+    width:'500px',
+    height:'150px',
     border:'1px solid white',
     borderRadius:'10px'
   });
@@ -136,6 +136,7 @@ const SelectBox:React.FC<Props>=(props)=>{
 
   const idHandler=(id:string)=>{
     setId(id);
+    setClicked(false);
     props.selectMain(id);
   }
 
@@ -177,4 +178,4 @@ const SelectBox:React.FC<Props>=(props)=>{
   );
 }
 
-export default SelectBox
+export default MainSelectBox

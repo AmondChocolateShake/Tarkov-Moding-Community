@@ -7,12 +7,12 @@ import Moding from './Moding';
 //총기 모딩 게시글 작성 페이지
 const Post:React.FC=()=>{
   const[mainWeaponId,setMainWeaponId]=useState('');
+  const[partList,setPartList]=useState([''])
   const[modIds,setModIds]=useState(['']);
   const[totalData,setTotalData]=useState({
     price:0,
     ergo:0,
-    VR:0,
-    HR:0
+    recoil:0
   });
   const[tags,setTags]=useState(['']);
   const [formData, setFormData] = useState({
@@ -20,25 +20,16 @@ const Post:React.FC=()=>{
     context: '',
     tags:'',
     mainWeaponId:'',
-    modIds:['']
+    modIds:[''],
+    price:0,
+    ergo:0,
+    recoil:0
     
   });
 
-  const mainWeaponHander=(data:string)=>{
-    setMainWeaponId(data);
-  }
-  const modIdsHander=(data:string[])=>{
-    setModIds(data);
-  }
-  const tagHander=(data:string[])=>{
-    setTags(data);
-  }
-  const totalDataHander=(data:any)=>{
-    setTotalData(data);
-  }
-
   
 
+  
   const handleChange = (event:any) => {
     setFormData({
       ...formData,
@@ -112,16 +103,30 @@ const Post:React.FC=()=>{
     backgroundColor:'#1e1e1e',
   }
 
-  let ids=[]
-  const addId=(id:string)=>{
-    ids.push(id);
+  const setTotal=(price:number,ergo:number,recoil:number)=>{
+    let obj={
+      price:totalData.price+price,
+      ergo:totalData.ergo+ergo,
+      recoil:totalData.recoil+recoil
+    }
+    setTotalData(obj);
 
   }
-
 
   const handleSubmit = (event:any) => {
     event.preventDefault();
     
+    setFormData({
+      title: formData.title,
+      context: formData.context,
+      tags:formData.tags,
+      mainWeaponId:mainWeaponId,
+      modIds:partList,
+      price:totalData.price,
+      ergo:totalData.ergo,
+      recoil:totalData.recoil
+    })
+    console.log(formData);
     fetch('/post_submit', {
       method: 'POST',
       headers: {
@@ -146,7 +151,7 @@ const Post:React.FC=()=>{
       <div style={container}>
         <div style={titleSt}>
           <h2 style={{color:'white'}}>제목 </h2>
-          <input type='text' id='title' name='context' value={formData.title} onChange={handleChange}
+          <input type='text' id='title' name='title' value={formData.title} onChange={handleChange}
           style={{
             width:'90%',
             backgroundColor:'#1E1E1E',
@@ -164,7 +169,7 @@ const Post:React.FC=()=>{
           </div>
         </div>
         
-        <Moding addId={addId}></Moding>
+        <Moding setTotal={setTotal} setMainId={setMainWeaponId} setPartList={setPartList}></Moding>
 
         <div style={btnContainer}>
           <button style={btnSt} type="submit">등록</button>

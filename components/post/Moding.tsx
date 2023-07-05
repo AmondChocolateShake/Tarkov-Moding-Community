@@ -5,18 +5,25 @@ import SelectBox from './SelectBox';
 
 
 interface Props{
-  addId:(id:string)=>void
+  setPartList:(ids:string[])=>void
+  setMainId:(id:string)=>void
+  setTotal:(
+    price: number,
+    ergo: number,
+    recoil: number,
+  )=>void
 }
 
 const Moding:React.FC<Props>=(props)=>{
   const[mainWeaponId,setMainWeaponId]=useState('');
+  const[partList,setPartList]=useState(['']);
   const[modSlots,setModSlots]=useState([{
     modName:'',
     compatibleItemIds:[]
   }])
   const[weaponSelected,setWeaponSelected]=useState(false);
   const[flag,setFlag]=useState(false);
-  const[partList,setPartList]=useState(['']);
+  
   //아이템Id
   //모드슬롯 이름
   //모드슬롯 장착가능id
@@ -37,14 +44,17 @@ const Moding:React.FC<Props>=(props)=>{
     height:'100px'
   }
 
+  
 
   const setMainWeapon=(id:string)=>{
     setMainWeaponId(id);
+    props.setMainId(id);
     setWeaponSelected(true);
   }
 
   const setParts=(id:string)=>{
     setPartList([...partList,id])
+    props.setPartList(partList);
   }
 
   useEffect(()=>{
@@ -74,7 +84,7 @@ const Moding:React.FC<Props>=(props)=>{
       <MainWeaponSelect selectMain={setMainWeapon}></MainWeaponSelect>
       {flag&&
         modSlots.map((item,index)=>(
-          <SelectBox setParts={setParts} key={index} compatibleIds={item.compatibleItemIds} slotName={item.modName}></SelectBox>
+          <SelectBox setTotal={props.setTotal} setParts={setParts} key={index} compatibleIds={item.compatibleItemIds} slotName={item.modName}></SelectBox>
         ))
       }
       {/* <div style={btnContainer}>
