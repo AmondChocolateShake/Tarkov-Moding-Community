@@ -137,7 +137,7 @@ app.post('/post_submit',async(req,res)=>{
   fs.writeFileSync('post_count.json',JSON.stringify({postId:count}))
   const item=await getItemData(data.mainWeaponId);
   const imageLink=item[0].imageLink;
-  console.log(item);
+  // console.log(item);
   insertPostDataIntoPost(count,data.mainWeaponId,data.title,data.context,data.ergo,data.price,imageLink)
   for(let mod of data['modIds']){
     insertDataIntoPostSub(count,mod);
@@ -315,6 +315,7 @@ app.post('/get_mod_list',async (req,res)=>{
   const postId=req.body.postId;
 
   const list=await getItemIdByPostId(postId);
+  console.log(postId,'post Item :',list)
   let objArr=[]
   for(let item of list){
     // console.log(item['id']);
@@ -324,7 +325,7 @@ app.post('/get_mod_list',async (req,res)=>{
     let recoil=await getRecoilByItemId(item['id']);
     recoil=await JSON.stringify(recoil);
     recoil=await JSON.parse(recoil);
-    // console.log(recoil)
+    console.log(modSlot)
     const setData= await setDataIntoModForm(itemData[0],price,modSlot[0],recoil[0]);
     // console.log(setData);
     objArr.push(setData);

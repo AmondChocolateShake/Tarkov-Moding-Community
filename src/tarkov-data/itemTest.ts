@@ -34,80 +34,80 @@
 
 // makeDefaultWeaponFile();
 
-async function addRecoil(){
-  const mysql=require('mysql');
-  const fs=require('fs');
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'Tarkov_Moding',
-  });
+// async function addRecoil(){
+//   const mysql=require('mysql');
+//   const fs=require('fs');
+//   const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '1234',
+//     database: 'Tarkov_Moding',
+//   });
 
-  const weaponData=fs.readFileSync('defaultWeapon.json','utf-8');
-  const itemData=fs.readFileSync('items.json','utf-8');
+//   const weaponData=fs.readFileSync('defaultWeapon.json','utf-8');
+//   const itemData=fs.readFileSync('items.json','utf-8');
 
-  const parsedWeapon=JSON.parse(weaponData);
-  const parsedItem=JSON.parse(itemData);
+//   const parsedWeapon=JSON.parse(weaponData);
+//   const parsedItem=JSON.parse(itemData);
 
-  let arr=[]
+//   let arr=[]
 
-  for(let weapon of parsedWeapon){
-    for(let item of parsedItem){
-      if(weapon['id']===item['id']){
-        for(let mod of item['modSlots']){
-          // console.log(mod);
-          let obj={
-            id:item['id'],
-            modSlot:mod
-          }
-          arr.push(obj);
-        }
-      }
-    }
-  }
+//   for(let weapon of parsedWeapon){
+//     for(let item of parsedItem){
+//       if(weapon['id']===item['id']){
+//         for(let mod of item['modSlots']){
+//           // console.log(mod);
+//           let obj={
+//             id:item['id'],
+//             modSlot:mod
+//           }
+//           arr.push(obj);
+//         }
+//       }
+//     }
+//   }
 
-  // console.log(arr);
+//   // console.log(arr);
 
-  for(let item of arr){
-    // console.log(item);
-    for(let data of item['modSlot'].compatibleItemIds)
-    {
-      // console.log(item['id']);
-      // console.log(item['modSlot'].name);
-      // console.log(data);
-      await insertDataIntoModSlotList(item['id'],item['modSlot'].name,data);
-    }
+//   for(let item of arr){
+//     // console.log(item);
+//     for(let data of item['modSlot'].compatibleItemIds)
+//     {
+//       // console.log(item['id']);
+//       // console.log(item['modSlot'].name);
+//       // console.log(data);
+//       await insertDataIntoModSlotList(item['id'],item['modSlot'].name,data);
+//     }
 
-  }
-  // insertDataIntoModSlotList('1','1','1');
-  console.log('end')
-}
+//   }
+//   // insertDataIntoModSlotList('1','1','1');
+//   console.log('end')
+// }
 
 
-async function insertDataIntoModSlotList(id:string,modName:string,compatibleItemIds:string){
-  return new Promise((resolve,reject)=>{
-    const mysql=require('mysql');
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '1234',
-      database: 'Tarkov_Moding',
-    });
+// async function insertDataIntoModSlotList(id:string,modName:string,compatibleItemIds:string){
+//   return new Promise((resolve,reject)=>{
+//     const mysql=require('mysql');
+//     const connection = mysql.createConnection({
+//       host: 'localhost',
+//       user: 'root',
+//       password: '1234',
+//       database: 'Tarkov_Moding',
+//     });
 
-    const query='INSERT INTO modSlotList (id,modName,compatibleItemIds) VALUES ( ? , ? , ? )'
-    connection.query(query,[id,modName,compatibleItemIds],(err:Error,results:any)=>{
-      if(err){
-        console.error(err);
-        reject(err)
-      }else{
-        resolve(results);
-        console.log('successed : '+results);
-        connection.end()
-      }
-    })
-  })
-}
+//     const query='INSERT INTO modSlotList (id,modName,compatibleItemIds) VALUES ( ? , ? , ? )'
+//     connection.query(query,[id,modName,compatibleItemIds],(err:Error,results:any)=>{
+//       if(err){
+//         console.error(err);
+//         reject(err)
+//       }else{
+//         resolve(results);
+//         console.log('successed : '+results);
+//         connection.end()
+//       }
+//     })
+//   })
+// }
 
 
 

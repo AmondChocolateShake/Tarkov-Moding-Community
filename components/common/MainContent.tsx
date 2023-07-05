@@ -113,7 +113,10 @@ const MainContent:React.FC<props>=(props)=>{
       .then(response=>response.json())
       .then(postData=>{
         console.log(postData);
-        const tags=postData[0].tags.split(',');
+        let tags=['']
+        if(postData[0].tags!==null)
+        {tags=postData[0].tags.split(',');}
+
         const post={
           postId:postData[0].postId,
           title:postData[0].title,
