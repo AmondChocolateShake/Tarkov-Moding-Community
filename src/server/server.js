@@ -130,28 +130,76 @@ app.post('/weapon_modSlots',async (req,res)=>{
   const id=req.body.id
   try{
     const modSlots=await getWeaponModSlots(id)
-    let objects=[{
-        modName:'chamber0',
-        compatibleItemIds:['1']
-      },
-      {
-        modName:'mod2',
-        compatibleItemIds:['2']
-      }
-    ]
+    // console.log(modSlots);
+    
+    // console.log('weapon_modslots : ',objects);
 
-    console.log('weapon_modslots : ',objects);
-
-    for(item of modSlots){
-      for(obj of objects){
-        console.log(obj['modName']===item['modName']);
-      }
+    
+    let results=[];
+    let obj={
+      modName:'',
+      compatibleItemIds:[]
     }
 
-    // console.log(modSlots);
-    res.json(modSlots);
+    // arr.forEach(element=> name=element.name)
+    for(let item of modSlots){
+      // console.log(item['modName'])
+      try{
+      console.log('item[modname]:',item['modName']+' obj[modName]:',obj.modName);
+      if(item['modName']===obj.modName){
+        
+        obj.compatibleItemIds.push(item['compatibleItemIds']);
+      }else{
+      
+        if(obj.modName===''){
+          
+          obj.modName=item['modName'];
+          obj.compatibleItemIds.push(item['compatibleItemIds']);
+          
+          console.log("modName==='' -> obj : ",obj );
+        }else{
+          results.push(obj);
+          console.log('result : ',results);
+          console.log('obj 초기화 전 : ',obj);
+          obj={
+            modName:'',
+            compatibleItemIds:[]
+          }
+          console.log('obj 초기화 후 : ',obj);
+
+          obj.modName=item['modName'];
+          obj.compatibleItemIds.push(item['compatibleItemIds']);
+          
+        }
+
+    
+
+      }
+      }catch(err){
+        console.log(err);
+      }
+
+    }
+    if(modSlots.count>0) results.push(obj);
+      // if(objects.length===0){
+      //   console.log('objects arrary is empty');
+      //   objects.push(item);
+      // }else
+      // {
+      //   for(obj of objects){
+      //     if(obj['modName']===item['modName']){
+      //       console.log('obj[\'modName\']=== item[\'modName\'] ? ' ,obj['modName']===item['modName']);
+      //       obj.compatibleItemIds.push(item.compatibleItemIds);
+      //       console.log('pushed id into ',obj.modName);
+      //     }
+          
+      //   }
+      // }
+    
+
+    console.log(results);
+    res.json(results);
   }catch{
-    connection.end()
   }
 
 })
@@ -167,7 +215,7 @@ async function getWeaponModSlots(weaponId){
     database: 'Tarkov_Moding',
   });
 
-  const query='SELECT modName,compatibleItemIds FROM modSlotList WHERE id = ?'
+  const query='SELECT modName,compatibleItemIds FROM modSlotList WHERE id = ? ORDER BY modName'
 
   try{
     return await new Promise((resolve,reject)=>{

@@ -12,7 +12,7 @@ const Moding:React.FC<Props>=(props)=>{
   const[mainWeaponId,setMainWeaponId]=useState('');
   const[modSlots,setModSlots]=useState([{
     modName:'',
-    compatibleItemIds:''
+    compatibleItemIds:[]
   }])
   const[weaponSelected,setWeaponSelected]=useState(false);
   const[flag,setFlag]=useState(false);
@@ -54,6 +54,9 @@ const Moding:React.FC<Props>=(props)=>{
     })
     .then(res=>res.json())
     .then(data=>{
+
+      
+
       setModSlots(data);
       setFlag(true);
 
@@ -67,7 +70,7 @@ const Moding:React.FC<Props>=(props)=>{
       <MainWeaponSelect selectMain={setMainWeapon}></MainWeaponSelect>
       {flag&&
         modSlots.map((item,index)=>(
-          <SelectBox key={index} compatibleIds={[item.compatibleItemIds]} slotName={item.modName}></SelectBox>
+          <SelectBox key={index} compatibleIds={item.compatibleItemIds} slotName={item.modName}></SelectBox>
         ))
       }
       <div style={btnContainer}>
