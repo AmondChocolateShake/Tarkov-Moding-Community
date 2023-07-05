@@ -9,15 +9,17 @@ const WriteBtn:React.FC=()=>{
     alignItems:'center',
     width:'100px',
     height:'50px',
-    border:'1px solid white',
+    border:'3px solid white',
     borderRadius:'10px',
     color:'white',
-    fontSize:'30px'
+    fontSize:'30px',
+    backgroundColor:'#1e1e1e',
+
   }
   return(
-    <div style={container}>
-      <div>등록</div>
-    </div>
+    <form>
+      <button style={container} type="submit">등록</button>
+    </form>
   );
 }
 

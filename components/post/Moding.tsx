@@ -16,7 +16,7 @@ const Moding:React.FC<Props>=(props)=>{
   }])
   const[weaponSelected,setWeaponSelected]=useState(false);
   const[flag,setFlag]=useState(false);
-  const[partList,setPartList]=useState([]);
+  const[partList,setPartList]=useState(['']);
   //아이템Id
   //모드슬롯 이름
   //모드슬롯 장착가능id
@@ -41,6 +41,10 @@ const Moding:React.FC<Props>=(props)=>{
   const setMainWeapon=(id:string)=>{
     setMainWeaponId(id);
     setWeaponSelected(true);
+  }
+
+  const setParts=(id:string)=>{
+    setPartList([...partList,id])
   }
 
   useEffect(()=>{
@@ -70,12 +74,12 @@ const Moding:React.FC<Props>=(props)=>{
       <MainWeaponSelect selectMain={setMainWeapon}></MainWeaponSelect>
       {flag&&
         modSlots.map((item,index)=>(
-          <SelectBox key={index} compatibleIds={item.compatibleItemIds} slotName={item.modName}></SelectBox>
+          <SelectBox setParts={setParts} key={index} compatibleIds={item.compatibleItemIds} slotName={item.modName}></SelectBox>
         ))
       }
-      <div style={btnContainer}>
+      {/* <div style={btnContainer}>
         <WriteBtn></WriteBtn>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -64,6 +64,7 @@ modSlots:null}
 interface Props{
   compatibleIds:string[]
   slotName:string
+  setParts:(id:string)=>void
 }
 
 
@@ -84,6 +85,15 @@ const SelectBox:React.FC<Props>=(props)=>{
     border:'1px solid white',
     borderRadius:'10px'
   });
+
+  const innerBox:React.CSSProperties={
+    display:'flex',
+    justifyContent:'flex-start',
+    alignItems:'center',
+    width:'100%',
+    height:'100px'
+
+  }
 
   useEffect(()=>{
     if(id!==''){
@@ -151,34 +161,41 @@ const SelectBox:React.FC<Props>=(props)=>{
 
   const idHandler=(id:string)=>{
     setId(id);
+    props.setParts(id);
   }
 
 
   return(
     <div style={container}>
       <div>{props.slotName}</div>
-      <div style={boxStyle} onClick={clickHandler}>
-        <div style={{
-          width:'33%',
-          height:'100%',
-          borderRight:'1px solid white',
-        }}>
-          {imgHidden!==true&&<img src={item.imageLink} alt="icon" style={{width:'100%',height:'100%',borderRadius:'10px'}}/>}
-        </div>
+        <div style={innerBox}>
 
-        <div style={{
-          display:'flex',
-          justifyContent:'center',
-          alignItems:'center',
-          width:'57%'
-          }}>{item.name}</div>
-        <div style={{
-          display:'flex',
-          alignItems:'center',
-          justifyContent:'center',
-          width:'10%'
+        <div style={boxStyle} onClick={clickHandler}>
+          <div style={{
+            width:'33%',
+            height:'100%',
+            borderRight:'1px solid white',
           }}>
-          <div className='cross'></div>
+            {imgHidden!==true&&<img src={item.imageLink} alt="icon" style={{width:'100%',height:'100%',borderRadius:'10px'}}/>}
+          </div>
+
+          <div style={{
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'center',
+            width:'57%'
+            }}>{item.name}</div>
+          <div style={{
+            display:'flex',
+            alignItems:'center',
+            justifyContent:'center',
+            width:'10%'
+            }}>
+            <div className='cross'></div>
+          </div>
+
+          <div></div>
+
         </div>
       </div>
 
