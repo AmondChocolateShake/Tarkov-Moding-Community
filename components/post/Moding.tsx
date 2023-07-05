@@ -16,7 +16,7 @@ const Moding:React.FC<Props>=(props)=>{
   }])
   const[weaponSelected,setWeaponSelected]=useState(false);
   const[flag,setFlag]=useState(false);
-
+  const[partList,setPartList]=useState([<SelectBox compatibleIds={['1']} slotName={'test'}></SelectBox>]);
   //아이템Id
   //모드슬롯 이름
   //모드슬롯 장착가능id
@@ -44,6 +44,7 @@ const Moding:React.FC<Props>=(props)=>{
   }
 
   useEffect(()=>{
+    
     fetch('/weapon_modSlots',{
       method:'POST',
       headers:{
@@ -53,9 +54,22 @@ const Moding:React.FC<Props>=(props)=>{
     })
     .then(res=>res.json())
     .then(data=>{
+      let obj=[{
+        modName:'',
+        compatibleItemIds:''
+      }]
+      let components=[<SelectBox compatibleIds={['1']} slotName={'test'}></SelectBox>]
+      obj=data
       console.log(data);
+      obj.forEach(element => {
+        components.push(<SelectBox compatibleIds={[element.compatibleItemIds]} slotName={element.modName}></SelectBox>)
+      });
+
       setModSlots(data);
+      setPartList(components);
+
       setFlag(true);
+
     })
 
   },[mainWeaponId])
@@ -64,9 +78,9 @@ const Moding:React.FC<Props>=(props)=>{
     <div style={container}>
       <MainWeaponSelect selectMain={setMainWeapon}></MainWeaponSelect>
       {flag&&
-        modSlots.map((item,index)=>(
-          <SelectBox key={index} compatibleIds={[item.compatibleItemIds]} slotName={item.modName}></SelectBox>
-        ))
+        <div>
+          {partList}
+        </div>
       }
       <div style={btnContainer}>
         <WriteBtn></WriteBtn>

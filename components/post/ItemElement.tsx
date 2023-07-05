@@ -7,13 +7,17 @@ interface Props{
 }
 
 const ItemElement:React.FC<Props>=(props)=>{
-  const[id,setId]=useState(props.id);
+  const[id,setId]=useState('');
   const[name,setName]=useState('');
   const[imageLink,setImageLink]=useState('');
   const[flag,setFlag]=useState(false);
 
   useEffect(()=>{
-    console.log("itemElement : ",id)
+    setId(props.id)
+  },[])
+
+
+  useEffect(()=>{
     fetch('/item_element',{
       method:'POST',
       headers:{
@@ -28,6 +32,12 @@ const ItemElement:React.FC<Props>=(props)=>{
       setName(data[0].name);
       setImageLink(data[0].imageLink);
     })
+    .catch(error => {
+      // 오류 처리
+      console.error('Fetch Error:', error);
+    });
+
+
   },[id])
 
   const container:React.CSSProperties={
@@ -46,7 +56,7 @@ const ItemElement:React.FC<Props>=(props)=>{
 
   return(
   <div style={container} onClick={selected}>
-    <div style={{width:'40%',height:'100%'}}>
+    <div style={{width:'20%',height:'100%'}}>
       <img style={{width:'100%',height:'100%'}} src={imageLink} alt="" />
     </div>
 

@@ -86,22 +86,29 @@ const SelectBox:React.FC<Props>=(props)=>{
   });
 
   useEffect(()=>{
-    fetch('/get_item_data',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({id:id})
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data);
-      setItem({
-        imageLink:data.imageLink,
-        name:data.name
+    if(id!==''){
+      fetch('/get_item_data',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({id:id})
       })
-      setImgHidden(false);
-    })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data);
+        setItem({
+          imageLink:data.imageLink,
+          name:data.name
+        })
+        
+        setImgHidden(false);
+      })
+      .catch(error => {
+        // 오류 처리
+        console.error('Fetch Error:', error);
+      });
+    }
   },[id])
 
 
@@ -120,10 +127,11 @@ const SelectBox:React.FC<Props>=(props)=>{
   const container:React.CSSProperties={
     display:'flex',
     width:'90%',
-    minHeight:'500px',
+    minHeight:'200px',
     flexDirection:'column',
     justifyContent:'center',
-    alignItems:'flex-start'
+    alignItems:'flex-start',
+    color:'white'
   }
 
   

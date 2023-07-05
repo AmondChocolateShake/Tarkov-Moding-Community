@@ -27,6 +27,7 @@ const ItemOverlay:React.FC<Props>=(props)=>{
 
   const scroll:React.CSSProperties={
     maxHeight:'95%',
+    width:'100%',
     overflow:'auto'
   }
   function clickHandler(){
