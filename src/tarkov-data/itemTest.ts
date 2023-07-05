@@ -112,8 +112,14 @@
 
 
 
+function pushModData(){
 
+  const fs=require('fs');
 
+  const file=fs.readFileSync('modSlotData.jso ','utf-8');
+  const parsedData=JSON.parse(file);
+
+}
 
 
 
@@ -145,39 +151,39 @@
 //   id:'',
 //   category:''
 // }]
-interface Item3{
-  categoryId:string,
-  id:string,
-  shortName:string,
-  name:string|null,
-  color:string|null,
-  iconLink:string|null,
-  imageLink:string|null,
-  value:{
-    value:number,
-    currencyName:string,
-  }|null,
-  conflictingItemIds:string[]|null,
-  ability:{
-    caliber:string|null
-    fireRate:number|null,
-    ergonomics:number|null,
-    verticalRecoil:number|null,
-    horizontalRecoil:number|null,
-    accuracyPercentageModifier:number|null,
-    capacity:number|null,
-    loadSpeedPercentageModifier:number|null,
-    checkSpeedPercentageModifier:number|null,
-    fleshDamage:number|null,
-    penetrationPower:number|null,
-    class:number[]|null,
-    fragmentationChancePercentage:number|null
-  },
-  modSlots:{
-    name:string,
-    compatibleItemIds:string[],
-  }[]|null
-}
+// interface Item3{
+//   categoryId:string,
+//   id:string,
+//   shortName:string,
+//   name:string|null,
+//   color:string|null,
+//   iconLink:string|null,
+//   imageLink:string|null,
+//   value:{
+//     value:number,
+//     currencyName:string,
+//   }|null,
+//   conflictingItemIds:string[]|null,
+//   ability:{
+//     caliber:string|null
+//     fireRate:number|null,
+//     ergonomics:number|null,
+//     verticalRecoil:number|null,
+//     horizontalRecoil:number|null,
+//     accuracyPercentageModifier:number|null,
+//     capacity:number|null,
+//     loadSpeedPercentageModifier:number|null,
+//     checkSpeedPercentageModifier:number|null,
+//     fleshDamage:number|null,
+//     penetrationPower:number|null,
+//     class:number[]|null,
+//     fragmentationChancePercentage:number|null
+//   },
+//   modSlots:{
+//     name:string,
+//     compatibleItemIds:string[],
+//   }[]|null
+// }
 
 // interface Item2{
 //   [key: string]: any,

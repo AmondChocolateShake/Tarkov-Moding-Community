@@ -336,6 +336,7 @@ app.post('/get_mod_list',async (req,res)=>{
 
 async function setDataIntoModForm(itemData,price,modSlot,recoil){
   let modName=modSlot.name.replace('mod_','');
+  
   let recoilPercentageModifier=0;
 
   if (recoil && recoil['recoilPercentageModifier']) {
@@ -383,12 +384,32 @@ async function getModSlotDataByItemId(id){
         reject(err)
       }else{
         resolve(results);
+        console.log('modSlot',results);
       }
     })
     connection.end();
 
   })
 }
+
+FSItemIdToGetModslotData('5c0d5e4486f77478390952fe')
+async function FSItemIdToGetModslotData(id){
+  const fs=require('fs');
+
+  const file=fs.readFileSync('../tarkov-data/items.json','utf-8');
+  const parsedData=JSON.parse(file);
+  let obj={
+    id:'',
+    compatibleItemIds:'',
+    modName:''
+  }
+  for(let item of parsedData){
+    
+  }
+  console.log(modSlot);
+
+}
+
 
 async function getRecoilByItemId(id){
   return new Promise((resolve,reject)=>{
@@ -512,6 +533,31 @@ async function getItemData(id){
         resolve(results);
       }
     })
+  })
+}
+
+async function getItemDataFromAPI(id){
+  const query=`{
+    item(id:`+"\""+id+"\""+`){
+      name,
+      inspectImageLink,
+      ergonomicsModifier,
+      recoilModifier,
+      basePrice,
+    }
+  }`;
+  console.log(query);
+  fetch('https://api.tarkov.dev/graphql',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+    },
+    body:JSON.stringify({query:query})
+  })
+  .then(res=>res.json())
+  .then(data=>{
+
   })
 }
 
