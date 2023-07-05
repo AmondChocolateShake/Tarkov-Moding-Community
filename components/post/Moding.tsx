@@ -44,18 +44,23 @@ const Moding:React.FC<Props>=(props)=>{
     height:'100px'
   }
 
-  
-
   const setMainWeapon=(id:string)=>{
+    console.log('In moding.tsx -> setMainWeapon : ',id)
+    
     setMainWeaponId(id);
     props.setMainId(id);
     setWeaponSelected(true);
   }
 
   const setParts=(id:string)=>{
-    setPartList([...partList,id])
+    console.log('In moding.tsx -> setParts : ',id);
+    if(partList[0]==='') setPartList([id])
+    else setPartList([...partList,id]);
+
+    console.log('In moding.tsx -> partList',partList)
     props.setPartList(partList);
   }
+
 
   useEffect(()=>{
     

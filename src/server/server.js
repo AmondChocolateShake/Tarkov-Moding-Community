@@ -126,6 +126,52 @@ app.post('/get_item_data',async (req,res)=>{
 
 })
 
+app.post('/post_submit',async(req,res)=>{
+  const data=req.body;
+  console.log(data);
+  const fs=require('fs');
+  
+  const file=fs.readFileSync('post_count.json','utf-8');
+  const parsedData=JSON.parse(file);
+  const count=parsedData['postId']+1
+  fs.writeFileSync('post_count.json',JSON.stringify({postId:count}))
+  const item=await getItemData(data.mainWeaponId);
+  const imageLink=item[0].imageLink;
+  console.log(item);
+  insertPostDataIntoPost(count,data.mainWeaponId,data.title,data.context,data.ergo,data.price,imageLink)
+  for(let mod of data['modIds']){
+    insertDataIntoPostSub(count,mod);
+  }
+
+
+})
+
+async function insertPostDataIntoPost(postId,id,title,context,ergo,price,imageLink){
+  return new Promise((resolve,reject)=>{
+    const mysql=require('mysql');
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '1234',
+      database: 'Tarkov_Moding',
+    });
+
+    const query='INSERT INTO posts (postId,title,context,ergomics,price,id,imageLink,likes,author) VALUES ( ? , ? , ? , ? , ? , ? , ? , 0 , \'DJ\')'
+    connection.query(query,[postId,title,context,ergo,price,id,imageLink],(err,results)=>{
+      if(err){
+        console.error(err);
+        reject(err)
+      }else{
+        resolve(results);
+      }
+    })
+    connection.end();
+
+  })
+}
+
+
+
 app.post('/weapon_modSlots',async (req,res)=>{
   const id=req.body.id
   try{
@@ -567,7 +613,7 @@ async function getGunList(){
   }
 
 app.post('/get_name_by_id',(req,res)=>{
-  const id=req.body;
+  const id=req.body.id;
   const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -578,7 +624,7 @@ app.post('/get_name_by_id',(req,res)=>{
     if (err) {
       console.error(err);
     } else {
-      // console.log(result);
+      console.log(result);
       res.json(result);
     }
   })

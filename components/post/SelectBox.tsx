@@ -142,6 +142,7 @@ const SelectBox:React.FC<Props>=(props)=>{
         // 오류 처리
         console.error('Fetch Error:', error);
       });
+      props.setParts(id);
       
     }
   },[id])
@@ -187,9 +188,9 @@ const SelectBox:React.FC<Props>=(props)=>{
   const idHandler=(id:string)=>{
     setId(id);
     setClicked(false);
-    props.setParts(id);
+    
   }
-
+  
   
 
   return(

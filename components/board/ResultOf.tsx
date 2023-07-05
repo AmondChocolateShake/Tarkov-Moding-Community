@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 
 interface Name{
   name:string
@@ -6,7 +6,12 @@ interface Name{
 
 const ResultOf:React.FC<Name>=(props)=>{
   const[name,setName]=useState(props.name);
+  const[flag,setFlag]=useState(false);
 
+  useEffect(()=>{
+    console.log(name);
+    setFlag(true)
+  },[name])
 
   const container:React.CSSProperties={
     display:'flex',
@@ -31,7 +36,7 @@ const ResultOf:React.FC<Name>=(props)=>{
 
   return(
     <div style={container}>
-      <div style={fontSt}>Result of {name}</div>
+      {flag&&<div style={fontSt}>Result of {name}</div>}
       <div style={Box}>글쓰기</div>
     </div>
   );

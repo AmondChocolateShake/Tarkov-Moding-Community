@@ -8,7 +8,6 @@ import Moding from './Moding';
 const Post:React.FC=()=>{
   const[mainWeaponId,setMainWeaponId]=useState('');
   const[partList,setPartList]=useState([''])
-  const[modIds,setModIds]=useState(['']);
   const[totalData,setTotalData]=useState({
     price:0,
     ergo:0,
@@ -118,17 +117,7 @@ const Post:React.FC=()=>{
   const handleSubmit = (event:any) => {
     event.preventDefault();
     
-    setFormData({
-      title: formData.title,
-      context: formData.context,
-      tags:formData.tags,
-      mainWeaponId:mainWeaponId,
-      modIds:partList,
-      price:totalData.price,
-      ergo:totalData.ergo,
-      recoil:totalData.recoil
-    })
-    console.log(formData);
+    
     fetch('/post_submit', {
       method: 'POST',
       headers: {
@@ -147,6 +136,20 @@ const Post:React.FC=()=>{
     });
   };
 
+  function btnClicked(){
+    let obj={
+      title: formData.title,
+      context: formData.context,
+      tags:formData.tags,
+      mainWeaponId:mainWeaponId,
+      modIds:partList,
+      price:totalData.price,
+      ergo:totalData.ergo,
+      recoil:totalData.recoil
+    }
+    console.log(obj);
+    setFormData(obj);
+  }
 
   return(
     <form onSubmit={handleSubmit}>
@@ -174,7 +177,7 @@ const Post:React.FC=()=>{
         <Moding setTotal={setTotal} setMainId={setMainWeaponId} setPartList={setPartList}></Moding>
 
         <div style={btnContainer}>
-          <button style={btnSt} type="submit">등록</button>
+          <button onClick={btnClicked} style={btnSt} type="submit">등록</button>
         </div>
       </div>
     </form>
