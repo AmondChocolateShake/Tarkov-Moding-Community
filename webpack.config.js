@@ -69,5 +69,13 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'], // 임포트 시 확장자 생략 가능
+    fallback: {
+      crypto: require.resolve('crypto-browserify'),
+      net: require.resolve('net-browserify'),
+      tls: require.resolve('tls-browserify'),
+      stream: require.resolve('stream-browserify'),
+      timers: require.resolve('timers-browserify'),
+      fs: false,
+    },
   },
 };

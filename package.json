@@ -11,9 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "net-browserify": "^0.2.4",
     "nocache": "^4.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "stream-browserify": "^3.0.0",
+    "timers-browserify": "^2.0.12",
+    "tls-browserify": "^0.2.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.5",

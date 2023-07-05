@@ -136,7 +136,7 @@ const SelectBox:React.FC<Props>=(props)=>{
 
   const idHandler=(id:string)=>{
     setId(id);
-    
+    props.selectMain(id);
   }
 
 

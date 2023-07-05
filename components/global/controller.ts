@@ -3,6 +3,36 @@
 // 매개변수로 조회하고자 하는 아이디를 담은 배열을 받는다.
 // 반환하는 객체의 형식은 아래아 같다.
 
+interface ReturnElement{
+  imageLink:string,
+  name:string
+}
+
+export function fetchIdForItemElement(id:string):ReturnElement{
+  let object={
+    imageLink:'',
+    name:''
+  };
+
+  fetch('/get_item_data',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({id:id})
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    object.imageLink=data.imageLink;
+    object.name=data.name;
+    console.log(data);
+    
+  })
+
+  return object
+}
+
+
 
 interface Post{
 
