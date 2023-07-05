@@ -145,7 +145,7 @@ app.post('/weapon_modSlots',async (req,res)=>{
     for(let item of modSlots){
       // console.log(item['modName'])
       try{
-      console.log('item[modname]:',item['modName']+' obj[modName]:',obj.modName);
+      // console.log('item[modname]:',item['modName']+' obj[modName]:',obj.modName);
       if(item['modName']===obj.modName){
         
         obj.compatibleItemIds.push(item['compatibleItemIds']);
@@ -156,16 +156,16 @@ app.post('/weapon_modSlots',async (req,res)=>{
           obj.modName=item['modName'];
           obj.compatibleItemIds.push(item['compatibleItemIds']);
           
-          console.log("modName==='' -> obj : ",obj );
+          // console.log("modName==='' -> obj : ",obj );
         }else{
           results.push(obj);
-          console.log('result : ',results);
-          console.log('obj 초기화 전 : ',obj);
+          // console.log('result : ',results);
+          // console.log('obj 초기화 전 : ',obj);
           obj={
             modName:'',
             compatibleItemIds:[]
           }
-          console.log('obj 초기화 후 : ',obj);
+          // console.log('obj 초기화 후 : ',obj);
 
           obj.modName=item['modName'];
           obj.compatibleItemIds.push(item['compatibleItemIds']);
