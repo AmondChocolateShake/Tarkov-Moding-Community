@@ -2,7 +2,7 @@
 
 
 [![Video Label](http://img.youtube.com/vi/DtXLMmJ8vtA/0.jpg)](https://youtu.be/DtXLMmJ8vtA)
-[유튜브 링크]
+유튜브 링크
 ### 개발 환경
 - React
 - node.js(express)
