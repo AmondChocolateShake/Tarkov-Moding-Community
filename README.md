@@ -3,7 +3,7 @@
 
 [![Video Label](http://img.youtube.com/vi/DtXLMmJ8vtA/0.jpg)](https://youtu.be/DtXLMmJ8vtA)
 
-[클릭시 유튜브 시연영상]
+[이미지 클릭 시 유튜브 시연영상]
 
 ### 개발 환경
 - React
