@@ -1,5 +1,8 @@
 # KDT -Pproject - B [ 타르코프 모딩 웹사이트 프로젝트 ]
 
+
+[![Video Label](http://img.youtube.com/vi/DtXLMmJ8vtA/0.jpg)](https://youtu.be/DtXLMmJ8vtA)
+
 ### 개발 환경
 - React
 - node.js(express)
