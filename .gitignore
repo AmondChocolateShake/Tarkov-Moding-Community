@@ -65,3 +65,41 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+
+
+# compiled output
+src/server.v2/dist
+src/server.v2/node_modules
+
+# Logs
+src/server.v2/logs
+src/server.v2/*.log
+src/server.v2/npm-debug.log*
+src/server.v2/pnpm-debug.log*
+src/server.v2/yarn-debug.log*
+src/server.v2/yarn-error.log*
+src/server.v2/lerna-debug.log*
+
+# OS
+src/server.v2/.DS_Store
+
+# Tests
+src/server.v2/coverage
+src/server.v2/.nyc_output
+
+# IDEs and editors
+src/server.v2/.idea
+src/server.v2/.project
+src/server.v2/.classpath
+src/server.v2/.c9/
+src/server.v2/*.launch
+src/server.v2/.settings/
+src/server.v2/*.sublime-workspace
+
+# IDE - VSCode
+src/server.v2/.vscode/*
+src/server.v2/!.vscode/settings.json
+src/server.v2/!.vscode/tasks.json
+src/server.v2/!.vscode/launch.json
+src/server.v2/!.vscode/extensions.json
