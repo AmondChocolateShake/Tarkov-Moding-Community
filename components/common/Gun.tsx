@@ -7,6 +7,8 @@ interface GunData{
   setPageState:(page:string)=>void
   setId:(id:string)=>void
 }
+
+
 const Gun:React.FC<GunData>=(props)=>{
 
   //총기 클릭 이벤트 발생시 상태를 변경하는 함수
