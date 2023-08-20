@@ -33,14 +33,12 @@ const mainPageForm:React.FC=(props)=>{
     width:'100%',
     minHeight:'75%'
   }
-  
+
   const jtfyctntSpcArnd:React.CSSProperties={
     justifyContent:'space-around'
   }
 
   const mainContainer={...fRow,...size,...jtfyctntSpcArnd}
-
-
 
 
 
@@ -53,7 +51,6 @@ const mainPageForm:React.FC=(props)=>{
       
       <div style={mainContainer}>
         <LeftMenu Guns={gunList}></LeftMenu>
-
         <MainContent pageState={pageState} setPageState={setPageState}></MainContent>
       </div>
     </div>
