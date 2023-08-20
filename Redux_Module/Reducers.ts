@@ -1,5 +1,5 @@
-import { MainActionTypes } from "./Actions";
-import { INCREMENT,DECREMENT,SELECTED,TAGSELECTED } from "./Types";
+import { MainActionTypes, WeaponAction } from "./Actions";
+import { INCREMENT,DECREMENT,SELECTED,TAGSELECTED,ADDITEM } from "./Types";
 
 interface weaponId{
     id:string,
@@ -11,9 +11,12 @@ const initialWeaponIdState:weaponId={
 
 
 // 무기 선택 reducer
-function weaponReducer(state=initialState,action:MainActionTypes):state{
+function weaponReducer(state=initialWeaponIdState,action:WeaponAction):weaponId{
     switch(action.type){
-        case 
+        case SELECTED:
+            return{...state,id:state.id}
+        default:
+            return state
     }
 }
 
