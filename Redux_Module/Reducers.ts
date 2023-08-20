@@ -1,19 +1,29 @@
 import { ActionTypes } from "./Actions";
-import { INCREMENT,DECREMENT,SELECTED } from "./Types";
+import { INCREMENT,DECREMENT,SELECTED,TAGSELECTED } from "./Types";
 
-interface Weapon{
-    id:string
+interface state{
+    id:string,
+    tags:string
 }
 
-const initialWeaponState:Weapon={
-    id:''
+const initialState:state={
+    id:'',
+    tags:''
 }
 
 
-function weaponIdReducer(state=initialWeaponState,action:ActionTypes):Weapon{
+function Reducer(state=initialState,action:ActionTypes):state{
     switch(action.type){
+        // case INCREMENT:
+
+        // case DECREMENT:
+
         case SELECTED:
             return {...state,id:state.id};
+
+        case TAGSELECTED:
+            return{...state,tags:state.tags}
+
         default:
             return state
     }

@@ -33,6 +33,7 @@ const mainPageForm:React.FC=(props)=>{
     width:'100%',
     minHeight:'75%'
   }
+  
   const jtfyctntSpcArnd:React.CSSProperties={
     justifyContent:'space-around'
   }
