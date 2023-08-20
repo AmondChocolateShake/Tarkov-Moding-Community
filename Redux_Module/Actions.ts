@@ -11,3 +11,5 @@ export interface DecrementAction{
 export interface SelectAction{
     type: typeof SELECTED
 }
+
+export type ActionTypes=IncrementAction|DecrementAction|SelectAction;
