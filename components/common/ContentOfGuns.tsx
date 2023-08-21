@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Gun from './Gun'
+import { useSelector } from 'react-redux'
 
 
 
@@ -17,7 +18,7 @@ interface GunData {
 }
 
 const ContentOfGuns:React.FC=(props)=>{
-  const[guns,setGuns]=useState<GunData[]>([]);
+  const guns=useSelector();
 
   
   const container:React.CSSProperties={

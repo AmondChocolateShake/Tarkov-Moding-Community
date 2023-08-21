@@ -1,5 +1,6 @@
 
 
+
 class FetchAPI{
     private endpoint:string;
 
@@ -12,9 +13,21 @@ class FetchAPI{
 
     }
 
-
     public getListOfGuns(){
-        
+        fetch(this.endpoint,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body:JSON.stringify({query:`{
+                items(){
+                    id
+                    name
+                    image
+                }
+            }`})
+
+        })
 
     }
 
