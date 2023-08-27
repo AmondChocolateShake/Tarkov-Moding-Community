@@ -11,3 +11,5 @@ export const ADDITEM='ADDITEM';
 //태그 선택
 export const TAGSELECTED='TAGSELECTED';
 
+//endpoint
+export const endpoint='https://api.tarkov.dev/graphql'

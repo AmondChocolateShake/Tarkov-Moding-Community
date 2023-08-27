@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Gun from './Gun'
 import { useSelector } from 'react-redux'
+import { fetching } from '../global/FetchAPI'
 
 
 
@@ -18,7 +19,13 @@ interface GunData {
 }
 
 const ContentOfGuns:React.FC=(props)=>{
-  const guns=useSelector();
+  const [guns,setGuns]=useState({});
+
+
+  useEffect(()=>{
+    
+
+  },[])
 
   
   const container:React.CSSProperties={

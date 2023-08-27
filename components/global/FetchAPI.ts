@@ -1,35 +1,42 @@
+import { endpoint } from "../../Redux_Module/Types";
 
 
 
 class FetchAPI{
-    private endpoint:string;
-
+    private endpoint:string="";
+    private temp:object={};
 
     constructor(endpoint:string){
         this.endpoint=endpoint;
     }
 
     public fetchData(){
-
+        
     }
 
-    public getListOfGuns(){
+
+    //fetch perfect image data of guns from API endpoint
+    public getPresetListOfGuns(){
+        
+
         fetch(this.endpoint,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
             },
             body:JSON.stringify({query:`{
-                items(){
+                items(categoryNames:Weapon,type:preset){
                     id
                     name
-                    image
+                    image8xLink
                 }
             }`})
-
         })
-
+        .then(res=>res.json())
+        .then(data=> this.temp=data);
     }
-
-
 }
+
+
+export const fetching=new FetchAPI(endpoint);
+
