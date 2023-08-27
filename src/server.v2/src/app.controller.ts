@@ -5,9 +5,11 @@ import * as fs from 'fs';
 
 @Controller()
 export class AppController {
+  //정적 파일 서빙
   @Get()
   async getFiles(@Res() res: Response): Promise<void> {
     const htmlPath = path.join(__dirname, '..', '..', 'dist', 'index.html');
+
     try {
       const html = await fs.promises.readFile(htmlPath, 'utf-8');
       res.setHeader('Content-Type', 'text/html');
@@ -18,6 +20,7 @@ export class AppController {
     }
   }
 
+  //script 파일 서빙
   @Get('bundle.js')
   async getJSFile(@Res() res: Response): Promise<void> {
     const JSPath = path.join(__dirname, '..', '..', 'dist', 'bundle.js');
