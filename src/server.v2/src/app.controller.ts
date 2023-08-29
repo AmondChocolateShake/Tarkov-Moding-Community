@@ -3,15 +3,17 @@ import { Response } from 'express';
 import * as path from 'path';
 import * as fs from 'fs';
 
+import { AppService } from './app.service';
+
 @Controller()
 export class AppController {
+  constructor(private readonly appService:AppService){};
   //정적 파일 서빙
   @Get()
   async getFiles(@Res() res: Response): Promise<void> {
-    const htmlPath = path.join(__dirname, '..', '..', 'dist', 'index.html');
 
     try {
-      const html = await fs.promises.readFile(htmlPath, 'utf-8');
+      const html = this.appService.serveHTML();
       res.setHeader('Content-Type', 'text/html');
       res.send(html);
     } catch (err) {
