@@ -1,7 +1,6 @@
 import { Controller, Get, Res } from '@nestjs/common';
 import { Response } from 'express';
-import * as path from 'path';
-import * as fs from 'fs';
+
 
 import { AppService } from './app.service';
 
@@ -25,10 +24,10 @@ export class AppController {
   //script 파일 서빙
   @Get('bundle.js')
   async getJSFile(@Res() res: Response): Promise<void> {
-    const JSPath = path.join(__dirname, '..', '..', 'dist', 'bundle.js');
+    
 
     try {
-      const js = await fs.promises.readFile(JSPath, 'utf-8');
+      const js = this.appService.serveJS();
       res.setHeader('Content-Type', 'application/javascript');
       res.send(js);
     } catch (err) {

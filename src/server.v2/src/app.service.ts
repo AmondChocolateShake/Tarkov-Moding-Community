@@ -16,7 +16,13 @@ export class AppService {
     }
 
     async serveJS(){
-
+        try{
+            const JSPath = path.join(__dirname, '..', '..', 'dist', 'bundle.js');
+            const js = await fs.promises.readFile(JSPath, 'utf-8');
+            return js;
+        }catch(err){
+            console.log(err);
+        }
 
     }
 
