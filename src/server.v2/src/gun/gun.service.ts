@@ -4,7 +4,7 @@
 export class GunService {
     
 
-    async toGetPreset(){
+    async toGetPreset():Promise<object>{
         const query=`{
             items(categoryNames:Weapon,type:preset){
               name
@@ -23,10 +23,11 @@ export class GunService {
             },
             body: JSON.stringify({query:query})
             })
-            .then(res=>res.json)
+            .then(res=>res.json())
             .then(data=>{result=data})
             .catch(err=>{ console.error('Error : ',err)});
         
-        console.log(result);
+        return result;
+        
     }
 }

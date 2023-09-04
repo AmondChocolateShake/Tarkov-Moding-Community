@@ -7,9 +7,9 @@ export class GunController {
     constructor(private readonly gunService:GunService){};
 
     @Get('AllOfGuns')
-    getListOfPreset(){
-        this.gunService.toGetPreset();
-
+    async getListOfPreset(){
+        const guns=await this.gunService.toGetPreset();
+        console.log(guns);
     }
 
 }
