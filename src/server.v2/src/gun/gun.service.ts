@@ -7,8 +7,8 @@ export class GunService {
     //This is a function for creating Query to get API Data from Tarkov.dev
     //You may pass values of query field as a function parameter.
     //
-    getQuery(types:string[],fields:string[]){
-        
+    getQuery(types:string,fields:string[]){
+
     }
 
     async getItemDataById(){
