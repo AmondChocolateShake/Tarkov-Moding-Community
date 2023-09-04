@@ -8,7 +8,7 @@ export class GunController {
 
     @Get('AllOfGuns')
     async getListOfPreset(){
-        const guns=await this.gunService.toGetPreset();
+        const guns=await this.gunService.getPresets();
         console.log(guns);
     }
 

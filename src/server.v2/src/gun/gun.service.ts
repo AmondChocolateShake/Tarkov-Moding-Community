@@ -4,7 +4,20 @@
 export class GunService {
     
 
-    async toGetPreset():Promise<object>{
+    //This is a function for creating Query to get API Data from Tarkov.dev
+    //You may pass values of query field as a function parameter.
+    //
+    getQuery(types:string[],fields:string[]){
+        
+    }
+
+    async getItemDataById(){
+
+
+    }
+
+
+    async getPresets():Promise<object>{
         const query=`{
             items(categoryNames:Weapon,type:preset){
               name
