@@ -6,9 +6,9 @@ import { GunService } from "./gun.service";
 export class GunController {
     constructor(private readonly gunService:GunService){};
 
-    @Get()
-    getListOfPreset():object{
-        
+    @Get('AllOfGuns')
+    getListOfPreset(){
+        this.gunService.toGetPreset();
 
     }
 
