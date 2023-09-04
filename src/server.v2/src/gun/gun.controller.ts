@@ -1,4 +1,4 @@
-import { Controller } from "@nestjs/common";
+import { Controller,Get } from "@nestjs/common";
 import { GunService } from "./gun.service";
 
 
@@ -7,7 +7,7 @@ export class GunController {
     constructor(private readonly gunService:GunService){};
 
     @Get()
-    getListOfPreset():object[]{
+    getListOfPreset():object{
         
 
     }
