@@ -2,7 +2,7 @@ import { types } from "./gun.type";
 
 export class GunService {
 
-
+    /** This function is for fetch. q parameter takes string of graphQL query */
     async fetchQuery(q:string){
         const query=q;
         let result={};
@@ -35,14 +35,15 @@ export class GunService {
         return query;
     }
 
+
     async getItemDataById(id:string){
         const query=this.getQuery("id:"+id,"name","id");
-
-
-
+        this.fetchQuery(query);
     }
 
 
+
+    /** this function returns gun preset object lists */
     async getPresets():Promise<object>{
         // const query=`{
         //     items(categoryNames:Weapon,type:preset){

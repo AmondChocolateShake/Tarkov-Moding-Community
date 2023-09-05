@@ -1,4 +1,4 @@
-import { Controller,Get } from "@nestjs/common";
+import { Controller,Get, Post, Body } from "@nestjs/common";
 import { GunService } from "./gun.service";
 
 
@@ -10,6 +10,11 @@ export class GunController {
     async getListOfPreset(){
         const guns=await this.gunService.getPresets();
         console.log(guns);
+    }
+
+    @Post('select_by_id')
+    async getItemDataByid(@Body id:string){
+
     }
 
 }
