@@ -1,4 +1,4 @@
-
+import { types } from "./gun.type";
 
 export class GunService {
 
@@ -6,7 +6,7 @@ export class GunService {
     //This is a function for creating Query to get API Data from Tarkov.dev
     //You may pass values of query field as a function parameter.
     //
-    getQuery(types:string,fields:string[]){
+    getQuery(types:string,...fields:string[]){
         const stringfiedFields=fields.join('\n');
         const query=`{
             items(${types}){
@@ -32,7 +32,7 @@ export class GunService {
         //     }
         //   }`;
         
-        const query=this.getQuery('categoryNames:Weapon',["name","id"]);
+        const query=this.getQuery(types.preset,"name","id");
 
         let result={};
 
