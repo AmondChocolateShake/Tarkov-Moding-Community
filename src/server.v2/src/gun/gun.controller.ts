@@ -1,4 +1,5 @@
-import { Controller,Get, Post, Body } from "@nestjs/common";
+import { Controller,Get, Post, Body, Res } from "@nestjs/common";
+import {Response} from 'express'
 import { GunService } from "./gun.service";
 import { GunId } from "./gun.type";
 
@@ -7,10 +8,11 @@ import { GunId } from "./gun.type";
 export class GunController {
     constructor(private readonly gunService:GunService){};
 
-    @Get('AllOfGuns')
-    async getListOfPreset(){
+    @Get('allOfGuns')
+    async getListOfPreset(@Res() res:Response){
         const guns=await this.gunService.getPresets();
         console.log(guns);
+        res.status(200).json(guns);
     }
 
     @Post('select')
@@ -18,7 +20,6 @@ export class GunController {
         console.log(gunId);
         const id=gunId.id;
         console.log(await this.gunService.getItemDataById(id));
-
     }
 
 }

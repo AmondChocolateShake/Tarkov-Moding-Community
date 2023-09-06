@@ -6,3 +6,9 @@ export const types={
 export class GunId{
     readonly gunId:string
 }
+
+export interface DataForm{
+    data:{
+        item:object[]
+    }
+}

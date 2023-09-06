@@ -18,7 +18,7 @@ export class GunService {
             .then(res=>res.json())
             .then(data=>{result=data})
             .catch(err=>{ console.error('Error : ',err)});
-        
+
         return result;
     }
 
@@ -35,15 +35,12 @@ export class GunService {
         return query;
     }
 
-
     async getItemDataById(id:string){
         const query=this.getQuery("ids:\""+id+"\"","name","id");
         console.log(query);
         const result=this.fetchQuery(query);
         return result;
     }
-
-
 
     /** this function returns gun preset object lists */
     async getPresets():Promise<object>{
@@ -56,9 +53,11 @@ export class GunService {
         //   }`;
         
         const query=this.getQuery(types.preset,"name","id");
-
-        let result={};
+        let result;
         result=this.fetchQuery(query);
+        result=result.data;
         return result;
     }
+
+    
 }
