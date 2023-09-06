@@ -1,4 +1,4 @@
-import { types } from "./gun.type";
+import { GunId, types } from "./gun.type";
 
 export class GunService {
 
@@ -37,8 +37,10 @@ export class GunService {
 
 
     async getItemDataById(id:string){
-        const query=this.getQuery("id:"+id,"name","id");
-        this.fetchQuery(query);
+        const query=this.getQuery("ids:"+id,"name","id");
+        console.log(query);
+        const result=this.fetchQuery(query);
+        return result;
     }
 
 
