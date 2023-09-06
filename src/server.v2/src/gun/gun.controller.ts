@@ -14,9 +14,9 @@ export class GunController {
     }
 
     @Post('select')
-    async getItemDataByid(@Body() gunId:GunId){
+    async getItemDataByid(@Body() gunId){
         console.log(gunId);
-        const id=gunId.gunId;
+        const id=gunId.id;
         console.log(await this.gunService.getItemDataById(id));
 
     }
