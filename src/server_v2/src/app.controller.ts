@@ -7,12 +7,14 @@ import { AppService } from './app.service';
 @Controller()
 export class AppController {
   constructor(private readonly appService:AppService){};
+
+  
   //정적 파일 서빙
   @Get()
   async getFiles(@Res() res: Response): Promise<void> {
 
     try {
-      const html = this.appService.serveHTML();
+      const html = await this.appService.serveHTML();
       res.setHeader('Content-Type', 'text/html');
       res.send(html);
     } catch (err) {
@@ -27,7 +29,7 @@ export class AppController {
     
 
     try {
-      const js = this.appService.serveJS();
+      const js = await this.appService.serveJS();
       res.setHeader('Content-Type', 'application/javascript');
       res.send(js);
     } catch (err) {
@@ -35,4 +37,6 @@ export class AppController {
       console.log('Error occured : ', err);
     }
   }
+
+
 }
