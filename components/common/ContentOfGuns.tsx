@@ -22,14 +22,17 @@ const ContentOfGuns:React.FC=(props)=>{
   const [guns,setGuns]=useState([{
     id:"",
     name:"",
-    imagex8Link:""
+    inspectImageLink:""
   }]);
-
+  const[flag,setFlag]=useState(false);
 
   useEffect(()=>{
     fetch('http://localhost:3000/guns')
     .then(res=>res.json())
-    .then(data=>{setGuns(data)})
+    .then(data=>{
+      setGuns(data);
+      setFlag(true);
+    })
   },[])
 
   
@@ -46,10 +49,10 @@ const ContentOfGuns:React.FC=(props)=>{
 
   return(
     <div style={container}>
-      {guns.length>0 &&
+      {flag &&
         guns.map((item,index)=>(
 
-          <Gun gunImg={item.imagex8Link} gunName={item.name} key={index} id={item.id}></Gun>
+          <Gun gunImg={item.inspectImageLink} gunName={item.name} key={index} id={item.id}></Gun>
         ))
       }
     </div>

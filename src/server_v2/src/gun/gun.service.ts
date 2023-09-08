@@ -56,7 +56,7 @@ export class GunService {
         //     }
         //   }`;
         
-        const query=this.getQuery(types.preset,"name","id","image8xLink");
+        const query=this.getQuery(types.preset,"name","id","inspectImageLink");
         let result;
         result=await this.fetchQuery(query);
         // console.log(typeof(result));

@@ -50,7 +50,7 @@ const mainPageForm:React.FC=(props)=>{
       </header>
       
       <div style={mainContainer}>
-        <LeftMenu Guns={gunList}></LeftMenu>
+        {/* <LeftMenu Guns={gunList}></LeftMenu> */}
         <MainContent pageState={pageState} setPageState={setPageState}></MainContent>
       </div>
     </div>

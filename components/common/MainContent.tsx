@@ -68,11 +68,13 @@ const MainContent:React.FC<props>=(props)=>{
 
   return(
     <div style={container}>
-      {/* {props.pageState!=='posts'&&props.pageState!=='postView'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
-      {props.pageState==='main'&& <ContentOfGuns setId={setId} pageState={props.pageState} setPageState={props.setPageState}></ContentOfGuns>}
-      {props.pageState==='post'&&<Post></Post>}
-      {props.pageState==='posts'&&<Board postIdHandler={postIdHandler} id={id}></Board>}
-      {postClicked===true&&flag&&<PostInner post={postData}></PostInner>} */}
+      { 
+      // {props.pageState!=='posts'&&props.pageState!=='postView'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
+      <ContentOfGuns></ContentOfGuns>
+      // {props.pageState==='post'&&<Post></Post>}
+      // {props.pageState==='posts'&&<Board postIdHandler={postIdHandler} id={id}></Board>}
+      // {postClicked===true&&flag&&<PostInner post={postData}></PostInner>}
+      }
     </div>
   );
 };
