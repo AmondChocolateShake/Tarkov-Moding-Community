@@ -54,8 +54,9 @@ export class GunService {
         
         const query=this.getQuery(types.preset,"name","id");
         let result;
-        result=this.fetchQuery(query);
-        result=result.data;
+        result=await this.fetchQuery(query);
+        // console.log(typeof(result));
+        result=result.data.items;
         return result;
     }
 
