@@ -52,7 +52,7 @@ export class GunService {
         //     }
         //   }`;
         
-        const query=this.getQuery(types.preset,"name","id");
+        const query=this.getQuery(types.preset,"name","id","image8xLink");
         let result;
         result=await this.fetchQuery(query);
         // console.log(typeof(result));
