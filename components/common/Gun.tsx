@@ -4,8 +4,6 @@ interface GunData{
   gunImg:string
   gunName:string
   id:string
-  setPageState:(page:string)=>void
-  setId:(id:string)=>void
 }
 
 
@@ -13,9 +11,9 @@ const Gun:React.FC<GunData>=(props)=>{
 
   //총기 클릭 이벤트 발생시 상태를 변경하는 함수
   const ClickEventhandler=()=>{
-    props.setPageState('posts');
-    props.setId(props.id);
-    console.log(props.id);
+    // props.setPageState('posts');
+    // props.setId(props.id);
+    // console.log(props.id);
   }
 
 

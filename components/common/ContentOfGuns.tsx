@@ -19,12 +19,17 @@ interface GunData {
 }
 
 const ContentOfGuns:React.FC=(props)=>{
-  const [guns,setGuns]=useState({});
+  const [guns,setGuns]=useState([{
+    id:"",
+    name:"",
+    imagex8Link:""
+  }]);
 
 
   useEffect(()=>{
-    
-
+    fetch('http://localhost:3000/guns')
+    .then(res=>res.json())
+    .then(data=>{setGuns(data)})
   },[])
 
   
@@ -44,7 +49,7 @@ const ContentOfGuns:React.FC=(props)=>{
       {guns.length>0 &&
         guns.map((item,index)=>(
 
-          // <Gun setId={props.setId} setPageState={props.setPageState} gunImg={item.imageLink} gunName={item.name} key={index} id={item.id}></Gun>
+          <Gun gunImg={item.imagex8Link} gunName={item.name} key={index} id={item.id}></Gun>
         ))
       }
     </div>

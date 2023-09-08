@@ -35,10 +35,14 @@ export class GunService {
         return query;
     }
 
+    /**select item data by item id */
     async getItemDataById(id:string){
         const query=this.getQuery("ids:\""+id+"\"","name","id");
         console.log(query);
-        const result=this.fetchQuery(query);
+
+        let result;
+        result=await this.fetchQuery(query);
+        result=result.data.items;
         return result;
     }
 

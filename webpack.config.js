@@ -18,7 +18,7 @@ module.exports = {
       },
       {
         test: /\.js$/, // .js 확장자를 가진 파일에 대해
-        exclude: /node_modules/, // node_modules 디렉토리는 제외
+        exclude: [/node_modules/], // node_modules 디렉토리는 제외
         use: {
           
           loader:'babel-loader', // babel-loader를 사용하여 변환
@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/],
         use: 'ts-loader',
       },
       // {
