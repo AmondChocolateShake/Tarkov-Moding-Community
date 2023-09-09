@@ -8,9 +8,7 @@ export class AppService {
     async serveHTML() {
         try{
             const htmlPath = path.join(__dirname, '..', '..', 'dist', 'index.html');
-            console.log(htmlPath);
             const html = await fs.promises.readFile(htmlPath, 'utf-8');
-            console.log(html);
             return html;
         }catch(err){
             console.log(err);
@@ -26,6 +24,17 @@ export class AppService {
             console.log(err);
         }
 
+    }
+
+    /** serve Main logo of the website */
+    async serveMainLogo(){
+        try{
+            const logoPath=path.join(__dirname,'..','..','dist','images','tarkov.logo.png');
+            const logo=await fs.promises.readFile(logoPath);
+            return logo;
+        }catch(err){
+            console.log('Error at "serveMainLogo" :',err);
+        }
     }
 
 }

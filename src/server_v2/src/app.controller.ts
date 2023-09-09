@@ -8,7 +8,7 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService:AppService){};
 
-  
+
   //정적 파일 서빙
   @Get()
   async getFiles(@Res() res: Response): Promise<void> {
@@ -39,4 +39,15 @@ export class AppController {
   }
 
 
+  @Get('tarkov_logo.png')
+  async getMainLogo(@Res() res:Response){
+    try{
+      const logo=await this.appService.serveMainLogo();
+      res.setHeader('Content-Type','image/png');
+      res.send(logo);
+    }catch(err){
+      console.log('Error at "getMainLogo" : ',err);
+    }
+
+  }
 }
