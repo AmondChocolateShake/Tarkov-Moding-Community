@@ -9,6 +9,7 @@ interface props{
 }
 
 
+/**contains logo, search bar.. */
 const TopBar:React.FC<props>=(props)=>{
   const fRow:React.CSSProperties={
     display:'flex',
@@ -62,7 +63,7 @@ return(
   <div style={topSt}>
     <Link to='/main'>
       <div onClick={clicked}>
-        <img src={Logo} alt="Logo" style={{width:'300px',height:'150px'}}/>
+        <img src="tarkov_logo.png" alt="Logo" style={{width:'300px',height:'150px'}}/>
       </div>
     </Link>
   

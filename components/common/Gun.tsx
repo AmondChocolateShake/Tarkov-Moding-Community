@@ -19,6 +19,7 @@ const Gun:React.FC<GunData>=(props)=>{
 
 
 
+
   const container:React.CSSProperties={
     display:'flex',
     flexDirection:'column',
@@ -26,14 +27,15 @@ const Gun:React.FC<GunData>=(props)=>{
     alignItems:'center',
     width:'300px',
     height:'200px',
+    marginTop:'10px'
   }
 
   return(
     <div style={container} onClick={ClickEventhandler}>
       <div>
-        <img src={props.gunImg} alt="" style={{width:'250px',height:'150px'}}/>
+        <img src={props.gunImg} alt="" style={{width:'250px',height:'150px', border:'2px solid rgba(255,255,255,0.5)', borderRadius:'10px'}}/>
       </div>
-      <div style={{color:'white'}}>{props.gunName}</div>
+      <div style={{color:'white',width:'250px',height:'50px'}}>{props.gunName}</div>
     </div>
   );
 }
