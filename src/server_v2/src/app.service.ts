@@ -29,7 +29,7 @@ export class AppService {
     /** serve Main logo of the website */
     async serveMainLogo(){
         try{
-            const logoPath=path.join(__dirname,'..','..','dist','images','tarkov.logo.png');
+            const logoPath=path.join(__dirname,'..','..','dist','images','tarkov_logo.png');
             const logo=await fs.promises.readFile(logoPath);
             return logo;
         }catch(err){

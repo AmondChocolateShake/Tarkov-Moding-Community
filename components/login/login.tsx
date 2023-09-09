@@ -1,6 +1,5 @@
 import React from 'react'
 import LoginBox from './LoginBox';
-import logo from '../../src/img/tarkov_logo.png'
 
 
 //로그인 페이지 컴포넌트
@@ -16,7 +15,7 @@ function Login(){
 
   return(
     <div style={container}>
-      <img src={logo}></img>
+      <img src="tarkov_logo.png"></img>
       <LoginBox></LoginBox>
 
     </div>
