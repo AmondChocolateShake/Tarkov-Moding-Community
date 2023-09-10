@@ -1,11 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 type Init={
-    page:string
+    page:string,
+    id:string
 }
 
 const initialState:Init={
-    page:'main'
+    page:'main',
+    id:''
 }
 
 const pageSlice=createSlice({
@@ -15,14 +17,17 @@ const pageSlice=createSlice({
         goToMain:(state)=>{
             state.page="main"
         },
-        goToPosts:(state)=>{
-            state.page="posts"
+        goToPosts:(state,actions)=>{
+            state.page="posts",
+            state.id=actions.payload;
         },
-        goToPosting:(state)=>{
+        goToPosting:(state,actions)=>{
             state.page="posting"
+            state.id=actions.payload
         },
-        viewPost:(state)=>{
+        viewPost:(state,actions)=>{
             state.page="viewPost"
+            state.id=actions.payload
         }
     }
 })

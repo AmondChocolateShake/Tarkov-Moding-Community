@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Gun from './Gun'
-import { useSelector } from 'react-redux'
 
 
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector,useDispatch } from 'react-redux'
 
 interface GunData{
   gunImg:string
@@ -8,12 +9,13 @@ interface GunData{
 
 
 const Gun:React.FC<GunData>=(props)=>{
+  const dispatch=useDispatch();
+
+
 
   //총기 클릭 이벤트 발생시 상태를 변경하는 함수
   const ClickEventhandler=()=>{
-    // props.setPageState('posts');
-    // props.setId(props.id);
-    // console.log(props.id);
+    
   }
 
 
