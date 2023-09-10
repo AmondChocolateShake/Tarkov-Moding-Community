@@ -27,4 +27,6 @@ const pageSlice=createSlice({
     }
 })
 
+export const {goToMain, goToPosting, goToPosts}=pageSlice.actions;
+export default pageSlice.reducer;
 
