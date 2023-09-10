@@ -5,6 +5,8 @@ import TagAndPost from './TagAndPost'
 import Board from '../board/Board'
 import PostInner from '../board/PostInner'
 import PostForm from '../board/PostForm'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
 
 interface props{
   pageState:string
@@ -28,7 +30,9 @@ interface Post{
 
 
 const MainContent:React.FC<props>=(props)=>{
-  
+  const page=useSelector((state:RootState)=>{
+    return state.page.page
+  })
 
   const fRow:React.CSSProperties={
     display:'flex',
@@ -68,13 +72,12 @@ const MainContent:React.FC<props>=(props)=>{
 
   return(
     <div style={container}>
-      { 
-      // {props.pageState!=='posts'&&props.pageState!=='postView'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
-      <ContentOfGuns></ContentOfGuns>
-      // {props.pageState==='post'&&<Post></Post>}
-      // {props.pageState==='posts'&&<Board postIdHandler={postIdHandler} id={id}></Board>}
-      // {postClicked===true&&flag&&<PostInner post={postData}></PostInner>}
-      }
+      <div style={{color:"white"}}>{page}</div>
+      {/* {props.pageState!=='posts'&&props.pageState!=='postView'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>} */}
+      {<ContentOfGuns></ContentOfGuns>}
+      {/* {props.pageState==='post'&&<Post></Post>} */}
+      {/* {props.pageState==='posts'&&<Board postIdHandler={postIdHandler} id={id}></Board>} */}
+      {/* {postClicked===true&&flag&&<PostInner post={postData}></PostInner>} */}
     </div>
   );
 };
