@@ -33,6 +33,9 @@ const MainContent:React.FC<props>=(props)=>{
   const page=useSelector((state:RootState)=>{
     return state.page.page
   })
+  const id=useSelector((state:RootState)=>{
+    return state.page.id
+  })
 
   const fRow:React.CSSProperties={
     display:'flex',
@@ -72,7 +75,7 @@ const MainContent:React.FC<props>=(props)=>{
 
   return(
     <div style={container}>
-      <div style={{color:"white"}}>{page}</div>
+      <div style={{color:"white"}}>{page+" : "+id}</div>
       {/* {props.pageState!=='posts'&&props.pageState!=='postView'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>} */}
       {<ContentOfGuns></ContentOfGuns>}
       {/* {props.pageState==='post'&&<Post></Post>} */}
