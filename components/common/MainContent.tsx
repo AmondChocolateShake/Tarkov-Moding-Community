@@ -76,8 +76,8 @@ const MainContent:React.FC<props>=(props)=>{
   return(
     <div style={container}>
       <div style={{color:"white"}}>{page+" : "+id}</div>
-      {/* {props.pageState!=='posts'&&props.pageState!=='postView'&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>} */}
-      {<ContentOfGuns></ContentOfGuns>}
+      {page!=="posting"&&<TagAndPost pageState={props.pageState} setPageState={props.setPageState}></TagAndPost>}
+      {page==='main'&&<ContentOfGuns></ContentOfGuns>}
       {/* {props.pageState==='post'&&<Post></Post>} */}
       {/* {props.pageState==='posts'&&<Board postIdHandler={postIdHandler} id={id}></Board>} */}
       {/* {postClicked===true&&flag&&<PostInner post={postData}></PostInner>} */}
